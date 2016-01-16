@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common" xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce" lang="pt-br">
+
+<head>
+    <vtex:metaTags/>
+    
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <vtex:template id="commonHead" />
+</head>
+
+<body>
+    <div class="all">
+        <vtex:template id="header" />
+        
+        <div id="mainContent">
+            <div class="wrapper">
+
+                <!-- FULL / SEM BARRA LATERAL -->
+                    <!-- NAVEGAÇÃO TOPO -->
+                    <aside class="navTopbar">
+                        <vtex.cmc:searchTitle />
+
+                        <div class="filterOptions">
+                            <!-- Lista os departamentos e filtros, com seleção única -->
+                            <vtex.cmc:departmentNavigator/>
+                            
+                            <!-- === OU === -->
+
+                            <!-- Lista os departamentos e filtros, com seleção múltipla -->
+                            <!-- Para smart research seu uso é obrigatorio -->
+                            <vtex.cmc:searchNavigator/>
+                        </div>
+                    </aside>
+                   
+                    <!-- LISTAGEM FULL SEM BARRA LATERAL -->
+                    <section class="pageContent">
+                        <!-- Lista os produtos -->
+                        <!-- layout == id da prateleira / itemCount = numero de itens exibidos por pagina / columnCount = numero de colunas -->
+                        <vtex.cmc:searchResult layout="ef3fcb99-de72-4251-aa57-71fe5b6e149f" itemCount="50" columnCount="4" />
+                    </section>
+                <!-- FULL / SEM BARRA LATERAL -->
+                
+                
+
+                <!-- COM BARRA LATERAL -->
+                    <!-- NAVEGAÇÃO LATERAL -->
+                    <aside class="navSidebar">
+                         <div class="filterOptions">
+                            <!-- Lista os departamentos e filtros, com seleção única -->
+                            <vtex.cmc:departmentNavigator/>
+
+                            <!-- === OU === -->
+                            
+                            <!-- Lista os departamentos e filtros, com seleção múltipla -->
+                            <!-- Para smart research seu uso é obrigatorio -->
+                            <vtex.cmc:searchNavigator/>
+                        </div>
+                    </aside>
+                    
+                    <!-- LISTAGEM COM SIDEBAR -->
+                    <section class="pageContent">
+                        <!-- Lista os produtos -->
+                        <!-- layout == id da prateleira / itemCount = numero de itens exibidos por pagina / columnCount = numero de colunas -->
+                        <vtex.cmc:searchResult layout="ef3fcb99-de72-4251-aa57-71fe5b6e149f" itemCount="50" columnCount="4" />
+                    </section>
+                <!-- /COM BARRA LATERAL -->
+
+    		</div><!-- /wrapper -->
+        </div><!-- /mainContent-->
+
+        <vtex:template id="footer" />
+    </div><!--/all-->
+
+    <vtex:template id="commonBottom" />
+</body>
+</html>

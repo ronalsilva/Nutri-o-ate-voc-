@@ -1,0 +1,122 @@
+/************************************
+
+//COMO ESCREVER E ORGANIZAR O CÓDIGO
+
+
+--- CLASSES ---
+
+Seguir modelo lowerCamelCase
+
+ex: nomeClassTeste
+
+
+--- ORDENAÇÃO DAS PROPRIEDADES ---
+
+.item {
+   // Position
+   position: absolute;
+   top: 50%;
+
+   // Block 
+   display: block;
+   border: 1px solid #000;
+   box-shadow: 1px 1px #000;
+   border-radius: 6px;
+
+   // Cores
+   background-color: #fff;
+   color: #000;
+
+   // Text
+   font: 14px arial, sans-serif #fff;
+   text-align: center;
+}
+
+
+--- REGRAS IMPORTANTES ---
+
+1. Tab com 4 espaços;
+
+2. Propriedades em linhas separadas, espaço entre o valor da propriedade e os ":" e vírgula depois do último valor.
+Ex certo:
+body {
+   background-color: #fff;
+   color: #000;
+}
+Ex errado:
+body{background-color: #fff;color: #000}
+
+3. Usar sempre aspas duplas
+Ex certo:
+a[href$=".com"]
+background-image: url("/images/image.png");
+content: "";
+
+Ex errado:
+a[href$=.com]
+background-image: url('/images/image.png');
+content: '';
+
+4. Evitar repetição de propriedades;
+Ex certo:
+margin: 10px 0 5px;
+
+Ex errado:
+margin-top: 10px;
+margin-bottom: 5px;
+
+
+************************************/
+
+
+//----------------------- 
+
+//PRIMARY VARIABLES
+
+//-----------------------
+
+//color pallete
+$color1: #ffc300;
+$color2: #68afeb;
+$color3: #ee1934;
+$color4: #e01731;
+$color5: #282828;
+$color6: #b1b1b1;
+$color7: #ebebeb;
+
+
+//grey scale
+$black: rgb(0,0,0); //#000000
+$darkergrey: tint($black, 10%); //#191919
+$darkgrey: tint($black, 25%); //#3f3f3f
+$midgrey: tint($black, 50%); //#7f7f7f
+$lightgrey: tint($black, 75%); //#bfbfbf
+$lightergrey: tint($black, 90%); //#e5e5e5
+$evenlightergrey: tint($black, 94.5%); //#f0f0f0
+$white: rgb(255,255,255); //#ffffff
+
+
+//color set
+$primaryColor: $color3;
+$primaryColorDark: $color4;
+$secondaryColor: $color1;
+$suportColor: $color2;
+
+
+//fonts
+$primaryFont: "PT Sans", sans-serif;
+$secondaryFont: "Roboto", sans-serif;
+$suportFont: "Roboto", sans-serif;
+
+
+//images
+$bgsprite: url("/arquivos/sprite-icons.png");
+
+
+
+//----------------------
+
+//DEFINES GRID
+
+//-----------------------
+$max-width: 1016px !global;

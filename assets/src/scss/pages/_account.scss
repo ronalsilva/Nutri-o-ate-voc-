@@ -1,0 +1,229 @@
+@import "../../../../../_baseStructure/base/_library-modules";
+
+/* ==========================================================================
+   Account
+   ========================================================================== */
+
+body.account{
+	font-family: $primaryFont !important; 
+	font-size: 12px !important; 
+	color: $midgrey !important;
+	background: $white !important;
+	
+	.pageHeader{
+		padding: 0 !important;
+		background: $white !important;
+
+		.searchBox .fulltext-search-box{
+			box-shadow: none;
+			border-radius: 0;
+			margin-bottom: 0;
+		}
+	
+		.mainMenu{
+			margin: 0 !important;
+			padding: 0 !important;
+		}
+	}
+
+	.pageHeader, .pageFooter{
+		ul, ol{
+			margin: 0 !important;
+			padding: 0 !important;
+		}
+
+		h3, h5{
+			font-weight: normal;
+		}
+	}
+
+	.floatElement, .floatHeader{display: none !important;}
+	
+	.content{
+		position: relative;
+
+		& > .span4, & > .span6, & > .span3{margin: 0}
+	}
+
+	.row{margin: 0}
+
+	#mainContent{
+		margin: 0 auto; 
+		font-family: $primaryFont;
+
+		a{
+			color: $primaryColor;
+			text-decoration: underline;
+		}
+
+		h4{
+			@include sectionTitle();
+			margin-bottom: 20px;
+		}
+	}
+
+	//botoes
+	#edit-data-link, .new-address-link .address-update, .orders-link a, .modal-footer .btn-primary{
+		@include primaryButton();
+		margin: 10px 0 30px 0;
+		text-decoration: none !important;
+		color: $white !important;
+		border-radius: 0;
+		text-shadow: none;
+		box-shadow: none;
+		line-height: 1;
+		display: table;
+	}
+	.modal-footer .btn-link{
+		@include secondaryButton();
+	}
+
+	/*poup*/
+	.modal{
+		.modal-header{
+			h3{
+				@include sectionTitle();
+			}
+		}
+		
+		.modal-body{
+			h5{
+				font-weight: bold;
+				font-size: 14px;
+				margin: 10px 0 10px 5px;
+				color: $primaryColor;
+			}
+
+			input[type=text]{
+				width: 100%;
+				padding: 5px;
+				height: 30px;
+				box-shadow: none;
+				border-radius: 0;
+
+				&[id=email]{
+					width: 370px;
+				}
+				&[id=street]{
+					width: 300px;
+				}
+				&[id=number]{
+					width: 100px; 
+				}
+			}
+			
+			label{
+				display: block;
+				font-size: em(12px);
+				text-transform: uppercase;
+				margin-bottom: 7px;
+
+				&.error{
+					float: right;
+					color: $midgrey;
+				}
+			}
+
+			.control-group{
+				margin-bottom: 20px;
+			}
+		}
+
+		.modal-footer{
+			.btn-primary{
+				float: right;
+				margin: 0;
+			}
+			.btn-link{
+				float: left;
+			}
+		}
+
+		.profile-detail-form{
+			.control-group{
+				margin: 0 20px 10px 5px;
+
+				&.form-contact-data-email{width: 100%}
+			}
+
+			.form-personal-data-gender{
+				label{
+					display: inline-block;
+					margin-right: 10px;
+				}
+			}
+
+			.form-business-data-name{
+				font-weight: bold;
+				text-decoration: underline;
+			}
+		}
+
+		.address-form{
+			.address-form-street-name{width: 300px;}
+			[class*="span"]{margin: 0 10px 0 0}
+		}
+	}
+
+	.profile-detail-display, .address-display-block{
+		border: 1px solid $lightergrey;
+		padding: 20px;
+		@include span-columns(6);
+		margin-left: 0;  
+	}
+
+	/*perfil*/
+	.profile-detail-display{
+		h5{
+			font-weight: bold;
+		}
+		
+		.profile-detail-display-info{	
+			span{
+				line-height: 20px;
+				.title{
+					font-weight: bold;
+				}
+			}
+		}
+	}
+
+	/*enderecos*/
+	.address-display-block{	
+		.address-display-unit{
+			background: $evenlightergrey;
+			padding: 15px;
+			margin: 0 15px 15px 0;
+			
+			h5{
+				margin-bottom: 5px;
+				color: $primaryColor;
+			}
+
+			.edit-address-link{
+				a{
+					padding: 5px;
+				}
+			}
+		}
+	}
+
+	/*pedidos*/
+	.myorders{
+		.page-header{background: none;}
+		.order-header.page-header{padding: 0 15px !important}
+		.page-header h1{margin-top: 0}
+		.myorders-list a{text-decoration: none !important;}
+		.myorders-list .order-date{color: #000;}
+	}
+
+	/*mensagem pós cadastro de endereço*/
+	#address-edit {
+		h4 {
+			text-align: center;
+			margin-top: 20px;
+			display: block;
+		}
+	}
+
+}

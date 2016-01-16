@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+/*
+	Project: Loja Base VTEX
+	Author: Original Media
+	Version: 1.0
+*/
+
+@charset "UTF-8";
+
+@import "bourbon";
+@import "neat";
+
+@import "../scss/base/_config";
+@import "../scss/base/_library";
+@import "../../../../_baseStructure/base/_reset";
+@import "../scss/base/_fonts";
+
+
+//components
+@import "../scss/components/_components.scss";
+
+
+//pages
+@import "../scss/pages/_pages.scss";

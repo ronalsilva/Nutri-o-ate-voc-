@@ -1,0 +1,25 @@
+@import "../../../../../_baseStructure/base/_library-modules";
+
+/* ==========================================================================
+   Shelf
+   ========================================================================== */
+.shelf{
+    // MIXIN, substituir parametros:
+    //@include shelf1($productNameFont, $productNameColor, $productPriceFont, $productPriceColor, $numberCol) {
+
+    li {
+        .productImage{
+        }
+
+        .productInfo {  
+            .productName {
+           }
+
+            .productPrice {
+            }
+
+            .soldOut {
+            }
+        }
+    }
+}

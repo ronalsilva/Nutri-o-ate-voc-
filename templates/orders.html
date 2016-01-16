@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common" xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce" lang="pt-br">
+
+<head>
+    <vtex:metaTags/>
+    
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <link href="/arquivos/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <vtex:template id="commonHead" />
+</head>
+
+<body>
+    <div class="all">
+        <vtex:template id="header" />
+        
+        <div id="mainContent">
+            <div class="wrapper">
+                <vtex.cmc:orderList/>
+    		</div><!-- /wrapper -->
+        </div><!-- /mainContent-->
+
+        <vtex:template id="footer" />
+    </div><!--/all-->
+    
+    <script src="/arquivos/bootstrap.min.js" type="text/javascript"></script>    
+    <vtex:template id="commonBottom" />
+</body>
+</html>

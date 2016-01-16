@@ -1,0 +1,47 @@
+@import "../../../../../_baseStructure/base/_library-modules";
+
+/* ==========================================================================
+   Common
+   ========================================================================== */
+body{
+	font-family: $primaryFont;
+	font-size: em(13px);
+	color: $midgrey;
+}
+
+.wrapper{
+	@include outer-container();
+  	width: $max-width;
+}
+
+.right{
+	text-align: right;
+}
+
+.seoStoreName{display: none;}
+
+#ajaxBusy{
+	position: absolute;
+	top: 5px;
+	left: 5px;
+}
+
+/*breadcrumb*/
+// MIXIN, substituir parametros:
+// @include breadcrumb($color, $colorActive)
+
+/*slider*/
+.mainGallery{}
+.carouselGallery{}
+.verticalSlider{}
+
+/*float header*/
+// MIXIN, substituir parametros:
+// @include floatHeader1($bg, $height);
+
+
+
+/* ==========================================================================
+   Lightbox
+   ========================================================================== */
+@include lightbox();

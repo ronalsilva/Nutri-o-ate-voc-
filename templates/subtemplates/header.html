@@ -1,0 +1,27 @@
+<header class="pageHeader">
+	<div class="wrapper">
+		<div class="logo">
+			<a href="" title="Nestlé" class="logoImg">Nestlé</a>
+		</div><!--/logo-->
+		
+		<div class="welcomeMsg">
+			<vtex.cmc:welcomeMessage/>
+		</div>
+
+		<ul class="listLinks">
+			<li><a href="/account">Minha conta</a></li>
+			<li><a href="/account/orders">Meus pedidos</a></li>
+		</ul>
+
+		<div class="searchBox">
+			<vtex.cmc:fullTextSearchBox/>
+		</div><!-- /searchBox -->
+
+		<div class="miniCart">
+			<a href="/checkout/#cart" class="cartAmountLink">
+				<vtex.cmc:AmountItemsInCart />
+			</a>
+			<vtex.cmc:miniCart />
+		</div><!-- /miniCart -->
+	</div>
+</header>

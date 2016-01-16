@@ -1,0 +1,17 @@
+/*forms*/
+
+@mixin form(){
+	label{
+		display: block;
+		font-size: em(14px);
+		margin-bottom: 7px;
+		color: $primaryColor;
+		font-family: $secondaryFont;
+	}
+
+	input[type=text], textarea, select {
+        border: 1px solid $lightergrey;
+        padding: 7px;
+        border-radius: 5px;
+    }
+}

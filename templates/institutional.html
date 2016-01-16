@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common" xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce" lang="pt-br">
+
+<head>
+    <vtex:metaTags/>
+    
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <vtex:template id="commonHead" />
+</head>
+
+<body>
+    <div class="all">
+        <vtex:template id="header" />
+        
+        <div id="mainContent">
+            <div class="wrapper">
+                <h2 class="titulo-sessao">Central de Atendimento</h2>
+
+                <!-- NAVEGAÇÃO LATERAL -->
+                <aside class="navSidebar">
+                    <nav class="institutionalLinks">
+                        <h4 class="institutionalLinksTitle">Ajuda e Suporte</h4>
+                        <ul class="institutionalLinksList">
+                            <li><a href="">Fale conosco</a></li>
+                            <li><a href="">Dúvidas frequentes</a></li>
+                            <li><a href="">Trocas e devoluções</a></li>
+                            <li><a href="">Como escolher a melhor bicicleta</a></li>
+                        </ul>
+
+                        <h4 class="institutionalLinksTitle">Ajuda e Suporte</h4>
+                        <ul class="institutionalLinksList">
+                            <li><a href="">Fale conosco</a></li>
+                            <li><a href="">Dúvidas frequentes</a></li>
+                            <li><a href="">Trocas e devoluções</a></li>
+                            <li><a href="">Como escolher a melhor bicicleta</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+                
+                <!-- CONTEUDO -->
+                <section class="pageContent">
+                    <!-- placeholder para conteudo da pagina. Template unico, o conteudo é alterado somente pelo placeholder  -->
+                     <vtex:contentPlaceHolder id="conteudo institucional" />
+                </section>
+
+    		</div><!-- /wrapper -->
+        </div><!-- /mainContent-->
+
+        <vtex:template id="footer" />
+    </div><!--/all-->
+
+    <vtex:template id="commonBottom" />
+</body>
+</html>

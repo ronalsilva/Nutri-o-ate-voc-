@@ -1,0 +1,47 @@
+@import "../../../../../_baseStructure/base/_library-modules";
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.pageHeader{
+    background: $primaryColor;
+    color: $white;
+    padding: 20px 0;
+
+    .searchBox{
+        // MIXIN, substituir parametros:
+        @include searchBox1($primaryColor, $white, $white, $primaryFont, rem(14px), 305px, 275px);
+        
+        fieldset{
+            border-width: 0 0 1px 0;
+            padding: 10px;
+        }
+
+        input{
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .btn-buscar{
+            background: $bgsprite -212px -68px;
+            width: 25px;
+            height: 25px;
+            font-size: 0;
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+    }
+
+    .miniCart{
+        // MIXIN, substituir parametros:
+        //@include miniCart1($textColor, $iconPosition, $iconWidth, $iconHeight);
+    }
+
+    .topBar{
+    }   
+}
+
+/*busca auto complete*/
+// MIXIN, substituir parametros:
+// @include autocomplete($bgColor, $width, $borderColor);

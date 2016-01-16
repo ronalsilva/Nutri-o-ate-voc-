@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common" xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce" lang="pt-br">
+
+<head>
+    <vtex:metaTags/>
+    
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <vtex:template id="commonHead" />
+</head>
+
+<body>
+    <div class="all">
+        <vtex:template id="header" />
+        
+        <div id="mainContent">
+            <h2 class="pageTitle">
+                Lista de Desejos
+            </h2>
+            <div class="wrapper">
+                <section class="pageFull">
+                    <div class="listLinks">
+                        <a href="/giftlist/create" class="createNew">Criar nova lista</a>
+                    </div>
+                    
+                    <vtex.cmc:GiftListInfoV2 />
+                    
+                    <vtex.cmc:GiftListStatisticsV2 />
+
+                    <vtex.cmc:GiftListProductsV2 />
+                    
+                    <vtex.cmc:giftListSendToCartButton />
+                </section>
+            </div><!-- /wrapper -->
+        </div><!-- /mainContent-->
+
+        <vtex:template id="footer" />
+    </div><!--/all-->
+
+    <vtex:template id="commonBottom" />
+</body>
+</html>

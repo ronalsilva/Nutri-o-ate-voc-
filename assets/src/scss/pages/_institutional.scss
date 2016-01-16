@@ -1,0 +1,149 @@
+@import "../../../../../_baseStructure/base/_library-modules";
+
+/* ==========================================================================
+   Insitutional
+   ========================================================================== */
+body.institutional{
+	.pageTitle{}
+	
+	.navSidebar{}
+	
+	.institutionalLinksTitle{
+		font-size: em(19px);
+		text-transform: uppercase;
+		margin-bottom: 10px;
+		font-weight: bold;
+	}
+
+	.institutionalLinksList{
+		margin-bottom: 50px;
+		border: 1px solid $lightergrey;
+		padding: 20px;
+		border-radius: 5px;
+
+		li{
+			font-size: em(19px);
+			line-height: 1.5;
+			display: block;
+			margin-bottom: 15px;
+						
+			a{
+				color: $midgrey;
+				display: block;
+				
+				&.current{
+					font-weight: bold;
+				}	
+
+				&:hover{
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+
+	.pageContent{
+		iframe{
+			width: 100%;
+			height: 545px;
+			margin-top: 20px;
+		}
+		
+		h1{
+			@include sectionTitle();
+			margin-bottom: 15px;
+			line-height: 1;
+		}
+		
+		h2{
+			font-size: em(15px);
+			font-weight: bold;
+			text-transform: uppercase;
+			margin: 25px 0 10px 0;
+		}
+
+		p, ul{
+			font-size: em(16px);
+			line-height: 1.8;
+			color: $midgrey;
+			margin-bottom: 10px;
+		}
+
+		a{
+			color: $primaryColor;
+			text-decoration: underline;
+		}
+
+		li{
+			list-style-type: disc;
+			list-style-position: inside;
+		}
+	}
+}
+
+
+/* fale conosco */
+.mainContentWrapper{
+    background: #fff !important;
+	overflow: hidden;
+
+    .wrapper{width: 620px;}
+    
+    fieldset {
+        border: none;
+        padding: 0;
+    }
+
+    .header, .footer, .searchWrapper, h2, hr, .bts .voltar, .box-outras-opcoes, h3, legend, .voltar .bt{display: none;}
+
+    .grp{
+        margin: 0 0 20px 0; 
+        float: left;
+        width: 50%;
+        
+        @include form();
+
+        input{
+        	width: 90%;
+
+            &.DDD {width: 20%;}
+            
+            &.telefone {
+            	width: 68%;
+            	margin-left: 5px;
+            }
+        }
+
+        &.fComentario {
+        	width: 99%;
+            float: none;  
+            clear: both;
+
+            textarea {
+            	width: 97%;  
+            	height: 100px;
+            }
+        }
+    }
+
+    .aviso-erro {
+    	margin-bottom: 15px;
+    }
+
+    .bts {
+        clear: both; 
+        padding: 0;
+
+        li {
+        	list-style-type: none;
+        }
+        
+        .enviar a{
+            padding:7px 15px;  
+            display: inline-block;
+            float: right;
+            margin-right: 25px;
+            @include primaryButton();
+        }
+    }
+}

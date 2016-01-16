@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common" xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce" lang="pt-br">
+
+<head>
+    <vtex:metaTags/>
+    
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <vtex:template id="commonHead" />
+</head>
+
+<body>
+    <div class="all">
+        <vtex:template id="header" />
+        
+        <div id="mainContent">
+            <div class="wrapper">
+                <vtex.cmc:breadCrumb />
+            
+                <div class="mainProduct">
+                    <section class="mainProductImage">
+                        <vtex.cmc:ProductImage/>
+                    </section><!--/mainProductImage -->
+
+                    <section class="mainProductInfo">
+                        <h1 class="productTitle"><vtex.cmc:productName/></h1>
+                        
+                        <div class="chooseProduct">
+                            <vtex.cmc:skuSelection />
+                        </div>
+                        
+                        <div class="buyProduct">
+                            <div class="priceProduct">
+                                <vtex.cmc:skuPrice/>
+                            </div>
+
+                            <div class="buyProductButton">
+                                <div class="prodQtd">
+                                    <span class="addItem">+</span>
+                                    <span class="removeItem">-</span>
+                                    <input type="text" value="1" class="qtdValue" />
+                                </div>
+
+                                <vtex.cmc:BuyButton />
+                            </div>
+                        </div>
+
+                        <div class="shipping">
+                            <vtex.cmc:shippingValue/>
+                        </div>
+                    
+                        <div class="paymentInfo">
+                            <vtex.cmc:OtherPaymentMethod/>
+                        </div>
+                    </section><!-- /mainProductInfo-->
+                </div><!-- /mainProduct -->
+
+                <section class="productDetails">  
+                    <vtex.cmc:ProductDescription/>
+
+                    <vtex.cmc:productSpecification/>
+                </section><!-- productDescription -->
+
+                <section class="productComplementary">  
+                    <vtex:contentPlaceHolder id="Produtos complementares" />
+                </section><!-- productComplementary -->
+
+                <section class="productEvaluation">
+                    <vtex.cmc:UserReview/>
+                </section><!-- productDescription -->
+
+    		</div><!-- /wrapper -->
+        </div><!-- /mainContent-->
+
+        <vtex:template id="footer" />
+    </div><!--/all-->
+
+    <vtex:template id="commonBottom" />
+</body>
+</html>
