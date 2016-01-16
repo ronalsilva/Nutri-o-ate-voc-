@@ -37,40 +37,38 @@
                             </div>
 
                             <div class="buyProductButton">
-                                <div class="prodQtd">
-                                    <span class="addItem">+</span>
-                                    <span class="removeItem">-</span>
-                                    <input type="text" value="1" class="qtdValue" />
-                                </div>
-
                                 <vtex.cmc:BuyButton />
                             </div>
                         </div>
-
-                        <div class="shipping">
-                            <vtex.cmc:shippingValue/>
-                        </div>
-                    
-                        <div class="paymentInfo">
-                            <vtex.cmc:OtherPaymentMethod/>
-                        </div>
                     </section><!-- /mainProductInfo-->
-                </div><!-- /mainProduct -->
+                </div><!-- /mainProduct -->               
 
-                <section class="productDetails">  
-                    <vtex.cmc:ProductDescription/>
+                <section class="productDetails">
+                    <div class="tabsItems">
+                        <div class="tabs">
+                            <nav class="tabNav">
+                                <a class="tabLink active" data-ref="descricao">Descrição</a>
+                                <a class="tabLink" data-ref="nutricional">Tabela Nutricional</a>
+                            </nav>
+                        </div>
 
-                    <vtex.cmc:productSpecification/>
+                        <div class="tabContent descricao active">
+                            <vtex.cmc:ProductDescription/>
+                        </div>
+
+                        <div class="tabContent nutricional">
+                            <vtex.cmc:productSpecification/>
+                        </div>
+                    </div>  
                 </section><!-- productDescription -->
-
-                <section class="productComplementary">  
-                    <vtex:contentPlaceHolder id="Produtos complementares" />
-                </section><!-- productComplementary -->
 
                 <section class="productEvaluation">
                     <vtex.cmc:UserReview/>
-                </section><!-- productDescription -->
+                </section><!-- productEvaluation -->
 
+                <section class="productComplementary shelfCarousel">  
+                    <vtex:contentPlaceHolder id="Produtos complementares" />
+                </section><!-- productComplementary -->
     		</div><!-- /wrapper -->
         </div><!-- /mainContent-->
 

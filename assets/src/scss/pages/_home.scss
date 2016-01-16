@@ -3,3 +3,28 @@
 /* ==========================================================================
    Home
    ========================================================================== */
+.categoriesHighlight{
+	margin: 40px 0;
+
+	.column{
+		@include span-columns(3);
+	}
+}
+
+.categoryProducts{
+	margin: 50px 0;
+	
+	ul{
+		padding: 10px 0;
+	}
+
+	h2{
+		display: none;
+	}
+
+	@include verticalNav(22px, 13px, -465px -18px, -465px -71px, -20px, -20px);
+	
+	.slick-arrow{
+		left: 45%;
+	}
+}

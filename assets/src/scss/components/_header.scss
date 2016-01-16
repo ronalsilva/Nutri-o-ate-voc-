@@ -4,22 +4,62 @@
    Header
    ========================================================================== */
 .pageHeader{
-    background: $primaryColor;
     color: $white;
-    padding: 20px 0;
+    margin-bottom: 20px;
+    
+    .topArea{
+        padding: 10px 0;
+        @include linear-gradient(to top, $primaryColor, $primaryColorDark);
+    }
+
+    .bottomArea{
+        background: $primaryColorDark;
+        padding: 10px 0;
+    }
+
+    .column{
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .logo{
+        .logoImg{
+            background: url("/arquivos/surpresa-no-ovo-logo.png") no-repeat;
+            width: 149px;
+            height: 61px;
+            font-size: 0;
+            display: block;
+            margin-top: 10px;
+        }
+    }
+
+    .welcomeMsg{
+        width: 220px;
+        margin-right: 50px;
+    }
+
+    .listLinks{
+        position: absolute;
+        background: $white;
+        padding: 10px;
+        z-index: 2;
+        display: none;
+    }
 
     .searchBox{
-        // MIXIN, substituir parametros:
-        @include searchBox1($primaryColor, $white, $white, $primaryFont, rem(14px), 305px, 275px);
+        margin: 0 80px;
+
+        @include searchBox1(transparent, $white, $white, $primaryFont, rem(14px), 305px, 275px);
         
         fieldset{
             border-width: 0 0 1px 0;
-            padding: 10px;
+            padding: 6px 0;
         }
 
         input{
             display: inline-block;
             vertical-align: top;
+            font-style: italic;
         }
 
         .btn-buscar{
@@ -34,12 +74,98 @@
     }
 
     .miniCart{
-        // MIXIN, substituir parametros:
-        //@include miniCart1($textColor, $iconPosition, $iconWidth, $iconHeight);
+        .cartAmountLink{
+            p{
+                position: absolute;
+                margin: 5px 0 0 50px;
+                width: 50px;
+                line-height: 1;
+                color: $white;
+            }
+        }
+    
+        .amount-products, .amount-kits, .title, .amount-items, .total-cart strong{display: none}
+    
+        .portal-totalizers-ref, .cartInfoWrapper{
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .total-cart{
+            color: $white;
+
+            &:before{
+                content: "";
+                display: inline-block;
+                vertical-align: bottom;
+                background: $bgsprite -333px -26px; 
+                width: 37px;
+                height: 52px;
+                margin-right: 8px;
+            }
+
+            &:after{
+                content: "";
+                background: $bgsprite -271px -26px;
+                width: 8px;
+                height: 5px;
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: 10px;
+            }
+        }
+
+        //hover carrinho
+        .portal-minicart-ref{
+            display:none;
+        }
     }
 
-    .topBar{
-    }   
+    .pitchBar{
+        .item{
+            display: inline-block;
+            vertical-align: middle;
+            width: 50%;
+            text-transform: uppercase;
+            text-align: center;
+
+            p{
+                display: inline-block;
+                vertical-align: middle;
+                font-size: rem(12px);
+                
+                span{
+                    text-transform: none;
+                }
+
+                &:before{
+                    content: "";
+                    display: inline-block;
+                    vertical-align: middle;
+                    margin-right: 10px;
+                    background: $bgsprite;
+                }
+            }            
+
+            &.frete{
+                border-right: 1px solid $primaryColor;
+                
+                p:before{
+                    background-position: -415px -18px;
+                    width: 21px;
+                    height: 16px;
+                }
+            }
+
+            &.parcela{
+                p:before{
+                    background-position: -416px -70px;
+                    width: 20px;
+                    height: 15px;
+                }
+            }
+        }
+    }
 }
 
 /*busca auto complete*/

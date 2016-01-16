@@ -4,22 +4,66 @@
    Shelf
    ========================================================================== */
 .shelf{
-    // MIXIN, substituir parametros:
-    //@include shelf1($productNameFont, $productNameColor, $productPriceFont, $productPriceColor, $numberCol) {
+    h2{
+        @include shelfTitle();
+    }
 
     li {
-        .productImage{
+        text-align: center;
+        @include span-columns(4);
+        padding: 10px 0;
+        transition: all .3s linear;
+        border-bottom: 3px solid transparent;
+
+        a{
+            color: $baseColor;
         }
 
-        .productInfo {  
-            .productName {
-           }
-
-            .productPrice {
-            }
-
-            .soldOut {
-            }
+        &:hover{
+            @include box-shadow(0px 0px 7px rgba(0,0,0,0.2));
+            border-bottom: 3px solid $primaryColor;
         }
     }
+
+    .productImage{
+        margin-bottom: 15px;
+
+        a{
+            display: block;
+        }
+
+        img{
+            margin: 0 auto;
+            display: block;
+        }
+    }
+
+    .productName {
+        margin-bottom: 10px;
+    }
+
+    .productPrice {
+        span{
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .oldPrice{
+            font-size: rem(14px);
+            text-decoration: line-through;
+            color: $color6;
+        }
+
+        .bestPrice{
+            font-size: rem(16px);
+            color: $suportColor;
+        }
+    }
+
+    .soldOut {
+    }
+}
+
+.shelfCarousel{
+    @include sideNav(13px, 22px, -521px -67px, -521px -14px, -15px, 45%);
 }

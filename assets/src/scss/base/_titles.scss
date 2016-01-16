@@ -2,18 +2,60 @@
 
 //titulo principal das paginas
 @mixin pageTitle (){
+	font-size: rem(26px);
+	text-transform: uppercase;
+	color: $baseColor;
+	margin-bottom: 20px;
+}
+
+@mixin pageTitle2 (){
+	span{
+		font-size: rem(12px);
+		color: $baseColor;
+		display: block;
+		margin-bottom: 5px;
+	}	
+
+	h2{
+		font-size: rem(30px);
+		color: $primaryColor;
+		margin-bottom: 20px;
+	}
 }
 
 //produto principal
 @mixin productTitle(){
+	font-size: rem(26px);
+	font-family: $primaryFont;
+	color: $baseColor;
+	margin-bottom: 20px;
+	line-height: 1;
 }
 
 //vitrines, blocos com produtos
 @mixin shelfTitle(){
+	font-size: rem(26px);
+	font-family: $primaryFont;
+	line-height: 2;
+	text-transform: uppercase;
+	text-align: center;
+	color: $color5;
+	border-bottom: 1px solid $color7;
+	margin-bottom: 25px;
+
+	&:after{
+		content: "";
+		display: block;
+		width: 125px;
+		height: 3px;
+		background: $primaryColor;
+		margin: 0 auto;
+	}
 }
 
 //blocos de sessoes, ex: minha conta, meus endereços
 @mixin sectionTitle(){
+
 }
 
 //subtitulos texto

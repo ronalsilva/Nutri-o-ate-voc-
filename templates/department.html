@@ -18,7 +18,13 @@
         <div id="mainContent">
             <div class="wrapper">
                 <section class="topInfo">
-                    <vtex.cmc:searchTitle />
+                    <div class="categoryName">
+                        <vtex:contentPlaceHolder id="Banners Categoria" />
+                    </div>
+
+                    <div class="featuredBanner mainGallery">
+                        <vtex:contentPlaceHolder id="Banners produtos em destaque" />
+                    </div>
                 </section>
 
                 <aside class="navSidebar">
@@ -28,6 +34,7 @@
                 </aside>
                 
                 <section class="pageContent">
+
                     <div class="viewType">
                         <span class="itemName">Visualizar:</span>
 
@@ -36,10 +43,10 @@
                             <span class="view2Col">Lista</span>
                         </div>
                     </div>
-
+                    
                     <vtex.cmc:searchResult layout="ef3fcb99-de72-4251-aa57-71fe5b6e149f" itemCount="50" columnCount="4" />
                 </section>
-            </div><!-- /wrapper -->
+    		</div><!-- /wrapper -->
         </div><!-- /mainContent-->
 
         <vtex:template id="footer" />

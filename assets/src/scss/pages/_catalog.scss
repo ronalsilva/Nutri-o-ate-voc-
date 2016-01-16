@@ -3,3 +3,127 @@
 /* ==========================================================================
    Catalog
    ========================================================================== */
+
+.navSidebar{
+	@include span-columns(3);
+}
+
+.pageContent{
+	@include span-columns(9);
+	border-left: 1px solid $color7;
+	padding-left: 20px;
+
+	.compare, .pager, .filterBy, .searchResultsTime, .sub:last-child{
+		display: none;
+	}
+}
+
+
+//filtros
+.navSidebar{
+	.menu-navegue, .bt-refinar, .search-single-navigator, .search-multiple-navigator h3, .search-multiple-navigator h4{
+		display: none;
+	}
+
+	.refino{
+		border: 1px solid $color7;
+		border-radius: 5px;
+		padding: 10px 20px;
+		margin-bottom: 10px;
+
+		h5{
+			color: $primaryColor;
+			font-size: rem(12px); 
+			text-transform: uppercase;
+			margin-bottom: 20px;
+		}
+
+		label{
+			font-size: rem(12px); 
+			background: $color7;
+			text-transform: uppercase;
+			padding: 10px;
+			margin-bottom: 2px;
+			display: block;
+			cursor: pointer;
+			color: #000;
+
+			input{
+				display: none;
+			}
+		}
+	}
+
+}
+
+
+// visualização
+.viewType{
+	.itemName, .switchView{
+		display: inline-block;
+		vertical-align: middle;
+	}
+}
+
+.switchView{
+	span{
+		display: inline-block;
+		vertical-align: middle;
+		font-size: 0;
+		background: $bgsprite $white;
+		margin-right: 10px;
+		width: 40px;
+		height: 30px;
+		border: 1px solid $color7;
+		cursor: pointer;
+
+		&.view3Col{
+			background-position: -906px -12px;
+			
+			&.active{
+				background-position: -857px -12px;
+			}
+		}
+
+		&.view2Col{
+			background-position: -906px -61px;
+			
+			&.active{
+				background-position: -857px -61px;
+			}
+		}
+
+		&.active{
+			border-color: $primaryColor;
+			background-color: $primaryColor;
+		}
+	}
+}
+
+
+//ordernar
+.orderBy{
+	float: right;
+
+	select{
+		color: $primaryColor;
+		border: 1px solid $color7;
+		padding: 5px 10px;
+		border-radius: 5px;
+		font-size: rem(14px);
+		font-family: $primaryFont;
+	}
+}
+
+.orderBy label, .viewType .itemName{
+	font-size: rem(12px);
+	color: $color6;
+	margin-right: 20px;
+}
+
+// scroll infinito
+.btn-load-more{
+	@include secondaryButton();
+	width: 200px;
+	margin: 40px auto 0 auto;
+}

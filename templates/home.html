@@ -19,11 +19,45 @@
         
         <div id="mainContent">
             <div class="wrapper">
-                <section class="mainGallery fullGallery">
+                <section class="mainGallery">
                     <vtex:contentPlaceHolder id="banner tv" />
                 </section>
     
-                <section class="featuredProducts">
+                <section class="categoriesHighlight">
+                    <div class="column">
+                        <vtex:contentPlaceHolder id="Banner Lembrança" />
+                        
+                        <div class="categoryProducts">
+                            <vtex:contentPlaceHolder id="Produtos Lembrança" />
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <vtex:contentPlaceHolder id="Banner Família" />
+                        
+                        <div class="categoryProducts">
+                            <vtex:contentPlaceHolder id="Produtos Família" />
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <vtex:contentPlaceHolder id="Banner Criançada" />
+                        
+                        <div class="categoryProducts">
+                            <vtex:contentPlaceHolder id="Produtos Criançada" />
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <vtex:contentPlaceHolder id="Banner Especial" />
+                        
+                        <div class="categoryProducts">
+                            <vtex:contentPlaceHolder id="Produtos Especial" />
+                        </div>
+                    </div>
+                </section>
+
+                <section class="featuredProducts shelfCarousel">
                     <vtex:contentPlaceHolder id="Coleções em destaque" />
                 </section>
     		</div><!-- /wrapper -->

@@ -276,8 +276,8 @@ var slider = {
 		});
 	},
 
-	shelfSlider: function (dots, arrows, slidesToShow, slidesToScroll) { // carrossel de produtos
-        $(".shelfCarousel").each(function() {
+	shelfSlider: function (dots, arrows, slidesToShow, slidesToScroll) { 
+		$(".shelfCarousel").each(function() {
             $(this).find("ul").slick({
                 dots: dots,
                 arrows: arrows,
@@ -285,7 +285,7 @@ var slider = {
                 slidesToScroll: slidesToScroll,
                 pauseOnHover: false,
                 autoplay: false,
-                autoplaySpeed: 4000
+                autoplaySpeed: 4000,
             });
         });
     },
@@ -332,6 +332,7 @@ var catalog = {
 	},
 
 	init: function  () {
+		catalog.smartResearch();
 	}
 }
 
@@ -384,7 +385,23 @@ $(document).ready(function () {
 	
 	global.init();
 
+	slider.shelfSlider(false, true, 3, 3);
+
+	slider.singleSlider(true, false);
+
 	if ($('body').hasClass("home")) {
+
+		$(".categoriesHighlight .categoryProducts").each(function() {
+            $(this).find("ul").slick({
+                dots: false,
+                arrows: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                pauseOnHover: true,
+                autoplay: false,
+                vertical: true,
+            });
+        });
 	}
 
 	if ($('body').hasClass("produto")) {

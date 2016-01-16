@@ -4,25 +4,54 @@
 /* ==========================================================================
    Product
    ========================================================================== */
-.mainProduct{}
+.mainProduct{
+    margin-bottom: 50px;
+}
 
 .mainProductImage {
-    // MIXIN, substituir parametros:
-    // @include image2($white, $white, 75px, 75px, 400px, 400px);
+    @include span-columns(8);
 
-    // MIXIN, substituir parametros:
-    // @include zoom1($width, $height) {
+    @include image1(#eee, #000, 63px, 530px, 10px, 530px);
+
+    @include zoom1(530px, 530px);
+
+    .thumbs a, #image{
+        border: none !important;
+        outline: none !important;
+    }
+
+    #include{
+        margin-right: 30px;
+    }
 }
 
 .mainProductInfo {
+    @include span-columns(4);
+
     .productTitle {
-        h1{}
+        @include productTitle();
     }
   
-    .priceProduct {
+    .priceProduct, .buyProductButton{
+        width: 49%;
+        display: inline-block;
+        vertical-align: middle;
     }
 
-    .buyProduct {
+    .priceProduct {
+        .valor-por{
+            font-size: 0;
+            display: block;
+            color: $suportColor;
+            
+            .skuBestPrice{
+                font-size: rem(28px);
+            }
+        }
+    }
+
+    .buy-button{
+        @include buyActionButton();
     }
     
     /*avise me*/

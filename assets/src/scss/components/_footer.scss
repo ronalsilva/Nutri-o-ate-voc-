@@ -4,6 +4,70 @@
    Footer
    ========================================================================== */
 .pageFooter{
+	background: $primaryColor;
+	color: $white; 	
+	margin-top: 50px;
+	text-transform: uppercase;
+	font-size: rem(12px);
 
-	
+	a{
+		color: $white;
+	}
+
+	.column{
+		padding: 20px 40px;
+	    float: none !important;
+	    display: table-cell !important;
+	    vertical-align: middle;
+	    height: 100%;
+	}
+
+	.adm{
+		@include span-columns(3);
+		background: $primaryColorDark;
+		text-align: center;
+
+		p{
+			margin-bottom: 20px;
+		}
+	}
+
+	.infos{
+		@include span-columns(9);
+		
+		.links{
+			li{
+				display: inline-block;
+				vertical-align: middle;
+				margin-right: 50px;
+			}
+
+			span{
+				color: $secondaryColor;
+				font-weight: bold;
+			}
+		}
+
+		.row{
+			margin-bottom: 35px;
+
+			&:last-child{
+				margin-bottom: 0;
+			}
+		}
+
+		.colItem{
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 20px;
+		}
+
+		a{
+			span{
+				font-size: 8px;
+				position: absolute;
+				display: block;
+			}
+		}
+	}
 }

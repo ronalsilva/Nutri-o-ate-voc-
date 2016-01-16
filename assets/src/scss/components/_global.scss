@@ -6,7 +6,7 @@
 body{
 	font-family: $primaryFont;
 	font-size: em(13px);
-	color: $midgrey;
+	color: $baseColor;
 }
 
 .wrapper{
@@ -27,12 +27,19 @@ body{
 }
 
 /*breadcrumb*/
-// MIXIN, substituir parametros:
-// @include breadcrumb($color, $colorActive)
+@include breadcrumb($baseColor, $baseColor); 
 
 /*slider*/
-.mainGallery{}
+.mainGallery{
+	@include galleryBullets($white, $primaryColor, 10px, 10px, 2px, $primaryColor, 0 5px);
+
+	.slick-dots{
+		margin-top: 0;
+	}
+}
+
 .carouselGallery{}
+
 .verticalSlider{}
 
 /*float header*/
