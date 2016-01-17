@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import "../../../../../_baseStructure/base/_library-modules";
 
 /* ==========================================================================
@@ -24,10 +25,18 @@ body{
 	position: absolute;
 	top: 5px;
 	left: 5px;
+	z-index: 2;
+	color: $white;
 }
 
 /*breadcrumb*/
 @include breadcrumb($baseColor, $baseColor); 
+.bread-crumb{
+	li a{
+		text-decoration: underline;
+	}
+}
+
 
 /*slider*/
 .mainGallery{
@@ -42,13 +51,12 @@ body{
 
 .verticalSlider{}
 
-/*float header*/
-// MIXIN, substituir parametros:
-// @include floatHeader1($bg, $height);
 
+/*title*/
+.pageTitle{
+	@include pageTitle2();
+}
 
-
-/* ==========================================================================
-   Lightbox
-   ========================================================================== */
+	
+/*lightbox*/
 @include lightbox();

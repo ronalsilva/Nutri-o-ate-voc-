@@ -2,40 +2,40 @@
 @mixin primaryButton(){
 	background: $primaryColor;
 	color: $white;
-	padding: 10px;
+	padding: 12px 18px;
 	display: block;
 	text-align: center;
 	text-transform: uppercase;
 	font-family: $secondaryFont;
 	font-size: rem(14px);
 	font-weight: 300;
-	border-radius: 5px;
+	border-radius: 4px;
 	cursor: pointer;
 }
 
 @mixin secondaryButton(){
 	background: $suportColor;
 	color: $white;
-	padding: 10px;
+	padding: 12px 18px;
 	text-align: center;
 	text-transform: uppercase;
 	font-family: $secondaryFont;
 	font-size: rem(12px);
 	font-weight: 300;
-	border-radius: 5px;
+	border-radius: 4px;
 	cursor: pointer;
 }
 
 @mixin secondaryButton2(){
 	background: $color6;
 	color: $white;
-	padding: 10px;
+	padding: 12px 18px;
 	text-align: center;
 	text-transform: uppercase;
 	font-family: $secondaryFont;
 	font-size: rem(12px);
 	font-weight: 300;
-	border-radius: 5px;
+	border-radius: 4px;
 	cursor: pointer;
 }
 
@@ -47,6 +47,32 @@
 	text-transform: uppercase;
 	font-family: $secondaryFont;
 	font-size: rem(16px);
+	font-weight: 300;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+@mixin checkoutButton(){
+	background: $white;
+	color: $primaryColor;
+	border: 1px solid $color7;
+	padding: 12px 18px;
+	text-align: center;
+	text-transform: uppercase;
+	font-family: $primaryFont;
+	font-size: rem(12px);
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+@mixin checkoutButton2(){
+	background: $color7;
+	color: $baseColor;
+	padding: 12px 18px;
+	text-align: center;
+	text-transform: uppercase;
+	font-family: $secondaryFont;
+	font-size: rem(12px);
 	font-weight: 300;
 	border-radius: 5px;
 	cursor: pointer;

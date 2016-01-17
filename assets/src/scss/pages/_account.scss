@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import "../../../../../_baseStructure/base/_library-modules";
 
 /* ==========================================================================
@@ -6,30 +7,28 @@
 
 body.account{
 	font-family: $primaryFont !important; 
-	font-size: 12px !important; 
-	color: $midgrey !important;
+	font-size: rem(13px) !important; 
+	color: $baseColor !important;
 	background: $white !important;
-	
-	.pageHeader{
-		padding: 0 !important;
-		background: $white !important;
 
+	.logo{
+		padding: 0; 
+	}
+
+	.pageHeader, .pageFooter{
 		.searchBox .fulltext-search-box{
 			box-shadow: none;
 			border-radius: 0;
 			margin-bottom: 0;
 		}
-	
-		.mainMenu{
-			margin: 0 !important;
-			padding: 0 !important;
-		}
-	}
 
-	.pageHeader, .pageFooter{
 		ul, ol{
 			margin: 0 !important;
 			padding: 0 !important;
+		}
+
+		p{
+			margin: 0;
 		}
 
 		h3, h5{
@@ -62,18 +61,18 @@ body.account{
 		}
 	}
 
-	//botoes
+	/*botoes*/
 	#edit-data-link, .new-address-link .address-update, .orders-link a, .modal-footer .btn-primary{
-		@include primaryButton();
+		@include secondaryButton();
 		margin: 10px 0 30px 0;
 		text-decoration: none !important;
 		color: $white !important;
-		border-radius: 0;
 		text-shadow: none;
 		box-shadow: none;
 		line-height: 1;
 		display: table;
 	}
+
 	.modal-footer .btn-link{
 		@include secondaryButton();
 	}

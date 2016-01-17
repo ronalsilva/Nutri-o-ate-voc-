@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import "../../../../../_baseStructure/base/_library-modules";
 
 
@@ -5,7 +6,9 @@
    Product
    ========================================================================== */
 .mainProduct{
+    padding-bottom: 50px;
     margin-bottom: 50px;
+    box-shadow: 0 20px 55px -35px rgba(0,0,0,0.4);
 }
 
 .mainProductImage {
@@ -32,6 +35,10 @@
         @include productTitle();
     }
   
+    .shortDescription{
+        margin: 25px 0;
+    }
+    
     .priceProduct, .buyProductButton{
         width: 49%;
         display: inline-block;
@@ -39,6 +46,19 @@
     }
 
     .priceProduct {
+        line-height: 1.2;
+
+        .valor-de{
+            font-size: 0;
+            display: block;
+            color: $color6;
+            text-decoration: line-through;
+
+            .skuListPrice{
+                font-size: rem(14px);
+            }
+        }
+
         .valor-por{
             font-size: 0;
             display: block;
@@ -47,6 +67,10 @@
             .skuBestPrice{
                 font-size: rem(28px);
             }
+        }
+        
+        .economia-de{
+            color: $color6;
         }
     }
 
@@ -64,160 +88,168 @@
     }
 }
 
+
+/*abas*/
+.tabNav{
+    margin-left: 100px;
+
+    .tabLink{
+        display: inline-block;
+        vertical-align: bottom;
+        font-size: rem(14px);
+        text-transform: uppercase;
+        padding: 10px 40px;
+        border: 1px solid $color7;
+        border-bottom: none;
+        background: #fff;
+        border-radius: 5px 5px 0 0;
+        position: relative;
+
+        &.active{
+            padding: 13px 40px;
+            color: $primaryColor;
+            margin-bottom: -1px;
+            border-color: $primaryColor;
+            box-shadow: 5px 2px 0 -2px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+    }
+}
+.tabContent{
+    border-top: 1px solid $primaryColor;
+    display: none;
+    padding: 20px 0;
+
+    &.active{
+        display: block;
+    }
+}
+
+
 /*detalhes*/
 .productDetails{
-    #caracteristicas{}
+    margin-bottom: 60px;
+
+    #caracteristicas{
+        margin-top: 20px;
+
+        h4{
+            display: none;
+        }
+
+        table{
+            width: 100%;
+            font-family: $secondaryFont;
+            text-align: left;
+
+            tr:nth-child(odd){
+                background: $color8;
+            }
+
+            th, td{
+                padding: 10px; 
+            }
+
+            td{
+                color: $primaryColor;
+            }
+        }
+    }
+}
+
+
+/* avaliacao geral*/
+.rate{
+    margin-bottom: 10px;
+
+    strong{
+        display: none;
+    }
+
+    .rating-produto{
+        background: url("/arquivos/sprite-rating.png");
+        width: 95px;
+        height: 16px;
+        display: table;
+        font-size: 0;
+        margin-bottom: 5px;
+        @include calcRatingShelf(-21px);
+    }
 }
 
 /*resenhas*/
 #resenha {
-    h4{}
-
+    h4, hr, .ver-todos-comentarios, .rating, #opcoes-avalie{display: none;}
+    
+    //media geral
     .media{
-        em{
-            float: left;
-            font-size: em(14px);
-        }
+        width: 45%;
+        float: right;
 
         .rating-produto{
-            background: url("/arquivos/sprite-rating.png");
-            width: 114px;
-            height: 19px;
-            display: table;
+            background: url("/arquivos/sprite-rating-big.png");
+            width: 150px;
+            height: 24px;
             font-size: 0;
             margin-bottom: 5px;
-            @include calcRatingShelf(-20px);
+            @include calcRatingShelf(-29px);
+        }
+
+        span, em, strong{
+            font-size: rem(16px);
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 15px;
+        }
+
+        em{
+            span{
+                color: $color6;
+                font-size: rem(14px);
+            }
         }
     }
 
-    #lnkPubliqueResenha{}
-    
-    .rating{
-        clear: both;
+    //selecionar rating
+    .ratingStar, .rating-avalie a span{
+        background: url("/arquivos/sprite-rating-big.png");
+        width: 24px;
+        height: 24px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px;
+        font-size: 0;
+
+        &.filledRatingStar{background-position: 0 -29px;}
+        &.emptyRatingStar{background-position: 0 0;}
+    }
+
+    //fazer avaliacao
+    #ulPubliqueResenha{
+        width: 55%;
+        float: left;
 
         li{
-            margin-bottom: 8px; 
-
-            span{
-                color: $lightgrey;
-                font-size: em(14px);
+            &:before{
+                content: "O que você achou desse produto?";
+                font-size: rem(16px);
+                margin-right: 15px;
+                display: inline-block;
             }
         }
 
-        .voteRatingStar, .voteRatingBar{
+        #lnkPubliqueResenha{
+            @include primaryButton();
             display: inline-block;
             vertical-align: middle;
         }
-
-        .voteRatingStar{
-            strong{
-                background: url("/arquivos/sprite-rating.png");
-                width: 97px;
-                height: 17px;
-                display: table;
-                font-size: 0;
-                @include calcRatingShelf(-20px);
-            }
-        }
-
-        .voteRatingBar { 
-            height: 15px; 
-            width: 190px; 
-            position: relative; 
-            margin: 0 0 0 10px; 
-            background: #fff; 
-            border: 1px solid $lightergrey;
-            border-radius: 3px;
-
-            span{
-                display: block;
-                height: 13px;
-                background: #eb8955;
-            }
-        }
     }
-    
-    hr, .avalie-produto, .ver-todos-comentarios{display: none;}
 
-
-    /*lista comentarios*/
-    .resenhas {    
-        &:before { 
-            content: "Comentarios"; 
-            display: block;
-        }
-        
-        .dados, .rating-wrapper, 
-        .resenhas .util .opiniao-ajudou ul, 
-        .resenhas .util .opiniao-ajudou ul li, 
-        .resenhas .util .opiniao-ajudou span{ 
-            display: inline-block; 
-            vertical-align: middle;
-        }
-        
-        & > .quem > li { 
-            margin-bottom: 25px; 
-            padding-bottom: 25px; 
-            border-bottom: 1px solid $lightergrey; 
-            color: $midgrey; 
-            position: relative;
-        }
-
-        .dados, .rating-wrapper{
-            margin-right: 10px;
-        }
-        
-        .dados, .opt-texto{
-            color: $darkergrey;
-            font-size: 13px;
-        }
-
-        .rating-wrapper .rating{
-            background: url("/arquivos/sprite-rating.png");
-            width: 97px;
-            height: 17px;
-            display: table;
-            font-size: 0;
-            @include calcRatingShelf(-20px);
-        }
-
-        .opt-texto {
-            line-height: 1.2; 
-            margin: 20px 0;
-        }
-
-        .dados strong, .rating-wrapper strong{display: none;}
-
-        .util{
-            font-size: 12px;
-            color: $lightgrey;
-            margin-bottom: 30px;
-
-            .considera-util { 
-                font-style: italic;
-                text-align: right;
-                position: absolute;
-                bottom: 15px;
-                right: 0;
-            }
-
-            .opiniao-ajudou {
-                ul, li{
-                    display: inline-block;
-                    vertical-align: middle;
-                    margin-right: 10px;
-
-                    a {
-                        display: block; 
-                        @include secondaryButton();
-                        text-transform: none;
-                        font-weight: normal;
-                    }
-                }
-            }
-        }
+    .avalie-produto{
+        display: none;
     }
 }
+
 
 /*publicar comentario */
 #publishUserReview{
@@ -296,18 +328,4 @@
     .rating-avalie{
         margin-bottom: 15px;
     }
-
-    .ratingStar{
-        background: url("/arquivos/sprite-rating.png");
-        width: 20px;
-        height: 19px;
-        display: inline-block;
-        vertical-align: middle;
-        margin-right: 5px;
-        font-size: 0;
-
-        &.emptyRatingStar{background-position: 0 0;}
-        &.filledRatingStar{background-position: 0 -20px;}
-    }
 }
-

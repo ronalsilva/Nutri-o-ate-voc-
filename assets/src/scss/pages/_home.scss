@@ -1,18 +1,21 @@
+@charset "UTF-8";
 @import "../../../../../_baseStructure/base/_library-modules";
 
 /* ==========================================================================
    Home
    ========================================================================== */
+
+// categorias destacadas   
 .categoriesHighlight{
+	padding: 0 20px;
 	margin: 40px 0;
 
 	.column{
 		@include span-columns(3);
 	}
 }
-
 .categoryProducts{
-	margin: 50px 0;
+	margin: 40px 0;
 	
 	ul{
 		padding: 10px 0;
@@ -22,9 +25,61 @@
 		display: none;
 	}
 
-	@include verticalNav(22px, 13px, -465px -18px, -465px -71px, -20px, -20px);
+	@include verticalNav(22px, 13px, -465px -18px, -465px -71px, -15px, -15px);
 	
 	.slick-arrow{
 		left: 45%;
 	}
+
+	.slick-list {
+        padding: 2px;
+    }
+
+	.btnSeeAll{
+		display: block;
+		margin-top: 40px;
+		@include primaryButton();
+	}
+}
+
+.filterMenu{
+	padding-left: 20px;
+	margin-top: 30px;
+
+	li{
+		position: relative;
+		border: 1px solid $color7;
+		border-radius: 5px;
+		margin-bottom: 10px;
+		transition: all .3s linear;
+
+		&:hover{
+			border-color: $primaryColor;
+		}
+
+		a{
+			display: block;
+			color: $primaryColor;
+			font-size: rem(12px); 
+			text-transform: uppercase;
+			cursor: pointer;
+			padding: 12px 15px;
+			width: 90%;
+		}
+
+		&:after{
+			content: "";
+			background: $bgsprite -126px -21px;
+			width: 6px;
+			height: 10px;
+			display: block;
+			position: absolute;
+			top: 15px;
+			right: 15px;
+		}
+	}
+}
+
+.banner{
+	margin: 20px 0 40px 0;
 }

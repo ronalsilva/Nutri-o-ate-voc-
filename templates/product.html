@@ -25,8 +25,14 @@
                     </section><!--/mainProductImage -->
 
                     <section class="mainProductInfo">
+                        <div class="rate"><vtex.cmc:evaluationRate/></div>
+                        
                         <h1 class="productTitle"><vtex.cmc:productName/></h1>
                         
+                        <div class="shortDescription">
+                            <vtex.cmc:productDescriptionShort />
+                        </div>
+
                         <div class="chooseProduct">
                             <vtex.cmc:skuSelection />
                         </div>
@@ -54,10 +60,10 @@
 
                         <div class="tabContent descricao active">
                             <vtex.cmc:ProductDescription/>
+                            <vtex.cmc:productSpecification/>
                         </div>
 
                         <div class="tabContent nutricional">
-                            <vtex.cmc:productSpecification/>
                         </div>
                     </div>  
                 </section><!-- productDescription -->

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import "../../../../../_baseStructure/base/_library-modules";
 
 /* ==========================================================================
@@ -14,7 +15,6 @@
 
     .bottomArea{
         background: $primaryColorDark;
-        padding: 10px 0;
     }
 
     .column{
@@ -35,7 +35,12 @@
 
     .welcomeMsg{
         width: 220px;
-        margin-right: 50px;
+        margin-right: 40px;
+
+        .welcome a{
+            color: $white;
+            text-decoration: underline;
+        }
     }
 
     .listLinks{
@@ -121,6 +126,7 @@
         }
     }
 
+    // diferenciais
     .pitchBar{
         .item{
             display: inline-block;
@@ -128,7 +134,9 @@
             width: 50%;
             text-transform: uppercase;
             text-align: center;
-
+            border-left: 1px solid $primaryColor;
+            padding: 10px 0;
+            
             p{
                 display: inline-block;
                 vertical-align: middle;
@@ -148,7 +156,6 @@
             }            
 
             &.frete{
-                border-right: 1px solid $primaryColor;
                 
                 p:before{
                     background-position: -415px -18px;
@@ -158,6 +165,8 @@
             }
 
             &.parcela{
+                border-right: 1px solid $primaryColor;
+
                 p:before{
                     background-position: -416px -70px;
                     width: 20px;
@@ -169,5 +178,4 @@
 }
 
 /*busca auto complete*/
-// MIXIN, substituir parametros:
-// @include autocomplete($bgColor, $width, $borderColor);
+@include autocomplete($white, 305px, $color7);

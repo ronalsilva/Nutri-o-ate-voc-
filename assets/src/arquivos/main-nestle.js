@@ -306,33 +306,61 @@ var catalog = {
 		$(".navSidebar input[type='checkbox']").vtexSmartResearch();	
 	},
 
-	buscaVazia: function () {
-		var pagina_busca = $('.search-result'),
-	        busca_vazia = $('.busca-vazio');
-
-		if (pagina_busca[0]) {
-	        var url = window.location.toString().split('/'),
-	            split_ft = url[3].split('?'),
-	            termo = split_ft[0];
-	        
-	        if (busca_vazia[0]) {
-	            pagina_busca.addClass('no-result');
-	            $(".busca-vazio").append("<ul><li>Tente palavras menos específicas.</li><li>Digite pelo menos quatro caracteres no campo de busca.</li><li>Use os menus do site para navegar pelos departamentos de produtos</ul>");
-				$(".navSidebar").remove();
-	        } else {
-	            var valorResult = $('.resultado-busca-termo:eq(0)').find('.value').text();
-	            pagina_busca.addClass('resultado-encontrado');
-	        };
-	    }; 
+	toggleFilter: function(){
+		$(".refino").each(function(){
+			$(this).find("h5").on("click", function(){
+				$(this).next("div").slideToggle();
+				$(this).toggleClass("active");
+			})
+		})
 	},
 
+	switchView: function () {
+        var typeGrid = $(".switchView").find("span"),
+            grid3 = $(".view3Col"),
+            grid2 = $(".view2Col"),
+            vitrinePrateleira = $(".resultItemsWrapper");
+
+        grid3.addClass('active');
+
+        typeGrid.on("click", function () {
+
+            if (!$(this).hasClass("active")) {
+                $(".vitrine > ul").hide(0).delay(300).fadeIn(400);
+            };
+
+            typeGrid.removeClass('active');
+            $(this).addClass('active');
+
+            if (grid3.hasClass('active')) {
+                vitrinePrateleira.removeClass("col2");
+                vitrinePrateleira.addClass("col3");
+        		$(".productList li").removeClass("last");
+        		$(".productList li:nth-child(3n)").addClass("last");
+
+            } else if (grid2.hasClass('active')) {
+                vitrinePrateleira.removeClass("col3");
+                vitrinePrateleira.addClass("col2");
+        		$(".productList li").removeClass("last");
+        		$(".productList li:nth-child(2n)").addClass("last");
+            }
+        });
+    },
+
 	searchWord: function () {
-		var word = $(".resultado-busca-termo:eq(0)").find("strong").text();
-		$(".navTopbar .titulo-sessao").html('<em>Você buscou por:</em>"' + word + '"');
+	  	var url = window.location.toString().split('/'),
+        split_ft = url[3].split('?'),
+        termo = split_ft[0];
+
+		// var word = $(".resultado-busca-termo:eq(0)").find("strong").text();
+		$(".topInfo .titulo-sessao").html('Resultado da busca: <em>"' + termo + '"</em>');
 	},
 
 	init: function  () {
 		catalog.smartResearch();
+		catalog.toggleFilter();
+		catalog.searchWord();
+		catalog.switchView();
 	}
 }
 
@@ -359,7 +387,7 @@ var product = {
 
 	init: function(){
 		product.share();
-		product.superZoom(300,300);
+		product.superZoom(530,530);
 	}
 }
 
@@ -380,7 +408,6 @@ var institutional = {
 }
 
 $(document).ready(function () {
-	$("body").prepend('<div id="fb-root"></div><script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=801185559934326";fjs.parentNode.insertBefore(js, fjs);}(document, "script", "facebook-jssdk"));</script>');
 	$(".helperComplement").remove();
 	
 	global.init();
@@ -388,33 +415,63 @@ $(document).ready(function () {
 	slider.shelfSlider(false, true, 3, 3);
 
 	slider.singleSlider(true, false);
+	
+	fns.tabs();
 
 	if ($('body').hasClass("home")) {
+		
+		//carrega produtos categorias
+  		//  $(".categoriesHighlight .column").each(function () {
+		// 	var url = "/buscapagina?fq=C%3a%2f12%2f&PS=12&sl=ef3fcb99-de72-4251-aa57-71fe5b6e149f&cc=12&sm=0&PageNumber=1";
+		// 	var container = $(this).find(".categoryProducts");
 
+		// 	$.ajax({
+		// 	  	url: url
+		// 	}).done(function( data ) {
+		// 		container.html(data);
+
+		// 		$(".helperComplement").remove();
+
+		//         container.find("ul").slick({
+		//             dots: false,
+		//             arrows: true,
+		//             slidesToShow: 1,
+		//             infinite: false,
+		//             vertical: true,
+		//         });
+		// 	});
+		// });
+
+        // carousel vertical produtos categorias
 		$(".categoriesHighlight .categoryProducts").each(function() {
-            $(this).find("ul").slick({
-                dots: false,
-                arrows: true,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                pauseOnHover: true,
-                autoplay: false,
-                vertical: true,
-            });
-        });
+	        $(this).find("ul").slick({
+	            dots: false,
+	            arrows: true,
+	            slidesToShow: 1,
+	            vertical: true,
+	            adaptiveHeight: true
+	        });
+	    });
 	}
 
-	if ($('body').hasClass("produto")) {
+	if ($('body').hasClass("product")) {
 		product.init();
 	};
 
 	if ( $('body').hasClass("catalog")) {
 		catalog.init();
+
+		$(".orderBy:eq(0)").appendTo(".sortOptions");
 	};
 
 	if ($('body').hasClass("institutional")) {
 		institutional.init();
 	};
+});
+
+
+$(document).ajaxStop(function () {
+	$(".helperComplement").remove();
 });
 
 

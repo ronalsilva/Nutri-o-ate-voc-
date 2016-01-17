@@ -22,23 +22,29 @@
                 </section>
 
                 <aside class="navSidebar">
-                     <div class="filterOptions">
+                    <div class="filterOptions">
                         <vtex.cmc:searchNavigator/>
+                    </div>
+                    
+                    <div class="catgDescription">
+                        <vtex:contentPlaceHolder id="Descrição categoria" />
                     </div>
                 </aside>
                 
-                <section class="pageContent">
-                    <div class="viewType">
-                        <span class="itemName">Visualizar:</span>
+                <div class="pageContent">
+                    <section class="sortOptions">
+                        <div class="viewType">
+                            <span class="itemName">Visualizar:</span>
 
-                        <div class="switchView">
-                            <span class="view3Col active">Tabela</span>
-                            <span class="view2Col">Lista</span>
+                            <div class="switchView">
+                                <span class="view3Col active">Tabela</span>
+                                <span class="view2Col">Lista</span>
+                            </div>
                         </div>
-                    </div>
+                    </section>
 
-                    <vtex.cmc:searchResult layout="ef3fcb99-de72-4251-aa57-71fe5b6e149f" itemCount="50" columnCount="4" />
-                </section>
+                    <vtex.cmc:searchResult layout="ef3fcb99-de72-4251-aa57-71fe5b6e149f" itemCount="12" columnCount="12" />
+                </div>
             </div><!-- /wrapper -->
         </div><!-- /mainContent-->
 
