@@ -5,7 +5,7 @@
    Footer
    ========================================================================== */
 .pageFooter{
-	background: $primaryColor;
+	background: $primaryColorLight;
 	color: $white; 	
 	margin-top: 50px;
 	text-transform: uppercase;
@@ -20,37 +20,51 @@
 	}
 
 	.column{
-		padding: 20px 40px;
-	    float: none !important;
-	    display: table-cell !important;
-	    vertical-align: middle;
-	    height: 100%;
+		// padding: 20px 40px;
+	    // float: none !important;
+	    // display: table-cell !important;
+	    // vertical-align: middle;
+	    // height: 100%;
 	}
 
 	.adm{
 		@include span-columns(3);
 		background: $primaryColorDark;
 		text-align: center;
+		border-left: 1px solid #cf142d;
+		border-right: 1px solid #cf142d;
 
 		p{
 			margin-bottom: 20px;
+		}
+
+		.gs{
+			padding: 20px 0;
+		    border-bottom: 1px solid #cf142d;
+		    margin-bottom: 20px;
+		}
+
+		.phoneInfo{
+			span{
+				color: $secondaryColor;
+				font-weight: bold;
+				display: block;
+				font-size: rem(20px);
+				line-height: 1.5;
+			}
 		}
 	}
 
 	.infos{
 		@include span-columns(9);
-		
+		padding: 30px 10px 20px 10px;
+
 		.links{
 			li{
 				display: inline-block;
 				vertical-align: middle;
 				margin-right: 50px;
-			}
-
-			span{
-				color: $secondaryColor;
-				font-weight: bold;
-			}
+			}	
 		}
 
 		.row{

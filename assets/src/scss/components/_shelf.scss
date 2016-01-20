@@ -27,6 +27,10 @@
         }
     }
 
+    .flagDiscountHighlight{
+        display: block !important;
+    }
+    
     .productImage{
         margin-bottom: 15px;
 
@@ -48,7 +52,7 @@
     }
 
     .productPrice {
-        height: 65px;
+        height: 30px;
         
         span{
             display: inline-block;
@@ -65,6 +69,7 @@
         .bestPrice{
             font-size: rem(16px);
             color: $suportColor;
+            font-weight: bold;
         }
 
         .economy strong{
