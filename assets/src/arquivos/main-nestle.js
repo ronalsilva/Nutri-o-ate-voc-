@@ -335,10 +335,17 @@ var catalog = {
         });
     },
 
+    searchWord: function () {
+		var word = decodeURI(window.location.search);
+		word = word.replace("?ft=","");
+		$(".box-emptySearch h3 span em").text(word);
+	},
+
 	init: function  () {
 		catalog.smartResearch();
 		catalog.toggleFilter();
 		catalog.switchView();
+		catalog.searchWord();
 	}
 }
 
@@ -349,6 +356,15 @@ var product = {
 		
 		fns.shareWindow(urlProduct, urlMediaProduct);
 	},
+
+	productIndisponivel: function(){
+		if ($( ".priceProduct" ).html() == "" ){
+			$('body').addClass("productUnaviable");
+			$(".sku-notifyme-button-ok").val("Avise-me quando chegar");
+		} else {
+			$('body').removeClass("productUnaviable");
+		};	
+    },
 
 	superZoom: function (width, height) {
 		window.LoadZoom = function (pi) {
@@ -393,13 +409,80 @@ var product = {
 	    })
 	},
 
+	reguaOvos: function () {
+		if ($('td.Regua-de-Ovos').length > 0 ) {
+			var hImg = $('td.Regua-de-Ovos img').height()
+			$('td.Regua-de-Ovos').parents('tr').css('background','#fff').css('height', hImg + 40);
+		};
+	},
+
+	nutritionalChart: function () {
+		if ($('td.Tabela-nutricional img').length < 1) {
+			$(".tabLink:eq(1)").remove();
+		} else {
+			$('.nutricional').prepend($('td.Tabela-nutricional img'));			
+		};
+	},
+
+	addCart:function(url) {    	
+    	$.ajax({
+    		type:'POST',
+            url:url,
+            async:false
+        } )
+        .done(function(data) {         	
+    		var tit = $(".productName:eq(0)").text();
+    		var img = '<img src="'+$("#image-main").attr("src")+'"/>';
+    		var success = 'Adicionado com sucesso!';
+        	
+            $("body").prepend('\
+               <div class="lb"><div class="lbOverlay"></div>\
+                   <div id="buyContent" class="lbContent">\
+                       <span class="closeLB">x</span>\
+                       <div class="buyAdd__img">'+img+'</div>\
+                       <p class="success">'+success+'</p>\
+                       <p class="title">'+tit+'</p>\
+                       <a href="/checkout/#/cart" class="bt-finalizar" target="_top">Finalizar compra</a>\
+                       <a href="#" class="bt-continuar">Continuar comprando</a>\
+                   </div>\
+               </div>')
+             vtexjs.checkout.getOrderForm();
+        })
+        .fail(function() {
+            alert("ocorreu um erro!")
+        });
+    },
+
+    buyProduct:function() {
+        $(document).on("click",".buyProductButton .buy-button", function(event) {
+            var _this = $(this)
+            var link = $(this).attr("href");
+
+            if(link.indexOf("/checkout/cart/")!=-1) {
+                event.preventDefault();
+                link = link.replace('redirect=true','redirect=false');
+                product.addCart(link,false);
+                
+            } 
+        });
+
+        $(document).on("click", ".lb .bt-continuar, .closeLB", function(event) {
+	        event.preventDefault();
+	        $(".lb").fadeOut("slow").remove();
+	    });
+    },
+
 	init: function(){
 		$(document).ajaxStop(function () {			
 		    product.changeStars();
 			product.retingLightbox();
+			product.productIndisponivel();
 		})
 		product.share();
 		product.superZoom(530,530);
+		product.reguaOvos();
+		product.nutritionalChart();
+		product.buyProduct();
 	}
 }
 
@@ -426,6 +509,16 @@ $(document).ready(function () {
 	
 	fns.tabs();
 
+	$(".shippingInfo ul").slick({
+	    slidesToShow: 1,
+		slidesToScroll: 1,
+	    vertical: true,
+	    arrows: false,
+	    dots: false,
+	    autoplay: true,
+	    autoplaySpeed: 8000
+	});
+
 	setTimeout( function(){ 
       $(".portal-minicart-ref").show();
     }, 5000);
@@ -433,9 +526,10 @@ $(document).ready(function () {
   	
 	if ($('body').hasClass("home")) {		
 		//carrega produtos categorias
-  		//  $(".categoriesHighlight .column").each(function () {
-		// 	var url = "/buscapagina?fq=C%3a%2f12%2f&PS=12&sl=ef3fcb99-de72-4251-aa57-71fe5b6e149f&cc=12&sm=0&PageNumber=1";
-		// 	var container = $(this).find(".categoryProducts");
+  // 		$(".categoriesHighlight .column").each(function () {
+		// 	var href = $(this).find(".categoryProducts").attr("data-catg"),
+		// 		url = "/buscapagina?fq=" + href + "&PS=12&sl=ef3fcb99-de72-4251-aa57-71fe5b6e149f&cc=12&sm=0&PageNumber=1",
+		// 		container = $(this).find(".categoryProducts");
 
 		// 	$.ajax({
 		// 	  	url: url
@@ -487,6 +581,10 @@ $(document).ready(function () {
 
 	if ($('body').hasClass("institutional")) {
 		institutional.init();
+	};
+
+	if ($('body').hasClass("resultado-busca")) {
+		catalog.searchWord();
 	};
 
 	if ($('body').hasClass("search-result")) {

@@ -141,25 +141,54 @@
             display: none;
         }
 
-        table{
+        table {
             width: 100%;
             font-family: $secondaryFont;
             text-align: left;
 
-            tr:nth-child(odd){
-                background: $color7;
+            tr {
+                position: relative;
+                display: block;
+                &:nth-child(even){
+                    background: $color7;
+                }
             }
             th {
                 width: 200px;
+                &.Regua-de-Ovos {
+                    font-size: 0;
+                }
             }
 
             th, td{
                 padding: 10px; 
+                &.Tabela-nutricional {
+                    display: none;
+                }
             }
 
             td{
                 color: $primaryColor;
+                &.Regua-de-Ovos {
+                    padding: 20px 0px;
+                    font-size: 0;
+                    img {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        bottom: 0;
+                        right: 0;
+                        margin: auto;
+                        max-width: 800px;
+                        height: auto;
+                    }
+                }
             }
+        }
+    }
+    .nutricional {
+        img {
+            margin: 20px auto;
         }
     }
 }
@@ -346,6 +375,47 @@
 
 
 /* ==========================================================================
+   Produto Indisponível
+   ========================================================================== */
+body.productUnaviable {
+    .priceProduct {
+        display: none;
+    }
+    .notifyme {
+        clear: both;
+        color: $color6;
+        h3 {
+            font-size: rem(12px);
+            margin-bottom: 10px;
+            font-family: $secondaryFont;
+            color: $color9;
+            text-transform: uppercase;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        @include form();
+        input[type=text] {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            border-color: $color7;
+            color:$color6;
+            font-size: rem(13px);
+            padding: 5px;
+        }
+        .notifyme-button-ok {            
+            @include primaryButton();
+            display: block !important;
+            background:$color9;
+            border: 0;
+            cursor: pointer;
+        }
+    }
+}
+
+
+/* ==========================================================================
    Lightbox
    ========================================================================== */
 div.lb,
@@ -397,6 +467,7 @@ div.lbOverlay {
         text-transform: none;        
     }
 }
+
 /*AVALIAÇÃO*/
 #ratingContent {
     width: 400px;
@@ -432,5 +503,42 @@ div.lbOverlay {
         font-weight: 300;
         border-radius: 4px;
         cursor: pointer;
+    }
+}
+
+/*ADD CARRINHO*/
+#buyContent {
+    width: 400px;
+    height: 520px;
+
+    .buyAdd__img {
+        display: block;
+        width: 90%;
+        margin: auto;
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .success {
+        font-family: $secondaryFont;
+        color: $color9;
+        font-size: rem(18px);
+    }
+
+    .bt-finalizar {
+        @include buyActionButton();
+        display: table;
+        margin: auto;
+    }
+
+    .bt-continuar {
+        font-family: $secondaryFont;
+        font-size: rem(12px);
+        text-decoration: underline;
+        color: #000;
+        display: block;
+        margin: 10px;
     }
 }
