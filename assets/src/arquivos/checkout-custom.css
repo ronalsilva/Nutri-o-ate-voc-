@@ -162,7 +162,7 @@
   font-family: Arial, sans-serif;
 }
 
-a.item-quantity-change{
+a.item-quantity-change, .item-link-remove{
 	color: #999 !important;
 }
 
