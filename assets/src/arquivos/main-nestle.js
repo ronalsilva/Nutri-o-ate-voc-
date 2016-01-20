@@ -142,59 +142,17 @@ var global = {
 	    });
     },
 
-<<<<<<< HEAD
-    newsletter: function(){
-        function closeNews() {
-            $('.lightboxOverlay').fadeOut(500, function(){
-                $(this).remove();
-            });
-            
-            $.cookie("newsletter", "ok", { path: '/', expires: 10 });
-        }
-
-        if(!$.cookie("newsletter")){
-            newsLightbox = $(".newsLightbox");
-
-            fns.lightboxOverlay.appendTo('body');
-            fns.lightboxBlock.appendTo('.lightboxOverlay');         
-
-            fns.lightbox(newsLightbox);
-        
-            $('.lightboxClose').click(function(e){
-                e.preventDefault();
-                closeNews();
-            });
-        }
-        
-        if($.cookie("newsletter") == "ok"){
-            $('.newsLightbox').remove();
-        }
-
-        $(document).ajaxStop(function(){
-            $.cookie("newsletter", "ok", { path: '/', expires: 10 });
-            if ($(".newsLightbox fieldset").hasClass('success')) { // customização da output de sucesso
-
-            };
-        });
-
-        fns.isMobile();
-    },
-
-    searchWord: function () {
+	searchWord: function () {
 		var word = decodeURI(window.location.search);
 		word = word.replace("?ft=","");
 		$(".box-emptySearch h3 em").text(word); 
 	},
-    
-    init: function () {
-    	global.floatHeader();
-    	global.menu();
-    	global.searchWord();
-=======
+
+   
     init: function () {
     	global.floatHeader();
     	global.shelfDiscount();
->>>>>>> da6a5bfc95a44d9da5581d005a74015abc2933a3
+    	global.searchWord();
     }
 }
 
@@ -325,19 +283,9 @@ var catalog = {
         });
     },
 
-	searchWord: function () {
-	  	var url = window.location.toString().split('/'),
-        split_ft = url[3].split('?'),
-        termo = split_ft[0];
-
-		// var word = $(".resultado-busca-termo:eq(0)").find("strong").text();
-		$(".topInfo .titulo-sessao").html('Resultado da busca: <em>"' + termo + '"</em>');
-	},
-
 	init: function  () {
 		catalog.smartResearch();
 		catalog.toggleFilter();
-		catalog.searchWord();
 		catalog.switchView();
 	}
 }
@@ -477,7 +425,7 @@ $(document).ready(function () {
 	if ( $('body').hasClass("catalog")) {
 		catalog.init();
 		slider.singleSlider(true, true);
-
+		
 		$(".orderBy:eq(0)").appendTo(".sortOptions");
 	};
 
