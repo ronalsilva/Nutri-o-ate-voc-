@@ -1,0 +1,204 @@
+@charset "UTF-8";
+@import "../../../../../_baseStructure/base/_library-modules";
+
+/* ==========================================================================
+   brands
+   ========================================================================== */
+
+
+body.brands {
+
+	.mainGallery{
+
+		.slick-dots{
+			float: left;
+			position: absolute;
+			top: 75%;
+			left: 90px;
+		}
+
+		.slick-arrow {
+			@include appearance(none);
+			border: none;
+			position: absolute;
+			top: 45%;
+			z-index: 20;
+			background: $bgsprite -521px -67px;
+			width: 13px;
+			height: 25px;
+			font-size: 0;
+			cursor: pointer;
+
+			&.slick-prev  {
+				
+			}
+
+			&.slick-next  {
+				right: 0;
+				background-position: -521px -14px;
+			}
+		}
+	}
+
+	.pageHeader {
+		margin-bottom: 0;
+	}
+
+	.fullGallery {
+		margin-bottom: 40px;
+
+		a {
+			display: block;
+		}
+
+		img {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+	}
+
+
+	.menu-departamento{
+		h3, h4{
+
+			&:after{
+				@include transform(rotate(-90deg));
+				background: $bgsprite -620px -21px;
+				width: 10px;
+				height: 7px;
+			}
+		}
+	}
+
+
+	//visualizacao
+	.switchView{
+		span{
+
+			&.view3Col{
+				background-position: -906px -12px;
+				
+				&.active{
+					background-position: -857px -12px;
+				}
+			}
+
+			&.view2Col{
+				background-position: -906px -61px;
+				
+				&.active{
+					background-position: -857px -61px;
+				}
+			}
+
+			&.active{
+				border-color: $primaryColor;
+				background-color: $primaryColor;
+			}
+		}
+	}
+
+
+	&.alpino {
+
+		$primaryColor: #e5c275;
+		
+		// titulo
+		.titulo-sessao{
+			color: $primaryColor;
+		}
+
+		//filtros
+		.navSidebar{
+
+			.menu-departamento{
+				h3, h4{
+
+					&:hover{
+						border-color: $primaryColor;
+					}
+
+					a{
+						color: $primaryColor;
+					}
+				}
+			}
+
+			.refino{
+
+				h5{
+					color: $primaryColor;
+				}
+
+				label{
+
+					&.sr_selected{
+						background: $primaryColor;
+					}
+				}
+			}
+
+			.catgDescription{
+				.title{
+					color: $primaryColor;
+				}
+			}
+		}
+
+		//visualizacao
+		.switchView{
+
+			span{
+
+				&.active{
+					border-color: $primaryColor;
+					background-color: $primaryColor;
+				}
+			}
+		}
+
+		//ordernar
+		.orderBy{
+			select{
+				color: $primaryColor;
+				font-family: $primaryFont;
+			}
+		}
+
+		#returnToTop{
+			a{
+				background: $white;
+			}
+		}
+
+		.btn-load-more {
+			background-color: $primaryColor;
+		}
+		
+		//Shelf
+		.shelf{
+
+		    li {
+		        &:hover{
+		            border-bottom: 3px solid $primaryColor;
+		        }
+		    }
+
+		    .productPrice {
+
+		        .bestPrice{
+		            color: $primaryColor;
+		        }
+
+		        .economy strong{
+		            color: $primaryColor;
+		        }
+		    }
+		}
+	}
+}
+
+
+
+
