@@ -39,6 +39,19 @@ body.catalog{
 	}
 }
 
+body.department {
+
+	.mainGallery{
+
+		.slick-dots{
+			float: left;
+			position: absolute;
+			top: 75%;
+			left: 90px;
+		}
+	}
+}
+
 // titulo
 .titulo-sessao{
 	@include pageTitle();
@@ -245,14 +258,31 @@ body.catalog{
 //ordernar
 .orderBy{
 	float: right;
+	position: relative;
+
+	&:after {
+		content: '';
+		display: inline-block;
+		background: $bgsprite  -620px -21px;
+		width: 10px;
+		height: 7px;
+		position: absolute;
+		top: 13px;
+		right: 8px;
+		z-index: 0;
+	}
+
 
 	select{
+		@include appearance(none);
 		color: $primaryColor;
 		border: 1px solid $color7;
 		padding: 5px 10px;
 		border-radius: 5px;
 		font-size: rem(14px);
 		font-family: $primaryFont;
+		background: transparent;
+		z-index: 1;
 	}
 }
 

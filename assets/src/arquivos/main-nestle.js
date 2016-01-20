@@ -460,6 +460,7 @@ $(document).ready(function () {
 
 	if ( $('body').hasClass("catalog")) {
 		catalog.init();
+		slider.singleSlider(true, true);
 
 		$(".orderBy:eq(0)").appendTo(".sortOptions");
 	};
