@@ -342,5 +342,58 @@
     }
 }
 
+
+/* ==========================================================================
+Header Flutuante
+========================================================================== */
+.floatElement {
+    position: fixed !important;
+    z-index: 5011;
+
+    &.busca {
+        width: 390px !important;
+        margin: auto;
+        top: 7px;
+        left: 0;
+        right: 0;
+        .fulltext-search-box {
+            width: 365px !important;
+        }
+    }
+
+    &.miniCart {
+        position: relative;
+        margin: auto;
+        top: 5px;
+        transform: translateY(30px);
+        -webkit-transform: translateX(200px);
+        -moz-transform: translateX(200px);
+    }
+
+    &.pageNav {
+        top: 65px;
+        left: 0;
+        right: 0; 
+    }
+}
+
+.floatHeader {
+    display: none;
+    width: 100%;
+    background: #af1f16;
+    position: fixed;
+    padding: 10px 0;
+    z-index: 5010;
+    .logo {
+        display: inline-block;
+        vertical-align: middle;
+        width: 210px;
+        height: 43px;
+        background: url("/arquivos/super-pascoa-logo.png") center center no-repeat;
+        background-size: cover;
+        font-size: 0;
+    }
+}
+
 /*busca auto complete*/
 @include autocomplete($white, 205px, $color7);
