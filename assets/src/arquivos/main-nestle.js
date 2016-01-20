@@ -415,14 +415,60 @@ var product = {
 	},
 
 	nutritionalChart: function () {
-		$('td.Tabela-nutricional').each(function () {
-			if($(this).length){
-				$('.nutricional').prepend($(this).find('img'))
-			} else {
-				$(".tabLink:eq(1)").remove();
-			}
-		});
+		if ($('td.Tabela-nutricional img').length < 1) {
+			$(".tabLink:eq(1)").remove();
+		} else {
+			$('.nutricional').prepend($('td.Tabela-nutricional img'));			
+		};
 	},
+
+	addCart:function(url) {    	
+    	$.ajax({
+    		type:'POST',
+            url:url,
+            async:false
+        } )
+        .done(function(data) {         	
+    		var tit = $(".productName:eq(0)").text();
+    		var img = '<img src="'+$("#image-main").attr("src")+'"/>';
+    		var success = 'Adicionado com sucesso!';
+        	
+            $("body").prepend('\
+               <div class="lb"><div class="lbOverlay"></div>\
+                   <div id="buyContent" class="lbContent">\
+                       <span class="closeLB">x</span>\
+                       <div class="buyAdd__img">'+img+'</div>\
+                       <p class="success">'+success+'</p>\
+                       <p class="title">'+tit+'</p>\
+                       <a href="/checkout/#/cart" class="bt-finalizar" target="_top">Finalizar compra</a>\
+                       <a href="#" class="bt-continuar">Continuar comprando</a>\
+                   </div>\
+               </div>')
+             vtexjs.checkout.getOrderForm();
+        })
+        .fail(function() {
+            alert("ocorreu um erro!")
+        });
+    },
+
+    buyProduct:function() {
+        $(document).on("click",".buyProductButton .buy-button", function(event) {
+            var _this = $(this)
+            var link = $(this).attr("href");
+
+            if(link.indexOf("/checkout/cart/")!=-1) {
+                event.preventDefault();
+                link = link.replace('redirect=true','redirect=false');
+                product.addCart(link,false);
+                
+            } 
+        });
+
+        $(document).on("click", ".lb .bt-continuar, .closeLB", function(event) {
+	        event.preventDefault();
+	        $(".lb").fadeOut("slow").remove();
+	    });
+    },
 
 	init: function(){
 		$(document).ajaxStop(function () {			
@@ -434,6 +480,7 @@ var product = {
 		product.superZoom(530,530);
 		product.reguaOvos();
 		product.nutritionalChart();
+		product.buyProduct();
 	}
 }
 
