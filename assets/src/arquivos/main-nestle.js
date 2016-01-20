@@ -126,6 +126,22 @@ var global = {
 	        }
 	    }); 	
     },
+
+    userLogged: function(){
+		$(".listLinks").append("<li><a href='/no-cache/user/logout'>sair</a></li>");
+    	
+    	vtexjs.checkout.getOrderForm().done(function(data){
+	        if (data.loggedIn){
+	           $('.welcomeMsg').addClass('userLogged')
+	        }  
+	   	});
+
+		setTimeout( function(){ 
+			$(".userLogged").on("click", function(){
+				$(".listLinks").slideToggle();
+			});
+	    }, 3000);
+    },
     
     shelfDiscount: function(){
     	$('.shelf .flagDiscountHighlight').each(function() {
@@ -203,6 +219,7 @@ var global = {
     init: function () {
     	global.floatHeader();
     	global.shelfDiscount();	
+    	global.userLogged();	
     }
 }
 
@@ -515,13 +532,13 @@ $(document).ready(function () {
 	    dots: false,
 	    autoplay: true,
 	    autoplaySpeed: 8000
-	});
+	});		
 
 	setTimeout( function(){ 
       $(".portal-minicart-ref").show();
     }, 5000);
 
-  	
+	  	
 	if ($('body').hasClass("home")) {		
 		//carrega produtos categorias
   // 		$(".categoriesHighlight .column").each(function () {
