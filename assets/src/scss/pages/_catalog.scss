@@ -133,6 +133,56 @@ body.department {
 		}
 	}
 }
+
+body.search-result {
+
+	.searchResultsTime {
+		display: block;
+		.resultado-busca-termo,
+		.resultado-busca-tempo,{
+			display: none;
+		}
+	}
+
+
+	.titulo-sessao {
+
+		.resultado-busca-numero {
+			color: $color6;
+			font-size: rem(12px);
+			margin-left: 10px;
+			text-transform: lowercase;
+			position: relative;
+
+			.label {
+				top: -5px;
+				position: relative;
+				padding-left: 12px;
+			}
+
+			.value {
+				position: absolute;
+				left: 0;
+				top: -4px;
+			}
+		}
+
+		.resultado-busca-numero:last-child {
+			display: none;
+		}
+	}
+}
+
+// titulo
+.titulo-sessao{
+	@include pageTitle();
+	color: $primaryColor;
+
+	em{
+		color: $baseColor;
+	}
+}
+
 .categoryName{
 	@include span-columns(4);
 }

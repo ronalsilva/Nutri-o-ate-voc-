@@ -486,6 +486,17 @@ $(document).ready(function () {
 	if ($('body').hasClass("institutional")) {
 		institutional.init();
 	};
+
+	if ($('body').hasClass("search-result")) {
+		var numbersearch = $(".resultado-busca-numero");
+		$(".titulo-sessao").append(numbersearch);
+		console.log(numbersearch);
+	};
+
+	if ($('body').hasClass("brands")) {
+		var dataUrl = decodeURI(window.location.search);
+		$("h2.titulo-sessao").text(dataUrl);
+	};
 });
 
 
