@@ -126,101 +126,83 @@ var global = {
 	        }
 	    }); 	
     },
-
-    menu: function(){
-    	var menuOutObject;
-		var menuOutTimer;
-
-		$(".menu-departamento ul").each(function(){
-			if(!$(this).find("li").length){
-				$(this).remove();
-			}
-		});
-
-		$(function() {
-			$('.pageNav .menu-departamento h3').hover(
-				function() {
-					menuOutObject = $(this).next('ul');
-					y = $(this).position().left;
-					menuOutObject.css('left', y);
-
-					if (!menuOutObject.is(':visible')) {
-						hideMenuSubItems($('.pageNav .menu-departamento ul:visible'));
-					}
-					clearTimeout(menuOutTimer);
-					menuOutObject.fadeIn();
-				},
-
-				function() {
-					menuOutTimer = setTimeout(function() {
-					hideMenuSubItems(menuOutObject);
-				}, 10);
-			});
-
-			$('.pageNav .menu-departamento ul').hover(
-				function() {
-					menuOutObject = $(this);
-					clearTimeout(menuOutTimer);
-				},
-				function() {
-					menuOutTimer = setTimeout(function() {
-					hideMenuSubItems(menuOutObject);
-				}, 10);
-			});
-
-			$(".pageNav .menu-departamento ul").mouseover(function(){
-			    $(this).prev('h3').addClass("active");
-			});
-			$(".pageNav .menu-departamento ul").mouseout(function(){
-			    $(this).prev('h3').removeClass("active");
-			});
-		});
-
-		function hideMenuSubItems(o) {
-			o.fadeOut(10);
-		}
+    
+    shelfDiscount: function(){
+    	$('.shelf .flagDiscountHighlight').each(function() {
+	        var descpct = $(this).text().replace(',', '.');
+	        descpct = descpct.replace(' %', '');
+	        descpct = parseFloat(descpct);
+	        descpct = Math.ceil(descpct);
+	        if ((descpct == "0") || (descpct == 0)) {
+	            $(this).hide();
+	        } else {
+            	$(this).show();
+            	$(this).html(descpct + "% off");
+	        }
+	    });
     },
 
-    newsletter: function(){
-        function closeNews() {
-            $('.lightboxOverlay').fadeOut(500, function(){
-                $(this).remove();
-            });
-            
-            $.cookie("newsletter", "ok", { path: '/', expires: 10 });
-        }
-
-        if(!$.cookie("newsletter")){
-            newsLightbox = $(".newsLightbox");
-
-            fns.lightboxOverlay.appendTo('body');
-            fns.lightboxBlock.appendTo('.lightboxOverlay');         
-
-            fns.lightbox(newsLightbox);
+    carouselCart: function () {
+        var numItens = $(".vtexsc-productList").find("tr").length - 1;
+        var buttonTop = $("<span>").addClass("btnTop");
+        var buttonBot = $("<span>").addClass("btnBottom");
+        var tableCart = $(".vtexsc-productList");
+        var cartWrap = $(".vtexsc-wrap");
+        cartWrap.after("<div class='carouselCart'></div>");
+        $(".carouselCart").append(buttonTop).append(buttonBot);
+        var hItem = 75;
         
-            $('.lightboxClose').click(function(e){
-                e.preventDefault();
-                closeNews();
-            });
-        }
-        
-        if($.cookie("newsletter") == "ok"){
-            $('.newsLightbox').remove();
-        }
+        buttonTop.on("click", function() {
+            slide = tableCart.position().top;
+            pos_slide = (slide + hItem);
+            if (slide >= 0) {
+                tableCart.animate({
+                    top: "0"
+                });
+            } else {
+                tableCart.animate({
+                    top: (pos_slide) + "px"
+                });
+            }
+        });
 
-        $(document).ajaxStop(function(){
-            $.cookie("newsletter", "ok", { path: '/', expires: 10 });
-            if ($(".newsLightbox fieldset").hasClass('success')) { // customização da output de sucesso
+        buttonBot.on("click", function() {
+            slide = tableCart.position().top;
+            pos_slide = (slide - hItem);
 
+            if (numItens > 2) {
+                if (slide <= (-hItem * (numItens - 1)) + 76) {
+                    tableCart.animate({
+                        top: slide + "px"
+                    });
+
+                } else {
+                    tableCart.animate({
+                        top: (pos_slide) + "px"
+                    });
+                }
             };
         });
 
-        fns.isMobile();
+        if (numItens <= 2) {
+            buttonTop.hide();
+            buttonBot.hide();
+        }
+    },
+
+	addButtonCart: function() {
+        var linkCarrinho = $("<a>").attr({
+            class: "linkGoCart",
+            href: "/checkout/#/cart"
+        }).text("ver carrinho");
+        if ($(".linkCarrinho-cart").length < 1) {
+            linkCarrinho.insertAfter(".cartCheckout");
+        };
     },
     
     init: function () {
     	global.floatHeader();
-    	global.menu();
+    	global.shelfDiscount();	
     }
 }
 
@@ -303,7 +285,11 @@ var slider = {
 
 var catalog = {
 	smartResearch: function(){
-		$(".navSidebar input[type='checkbox']").vtexSmartResearch();	
+		$(".navSidebar input[type='checkbox']").vtexSmartResearch({
+	        callback:function() {
+	           global.shelfDiscount();
+	        }
+	    });
 	},
 
 	toggleFilter: function(){
@@ -347,19 +333,9 @@ var catalog = {
         });
     },
 
-	searchWord: function () {
-	  	var url = window.location.toString().split('/'),
-        split_ft = url[3].split('?'),
-        termo = split_ft[0];
-
-		// var word = $(".resultado-busca-termo:eq(0)").find("strong").text();
-		$(".topInfo .titulo-sessao").html('Resultado da busca: <em>"' + termo + '"</em>');
-	},
-
 	init: function  () {
 		catalog.smartResearch();
 		catalog.toggleFilter();
-		catalog.searchWord();
 		catalog.switchView();
 	}
 }
@@ -386,32 +362,42 @@ var product = {
 	},
 
 	retingLightbox: function () {
+		var stars = $("#resenha .avalie-produto").clone().html();
 		$("#lnkPubliqueResenha").on("click", function (event) {
 			event.preventDefault();
-			var stars = $('#resenha .avalie-produto').clone();
-			var lightboxStars = '\
-				<div class="lb"><div class="lbBg"></div>\
-				   	<div class="lbContent">\
+			
+			$("body").prepend('\
+				<div class="lb"><div class="lbOverlay"></div>\
+				   	<div id="ratingContent" class="lbContent">\
 						<span class="closeLB">x</span>\
 						<p class="title">O que você achou desse produto?</p>\
 						<div class="rateStars">'+stars+'</div>\
 						<a href="#" class="bt-continuar">Fazer avaliação do produto</a>\
 				   	</div>\
-				</div>';
-			
-			$('body').prepend(lightboxStars);
+				</div>');
 
 		})
-		$(document).on("click", ".lb .bt-continuar, .closeLB", function(event) {
+		$(document).on("click", ".lb .bt-continuar, .closeLB", function (event) {
 	        event.preventDefault();
 	        $(".lb").fadeOut("slow").remove();
 	    });
 	},
 
+	changeStars: function () {
+		$('#ratingContent span.ratingStar').on("click", function () {
+			$(document).ajaxStop(function () {	
+	    		$('#ratingContent .rateStars').html( $("#resenha .avalie-produto").clone());
+			})
+	    })
+	},
+
 	init: function(){
+		$(document).ajaxStop(function () {			
+		    product.changeStars();
+			product.retingLightbox();
+		})
 		product.share();
 		product.superZoom(530,530);
-		product.retingLightbox();
 	}
 }
 
@@ -438,6 +424,11 @@ $(document).ready(function () {
 	
 	fns.tabs();
 
+	setTimeout( function(){ 
+      $(".portal-minicart-ref").show();
+    }, 5000);
+
+  	
 	if ($('body').hasClass("home")) {		
 		//carrega produtos categorias
   		//  $(".categoriesHighlight .column").each(function () {
@@ -488,7 +479,7 @@ $(document).ready(function () {
 	if ( $('body').hasClass("catalog")) {
 		catalog.init();
 		slider.singleSlider(true, true);
-
+		
 		$(".orderBy:eq(0)").appendTo(".sortOptions");
 	};
 
@@ -511,6 +502,9 @@ $(document).ready(function () {
 
 $(document).ajaxStop(function () {
 	$(".helperComplement").remove();
+
+	global.carouselCart();
+	global.addButtonCart();
 });
 
 

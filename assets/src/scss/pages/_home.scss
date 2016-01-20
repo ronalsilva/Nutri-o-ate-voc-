@@ -14,11 +14,16 @@
 		@include span-columns(3);
 	}
 }
+
 .categoryProducts{
 	margin: 40px 0;
 	
 	ul{
 		padding: 10px 0;
+
+		li{
+			min-height: 310px;
+		}
 	}
 
 	h2{
@@ -42,6 +47,7 @@
 	}
 }
 
+// filter menu
 .filterMenu{
 	padding-left: 20px;
 	margin-top: 30px;

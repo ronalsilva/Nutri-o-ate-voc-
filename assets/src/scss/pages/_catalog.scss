@@ -39,6 +39,67 @@ body.catalog{
 	}
 }
 
+// titulo
+.titulo-sessao{
+	@include pageTitle();
+	color: $primaryColor;
+
+	em{
+		color: $baseColor;
+	}
+}
+
+
+//busca vazia
+body.resultado-busca {
+	.box-emptySearch 
+		h3 {
+		    text-align: center;
+		    font-size: 22pt;
+		    color: #ee1934;
+		    text-transform: uppercase;
+		    padding-top: 40px;
+		    padding-bottom: 40px;
+
+		    span {
+	    		color: #000;
+	    		font-style: italic;
+			}
+		}
+
+	.conteinerSearch {
+	    width: 41%;
+	    margin: 0 auto;
+	    padding-bottom: 65px;
+
+	    li {
+		    padding-bottom: 7px;
+
+		    &:before {
+			    content: "";
+			    width: 20px;
+			    height: 20px;
+			    background: url("/arquivos/sprite-icons.png") -673px -70px;
+			    float: left;
+			}
+		}
+	}
+
+	.btnHome {
+	    text-align: center;
+	    padding-bottom: 40px;
+
+		    a {
+		    background: #E41832;
+		    color: #fff;
+		    padding: 10px 30px;
+		    border-radius: 4px;
+		}
+	}
+}
+
+
+//departamento
 body.department {
 
 	.mainGallery{
@@ -122,8 +183,6 @@ body.search-result {
 	}
 }
 
-
-// departamento
 .categoryName{
 	@include span-columns(4);
 }
@@ -255,6 +314,10 @@ body.search-result {
 	}
 }
 
+// filtro de preco
+#sliderPrice{
+	display: block !important;
+}
 
 // opcoes de ordenacao 
 .sortOptions{
@@ -346,7 +409,6 @@ body.search-result {
 	}
 }
 
-
 // scroll infinito
 .btn-load-more{
 	@include secondaryButton();
@@ -377,4 +439,12 @@ body.search-result {
 	.text2{
 		font-size: 15px;
 	}
+}
+
+
+// filtro sem resultado
+.vtexsr-emptySearch{
+	text-align: center;
+	font-size: rem(14px);
+	padding: 30px;
 }

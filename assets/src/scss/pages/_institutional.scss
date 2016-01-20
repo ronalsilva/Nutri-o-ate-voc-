@@ -87,8 +87,7 @@ body.institutional{
 
 		iframe{
 			width: 100%;
-			height: 545px;
-			margin-top: 20px;
+		    height: 285px;			
 		}
 		
 		h1{
@@ -118,6 +117,45 @@ body.institutional{
 		li{
 			list-style-type: disc;
 			list-style-position: inside;
+		}
+	}
+
+	&.fale-conosco{
+		
+		.destaque{			
+			color: $color3;
+			font-size: 20px;
+			font-weight: bold;			
+		}
+
+		.pedidos, .duvidas{
+			display: inline-block;
+			padding-left: 20px;
+		}
+
+		.black{
+			p{
+				color: $black;
+				font-weight: bold;
+				padding: 0;
+				margin: 0;				 
+			}
+		}
+
+		.telefones{
+			    border-bottom: 1px solid #e6e6e6;
+		}
+
+		.page-title{
+			
+			.srt{
+				padding: 0;
+
+				p{
+					padding: 0;
+					font-size: rem(13px);
+				}
+			}
 		}
 	}
 }
