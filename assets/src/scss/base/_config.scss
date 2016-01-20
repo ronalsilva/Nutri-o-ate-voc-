@@ -87,6 +87,9 @@ $color8: #f5f5f5;
 $color9: #ee1934;
 
 
+
+
+
 //grey scale
 $black: rgb(0,0,0); //#000000
 $darkergrey: tint($black, 10%); //#191919
@@ -124,3 +127,8 @@ $bgsprite: url("/arquivos/sprite-icons.png");
 
 //-----------------------
 $max-width: 1016px !global;
+
+
+body.alpino {
+   $primaryColor: #e5c275 !important;
+}
