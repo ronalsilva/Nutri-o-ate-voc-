@@ -142,17 +142,10 @@ var global = {
 	    });
     },
 
-	searchWord: function () {
-		var word = decodeURI(window.location.search);
-		word = word.replace("?ft=","");
-		$(".box-emptySearch h3 em").text(word); 
-	},
-
    
     init: function () {
     	global.floatHeader();
     	global.shelfDiscount();
-    	global.searchWord();
     }
 }
 
@@ -283,10 +276,17 @@ var catalog = {
         });
     },
 
-	init: function  () {
-		catalog.smartResearch();
+	searchWord: function () {
+		var word = decodeURI(window.location.search);
+		word = word.replace("?ft=","");
+		$(".box-emptySearch h3 em").text(word); 
+	},
+
+	init: function  () { 
+		catalog.smartResearch(); 
 		catalog.toggleFilter();
 		catalog.switchView();
+        catalog.searchWord();
 	}
 }
 
@@ -373,7 +373,6 @@ $(document).ready(function () {
 	global.init();
 	
 	fns.tabs();
-
   	
 	if ($('body').hasClass("home")) {		
 		//carrega produtos categorias
@@ -431,6 +430,11 @@ $(document).ready(function () {
 
 	if ($('body').hasClass("institutional")) {
 		institutional.init();
+	};
+
+	if ($('body').hasClass("resultado-busca")) {
+		catalog.searchWord();
+		catalog.init();
 	};
 });
 
