@@ -14,6 +14,10 @@
 		<a title="$escapedName" href="$uri">$product.Name</a>
 	</p>
 	
+	<div class="flagDiscountHighlight" style="display:none;">
+	    $product.ListPriceMinusBestPriceInPercent
+	</div>
+
 	#if ($product.IsInStock)
 		<div class="productPrice">
 	        <a href="$uri">
@@ -21,10 +25,6 @@
 		          <span class="oldPrice"><strong>$product.ListPrice</strong></span>
 		        #end
 		        <span class="bestPrice"><strong>$product.BestPrice</strong></span>
-
-	         	#if ($product.HasBestPrice)
-	    			<p class="economy"><strong> - $product.ListPriceMinusBestPrice</strong></p>
-		        #end
 	        </a>
     	</div> 
 	#else

@@ -7,15 +7,8 @@
 .pageHeader{
     color: $white;
     margin-bottom: 20px;
-    
-    .topArea{
-        padding: 10px 0;
-        @include linear-gradient(to top, $primaryColor, $primaryColorDark);
-    }
-
-    .bottomArea{
-        background: $primaryColorDark;
-    }
+    padding: 15px 0;
+    @include linear-gradient(to top, $primaryColor, $primaryColorLight);
 
     .column{
         display: inline-block;
@@ -24,18 +17,17 @@
 
     .logo{
         .logoImg{
-            background: url("/arquivos/surpresa-no-ovo-logo.png") no-repeat;
-            width: 149px;
-            height: 61px;
+            background: url("/arquivos/super-pascoa-logo.png") no-repeat;
+            width: 233px;
+            height: 49px;
             font-size: 0;
             display: block;
-            margin-top: 10px;
         }
     }
 
     .welcomeMsg{
         width: 220px;
-        margin-right: 40px;
+        margin: 0 20px;
 
         .welcome a{
             color: $white;
@@ -52,9 +44,9 @@
     }
 
     .searchBox{
-        margin: 0 80px;
+        margin: 0 45px;
 
-        @include searchBox1(transparent, $white, $white, $primaryFont, rem(14px), 305px, 275px);
+        @include searchBox1(transparent, $white, $white, $primaryFont, rem(14px), 205px, 175px);
         
         fieldset{
             border-width: 0 0 1px 0;
@@ -126,56 +118,31 @@
         }
     }
 
-    // diferenciais
-    .pitchBar{
-        .item{
+    .shippingInfo{   
+        p{
+            text-transform: uppercase;
+            font-size: rem(14px);
+            font-weight: bold;
+            line-height: 1.1;
             display: inline-block;
             vertical-align: middle;
-            width: 50%;
-            text-transform: uppercase;
-            text-align: center;
-            border-left: 1px solid $primaryColor;
-            padding: 10px 0;
-            
-            p{
-                display: inline-block;
-                vertical-align: middle;
-                font-size: rem(12px);
-                
-                span{
-                    text-transform: none;
-                }
 
-                &:before{
-                    content: "";
-                    display: inline-block;
-                    vertical-align: middle;
-                    margin-right: 10px;
-                    background: $bgsprite;
-                }
-            }            
-
-            &.frete{
-                
-                p:before{
-                    background-position: -415px -18px;
-                    width: 21px;
-                    height: 16px;
-                }
+            span{
+                display: block;
             }
+        }
 
-            &.parcela{
-                border-right: 1px solid $primaryColor;
-
-                p:before{
-                    background-position: -416px -70px;
-                    width: 20px;
-                    height: 15px;
-                }
-            }
+        &:before{
+            content: "";
+            background: $bgsprite -415px -18px;
+            width: 21px;
+            height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
         }
     }
 }
 
 /*busca auto complete*/
-@include autocomplete($white, 305px, $color7);
+@include autocomplete($white, 205px, $color7);
