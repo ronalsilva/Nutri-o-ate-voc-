@@ -314,32 +314,42 @@ var product = {
 	},
 
 	retingLightbox: function () {
+		var stars = $("#resenha .avalie-produto").clone().html();
 		$("#lnkPubliqueResenha").on("click", function (event) {
 			event.preventDefault();
-			var stars = $('#resenha .avalie-produto').clone();
-			var lightboxStars = '\
-				<div class="lb"><div class="lbBg"></div>\
-				   	<div class="lbContent">\
+			
+			$("body").prepend('\
+				<div class="lb"><div class="lbOverlay"></div>\
+				   	<div id="ratingContent" class="lbContent">\
 						<span class="closeLB">x</span>\
 						<p class="title">O que você achou desse produto?</p>\
 						<div class="rateStars">'+stars+'</div>\
 						<a href="#" class="bt-continuar">Fazer avaliação do produto</a>\
 				   	</div>\
-				</div>';
-			
-			$('body').prepend(lightboxStars);
+				</div>');
 
 		})
-		$(document).on("click", ".lb .bt-continuar, .closeLB", function(event) {
+		$(document).on("click", ".lb .bt-continuar, .closeLB", function (event) {
 	        event.preventDefault();
 	        $(".lb").fadeOut("slow").remove();
 	    });
 	},
 
+	changeStars: function () {
+		$('#ratingContent span.ratingStar').on("click", function () {
+			$(document).ajaxStop(function () {	
+	    		$('#ratingContent .rateStars').html( $("#resenha .avalie-produto").clone());
+			})
+	    })
+	},
+
 	init: function(){
+		$(document).ajaxStop(function () {			
+		    product.changeStars();
+			product.retingLightbox();
+		})
 		product.share();
 		product.superZoom(530,530);
-		product.retingLightbox();
 	}
 }
 
