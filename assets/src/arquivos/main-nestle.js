@@ -126,61 +126,23 @@ var global = {
 	        }
 	    }); 	
     },
-
-    menu: function(){
-    	var menuOutObject;
-		var menuOutTimer;
-
-		$(".menu-departamento ul").each(function(){
-			if(!$(this).find("li").length){
-				$(this).remove();
-			}
-		});
-
-		$(function() {
-			$('.pageNav .menu-departamento h3').hover(
-				function() {
-					menuOutObject = $(this).next('ul');
-					y = $(this).position().left;
-					menuOutObject.css('left', y);
-
-					if (!menuOutObject.is(':visible')) {
-						hideMenuSubItems($('.pageNav .menu-departamento ul:visible'));
-					}
-					clearTimeout(menuOutTimer);
-					menuOutObject.fadeIn();
-				},
-
-				function() {
-					menuOutTimer = setTimeout(function() {
-					hideMenuSubItems(menuOutObject);
-				}, 10);
-			});
-
-			$('.pageNav .menu-departamento ul').hover(
-				function() {
-					menuOutObject = $(this);
-					clearTimeout(menuOutTimer);
-				},
-				function() {
-					menuOutTimer = setTimeout(function() {
-					hideMenuSubItems(menuOutObject);
-				}, 10);
-			});
-
-			$(".pageNav .menu-departamento ul").mouseover(function(){
-			    $(this).prev('h3').addClass("active");
-			});
-			$(".pageNav .menu-departamento ul").mouseout(function(){
-			    $(this).prev('h3').removeClass("active");
-			});
-		});
-
-		function hideMenuSubItems(o) {
-			o.fadeOut(10);
-		}
+    
+    shelfDiscount: function(){
+    	$('.shelf .flagDiscountHighlight').each(function() {
+	        var descpct = $(this).text().replace(',', '.');
+	        descpct = descpct.replace(' %', '');
+	        descpct = parseFloat(descpct);
+	        descpct = Math.ceil(descpct);
+	        if ((descpct == "0") || (descpct == 0)) {
+	            $(this).hide();
+	        } else {
+            	$(this).show();
+            	$(this).html(descpct + "% off");
+	        }
+	    });
     },
 
+<<<<<<< HEAD
     newsletter: function(){
         function closeNews() {
             $('.lightboxOverlay').fadeOut(500, function(){
@@ -228,6 +190,11 @@ var global = {
     	global.floatHeader();
     	global.menu();
     	global.searchWord();
+=======
+    init: function () {
+    	global.floatHeader();
+    	global.shelfDiscount();
+>>>>>>> da6a5bfc95a44d9da5581d005a74015abc2933a3
     }
 }
 
@@ -310,7 +277,11 @@ var slider = {
 
 var catalog = {
 	smartResearch: function(){
-		$(".navSidebar input[type='checkbox']").vtexSmartResearch();	
+		$(".navSidebar input[type='checkbox']").vtexSmartResearch({
+	        callback:function() {
+	           global.shelfDiscount();
+	        }
+	    });
 	},
 
 	toggleFilter: function(){
@@ -392,7 +363,41 @@ var product = {
 	    LoadZoom(0);
 	},
 
+	retingLightbox: function () {
+		var stars = $("#resenha .avalie-produto").clone().html();
+		$("#lnkPubliqueResenha").on("click", function (event) {
+			event.preventDefault();
+			
+			$("body").prepend('\
+				<div class="lb"><div class="lbOverlay"></div>\
+				   	<div id="ratingContent" class="lbContent">\
+						<span class="closeLB">x</span>\
+						<p class="title">O que você achou desse produto?</p>\
+						<div class="rateStars">'+stars+'</div>\
+						<a href="#" class="bt-continuar">Fazer avaliação do produto</a>\
+				   	</div>\
+				</div>');
+
+		})
+		$(document).on("click", ".lb .bt-continuar, .closeLB", function (event) {
+	        event.preventDefault();
+	        $(".lb").fadeOut("slow").remove();
+	    });
+	},
+
+	changeStars: function () {
+		$('#ratingContent span.ratingStar').on("click", function () {
+			$(document).ajaxStop(function () {	
+	    		$('#ratingContent .rateStars').html( $("#resenha .avalie-produto").clone());
+			})
+	    })
+	},
+
 	init: function(){
+		$(document).ajaxStop(function () {			
+		    product.changeStars();
+			product.retingLightbox();
+		})
 		product.share();
 		product.superZoom(530,530);
 	}
@@ -418,15 +423,11 @@ $(document).ready(function () {
 	$(".helperComplement").remove();
 	
 	global.init();
-
-	slider.shelfSlider(false, true, 3, 3);
-
-	slider.singleSlider(true, false);
 	
 	fns.tabs();
 
-	if ($('body').hasClass("home")) {
-		
+  	
+	if ($('body').hasClass("home")) {		
 		//carrega produtos categorias
   		//  $(".categoriesHighlight .column").each(function () {
 		// 	var url = "/buscapagina?fq=C%3a%2f12%2f&PS=12&sl=ef3fcb99-de72-4251-aa57-71fe5b6e149f&cc=12&sm=0&PageNumber=1";
@@ -449,6 +450,10 @@ $(document).ready(function () {
 		// 	});
 		// });
 
+		slider.shelfSlider(false, true, 3, 3);
+
+		slider.singleSlider(true, false);
+
         // carousel vertical produtos categorias
 		$(".categoriesHighlight .categoryProducts").each(function() {
 	        $(this).find("ul").slick({
@@ -462,11 +467,16 @@ $(document).ready(function () {
 	}
 
 	if ($('body').hasClass("product")) {
+		slider.shelfSlider(false, true, 4, 4);
+
+		slider.singleSlider(true, true);
+
 		product.init();
 	};
 
 	if ( $('body').hasClass("catalog")) {
 		catalog.init();
+		slider.singleSlider(true, true);
 
 		$(".orderBy:eq(0)").appendTo(".sortOptions");
 	};
