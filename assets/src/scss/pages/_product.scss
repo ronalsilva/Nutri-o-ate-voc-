@@ -5,6 +5,12 @@
 /* ==========================================================================
    Product
    ========================================================================== */
+body.product{
+    .mainGallery {
+        margin-bottom: 60px;
+    }
+}
+
 .mainProduct{
     padding-bottom: 50px;
     margin-bottom: 50px;
@@ -137,7 +143,7 @@
     #caracteristicas{
         margin-top: 20px;
 
-        h4{
+        h4 {
             display: none;
         }
 
@@ -160,14 +166,14 @@
                 }
             }
 
-            th, td{
+            th, td {
                 padding: 10px; 
                 &.Tabela-nutricional {
                     display: none;
                 }
             }
 
-            td{
+            td {
                 color: $primaryColor;
                 &.Regua-de-Ovos {
                     padding: 20px 0px;
@@ -191,11 +197,6 @@
             margin: 20px auto;
         }
     }
-}
-
-/*Banner surpresas*/
-.mainGallery {
-    margin-bottom: 60px;
 }
 
 
