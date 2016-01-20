@@ -1,0 +1,327 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,600,400italic,600italic,700,700italic);
+
+@font-face {
+    font-family: 'texgyreadventorregular';
+    src: url('/arquivos/texgyreadventor-regular-webfont.eot.css');
+    src: url('/arquivos/texgyreadventor-regular-webfont.eot.css?#iefix') format('embedded-opentype'),
+         url('/arquivos/texgyreadventor-regular-webfont.woff.css') format('woff'),
+         url('/arquivos/texgyreadventor-regular-webfont.ttf.css') format('truetype'),
+         url('/arquivos/texgyreadventor-regular-webfont.svg#texgyreadventorregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body.body-cart .hidden{
+  text-indent: -9999px;
+  overflow: hidden;  
+
+}
+
+body.body-cart .btn:hover{
+      background-color: #00a650;
+}
+
+body.body-cart .pageHeader, .pageFooter{
+  background-color: #dd182d;
+}
+
+body.body-cart .pageHeader{
+  border-bottom: 3px solid #ccc;
+}
+
+body.body-cart .pageHeader .wrapper, .pageFooter .wrapper{
+  max-width: 970px;
+  margin: 0 auto;
+}
+
+body.body-cart .pageHeader h1{
+  background: url("https://emetrixclub.vteximg.com.br/arquivos/logo-checkout.png") no-repeat 0 0;
+  width: 128px;
+  height:48px;
+  cursor: pointer;
+  float:left;
+}
+
+body.body-cart .pageHeader h1 a{
+  font-size: 0;
+  display: block;
+}
+
+body.body-cart .pageHeader .safe{
+  background: url("https://emetrixclub.vteximg.com.br/arquivos/compra-segura-checkout.png") no-repeat 0 0;
+  width: 128px;
+  height:48px;
+  float:right;
+  margin: 26px 50px 0 0;
+  text-indent: -9999px;
+  font-size: 0;
+
+}
+
+body.body-cart .pageHeader .vtexCheckout{
+  background: url("https://emetrixclub.vteximg.com.br/arquivos/vtex-smartcheckout.png") no-repeat 0 0;
+  width: 128px;
+  height:48px;
+  float:right;
+  margin-top: 26px;
+  text-indent: -9999px;
+  font-size: 0;
+}
+
+body.body-cart .pageHeader .wrapper > div{
+  display: inline-block;
+  overflow: hidden;
+}
+
+body.body-cart .pageFooter ul li{
+  display: inline-block;
+  list-style: none;
+}
+
+body.body-cart .pageFooter .pagamento{
+  color: #cb0f6b;
+}
+
+body.body-cart .pageFooter .pagamento{
+    margin-top: 45px;
+    margin-right: 25px;
+    display: inline-block;       
+    width: 222px;
+    height: 14px;
+    background: url("https://emetrixclub.vteximg.com.br/arquivos/pagamento-seguranca.png") no-repeat 0 0;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+body.body-cart .pageFooter .formas-pagamento{
+  position: relative;
+  top: -6px;
+  padding-right: 33px;
+}
+
+body.body-cart .pageFooter .row.top{
+  border-bottom: 1px solid #1a1a1a; 
+  padding-bottom: 20px; 
+}
+
+body.body-cart .pageFooter ul{
+  margin: 0;        
+  padding: 35px 0 0 0;
+}
+
+body.body-cart .pageFooter ul li:nth-child(2){
+  margin: 0 50px 0 50px;
+}
+
+body.body-cart .pageFooter ul li a{
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333;
+  font-size: 13px;
+}
+
+body.body-cart .pageFooter .credits.right{
+  position: relative;
+  top: -40px;
+}    
+
+body.body-cart .pageFooter .credits.right a{    
+  float: right; 
+}
+
+body.body-cart .pageFooter .vtex-logo{
+  position: relative;
+  top: 10px;
+  margin-right: 30px;
+}
+
+body.body-cart .pageFoote .security-checkout{
+  position: relative;
+  top: -5px;
+}
+
+body.body-cart #cart-title{
+  font-size: 0;  
+}
+
+body.body-cart #cart-title:after{
+  content: "MINHA SACOLA";
+  text-transform: uppercase;
+  font-family: 'texgyreadventorregular';
+  font-size: 36px;
+  color: #000;
+}
+
+body.body-cart .empty-cart-title{
+  color: #000;
+}
+
+body.body-cart .step, .cart, .totalizers{
+  border: none;
+}
+
+body.body-cart .table.cart-items thead > tr{
+  background-color: #f4f2f1; 
+}
+
+body.body-cart .checkout-container.row-fluid.cart-active table,
+body.body-cart .checkout-container.row-fluid.cart-active div span,
+body.body-cart .checkout-container.row-fluid.cart-active table a,
+body.body-cart .row-fluid.summary a{
+  color: #666;
+  font-family: Arial, sans-serif;
+}
+
+body.body-cart .cart-template-holder table.cart-items tbody tr{
+  border-left: 1px solid #f4f2f1;
+  border-right: 1px solid #f4f2f1;
+  border-bottom: 1px solid #f4f2f1;
+}
+
+body.body-cart .full-cart .summary-totalizers tr{
+  border: none !important;  
+}  
+
+body.body-cart .accordion-group{
+  border: 1px solid #f4f2f1;
+}
+
+body.body-cart .table tfoot tr{
+  background-color: #f4f2f1;
+}
+
+body.body-cart tfoot .cart table tbody .quantity-price span.total-price,
+body.body-cart .cart table tbody  span.total-selling-price, 
+body.body-cart tfoot .monetary{
+  color: #ae1a4f !important;  
+}
+
+body.body-cart .cart table tbody  .quantity-price span.total-selling-price{
+  font-weight: bold;
+}
+
+body.body-cart .table.cart-items .product-name a{
+  font-weight: bold;
+}
+
+body.body-cart a.link-coupon-add{
+  font-weight: bold;
+  padding: 10px 20px;
+  border: 1px solid #666;  
+}
+
+body.body-cart .table.cart-items thead > tr > th{
+  padding: 15px 0;  
+}
+
+body.body-cart .table.cart-items thead > tr > th:first-child{
+  padding-left:10px; 
+}
+
+body.body-cart #cart-choose-more-products{
+  border: 1px solid #000;
+  padding: 11px;
+  color: #666;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+body.body-cart .btn{
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+  background-image: linear-gradient(to bottom,#00a650,#00a650);
+  border: none;
+}
+
+body.body-cart #cart-to-orderform{
+  font-size: 0;
+  font-family: 'texgyreadventorregular';
+}
+
+body.body-cart #cart-to-orderform:after{
+  font-family: 'texgyreadventorregular';
+  color: #fff;
+  font-size: 18px;
+  content: 'FINALIZAR COMPRA';  
+}
+
+body.body-cart .btn-place-order-wrapper .btn-large{
+  
+  line-height: 1;
+}
+
+body.body-cart a{
+  text-decoration: none;
+}
+
+body.body-cart .seller.muted{
+  font-size: 0;
+}
+
+.brand-name{
+  font-size: 12px;
+  display: block;
+}
+
+body.body-cart @media (max-width: 660px){
+  
+  .pageFooter .credits.right a,
+  .pageFooter .credits.right a,
+  body.body-cart .pageFooter ul li{
+    display: block;    
+  }
+ 
+  body.body-cart .pageFooter .credits.right a,
+  body.body-cart .pageFooter .credits.right a{
+    float: none;
+  }
+
+  body.body-cart .pageHeader div.vtexCheckout, 
+  body.body-cart .pageHeader div.safe{
+    display: none;
+  }
+
+  body.body-cart .pageFooter .credits.right{
+    position: inherit;
+  }
+
+  body.body-cart .pageFooter ul li:nth-child(2){
+    margin: 20px 0;
+  }  
+
+  body.body-cart h1{
+    padding: 15px 0;
+  }
+
+  body.body-cart h1,
+  body.body-cart img,
+  body.body-cart div{
+    margin: 0 auto;
+    text-align: center;
+  }
+
+   body.body-cart .pageFooter img{
+      margin: 10px 0;
+   }
+
+   body.body-cart .pageFooter .pagamento{
+    margin-top: 20px;
+   }
+
+   body.body-cart .pageHeader{
+    padding-top: 35px
+   }
+
+   body.body-cart .pageFooter{
+      padding-bottom: 20px;
+   }
+}
+
+
+
+p {
+	color: red;
+}

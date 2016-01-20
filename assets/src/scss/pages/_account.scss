@@ -11,6 +11,10 @@ body.account{
 	color: $baseColor !important;
 	background: $white !important;
 
+	.span6 {
+    	width: 334px;
+	}
+
 	.logo{
 		padding: 0; 
 	}
@@ -58,6 +62,9 @@ body.account{
 		h4{
 			@include sectionTitle();
 			margin-bottom: 20px;
+			color: $color3;
+			font-size: em(20pt);
+			font-family: $primaryFont;
 		}
 	}
 
@@ -168,6 +175,7 @@ body.account{
 		border: 1px solid $lightergrey;
 		padding: 20px;
 		@include span-columns(6);
+		width: 31%;
 		margin-left: 0;  
 	}
 
@@ -225,4 +233,144 @@ body.account{
 		}
 	}
 
+	.bntPedidos {
+		a {
+		    background: #68AFEB;
+		    color: #fff !important;
+		    text-decoration: none !important;
+		    padding: 9px 50px;
+		    border-radius: 4px;
+		    text-transform: uppercase;
+		}
+	}
+
+	.bntPedidos {
+	    padding-bottom: 110px;
+	}
+
+}
+
+body.orders {
+	.vtex-bootstrap .form-search .search-query, .vtex-bootstrap .ordergroup {
+    border-radius: 3px !important;
+	}
+	.page-header {
+	    margin: 0 !important;
+	    border-bottom: 0 !important;
+	}
+	.vtex-bootstrap .title-ordergroup-order, .myorders .myorders-list .order-date {
+	    font-weight: normal;
+	    color: $color3;
+	}
+
+	.order-title .pull-right a {
+	    background: #68AFEB;
+	    color: #fff !important;
+	    text-shadow: none;
+	    border-radius: 2px;
+	    border: none;
+	    padding: 5px 25px;
+	}
+
+	.shipping-info {
+	    width: 45% !important;
+	}
+	.shipping-info hr {
+	    border: none;
+	}
+	.payment-info {
+	    width: 45% !important;
+	    padding-left: 21px !important;
+	}
+	.payment-info hr {
+	    border: none;
+	}
+	.payment-info .btn-success {
+	    margin-top: 10px;
+	    color: #fff !important;
+	    background: #000 !important;
+	    border: none;
+	    border-radius: 2px;
+	}
+
+	.total-info {
+	    width: 96% !important;
+	    padding-right: 600px;
+	    padding-top: 17px;
+	    border-top: 1px solid #E0E0E0;
+	}
+
+	.myorders .order-header.page-header {
+	    padding: 19px 34px 0px 30px !important
+	}
+
+	.total-info h3 {
+	    display: none;
+	}
+	.total-info tr {
+	    border-top: 0px !important;
+	}
+	.vtex-bootstrap .total-info th, .vtex-bootstrap .total-info td {
+	    text-align: left !important;
+	    color: #000;
+	    font-weight: 300;
+	    padding-top: 1px;
+	}
+
+	.vtex-bootstrap .total-info .Shipping th, .vtex-bootstrap .total-info .Shipping td {
+	    color: $color2 !important;
+	    font-weight: normal;
+	}
+	.vtex-bootstrap .order-info .general-info tfoot td, .vtex-bootstrap .order-info .general-info tfoot th {
+	    font-weight: bold;
+	    font-size: 14px;
+	    color: #000;
+	}
+	.vtex-bootstrap p {
+	    margin-bottom: 0px !important;
+	}
+	.order-details {
+	    padding: 0 32px !important;
+	}
+	.vtex-bootstrap .section-info-title {
+	    font-size: 18px;
+	    font-weight: normal;
+	    color: #000;
+	}
+	.showTrackingInfo {
+	    float: right;
+	    margin-top: -41px;
+	}
+	.showTrackingInfo a {
+	    background: $color2;
+	    color: #fff !important;
+	    border: none;
+	    border-radius: 2px;
+	    text-shadow: none !important;
+	    padding: 7px 20px;
+	}
+	.showTrackingInfo a:hover {
+	    background: $color2;
+	}
+	.vtex-bootstrap .order-status {
+	    padding: 6px !important;
+	}
+	.order-status-info p {
+	    margin-bottom: 17px !important;
+	    display: none;
+	}
+	.row-fluid .span9 {
+	    width: 100%;
+	}
+	p.request-cancel-link a {
+	    background: #AE1A4F;
+	    color: #fff !important;
+	    padding: 5px 30px;
+	    font-weight: bold;
+	    border-radius: 2px;
+	    /* margin-top: 60px !important; */
+	}
+	.myorders .page-header .title {
+	    display: none;
+	}
 }
