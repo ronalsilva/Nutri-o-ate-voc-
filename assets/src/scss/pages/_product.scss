@@ -8,6 +8,9 @@
 body.product{
     .mainGallery {
         margin-bottom: 60px;
+        h2 {
+            @include shelfTitle();
+        }
     }
 }
 
