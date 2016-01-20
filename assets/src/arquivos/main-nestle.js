@@ -142,7 +142,7 @@ var global = {
 			$(".userLogged").on("click", function(){
 				$(".listLinks").slideToggle();
 			});
-	    }, 3000);
+	    }, 4000);
     },
     
     shelfDiscount: function(){

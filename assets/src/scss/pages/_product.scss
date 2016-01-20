@@ -5,6 +5,12 @@
 /* ==========================================================================
    Product
    ========================================================================== */
+body.product{
+    .mainGallery {
+        margin-bottom: 60px;
+    }
+}
+
 .mainProduct{
     padding-bottom: 50px;
     margin-bottom: 50px;
@@ -191,11 +197,6 @@
             margin: 20px auto;
         }
     }
-}
-
-/*Banner surpresas*/
-.mainGallery {
-    margin-bottom: 60px;
 }
 
 
