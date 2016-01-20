@@ -105,24 +105,26 @@ var fns = {
 }
 
 var global = {
+
     floatHeader: function(){
-    	var floatingBar=$(".floatHeader"),
-    	logo = $(".pageHeader .logo .logoImg");
+    	var floatingBar = $(".floatHeader"),
+    	//logo = $(".pageHeader .logo .logoImg");
     	search = $(".pageHeader .searchBox .busca");
     	smartCart = $(".pageHeader .miniCart");
-    	
+    	$(".floatHeader wrapper").append(smartCart);
+
+    	var width = $( window ).width();
+
 	    $(window).bind("scroll",function(){
 	        if($(this).scrollTop()>100){
 	            floatingBar.fadeIn(100);
-	            logo.addClass("floatElement");
 	            search.addClass("floatElement");
 	            smartCart.addClass("floatElement");
 	        }
 	        else{
-	            logo.removeClass("floatElement");
 	            search.removeClass("floatElement");
 	            smartCart.removeClass("floatElement");
-	            floatingBar.fadeOut(100);
+	            floatingBar.fadeOut(100).css("height", "auto");               
 	        }
 	    }); 	
     },
