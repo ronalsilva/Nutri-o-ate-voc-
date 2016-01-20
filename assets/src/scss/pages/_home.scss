@@ -54,7 +54,15 @@
 		transition: all .3s linear;
 
 		&:hover{
-			border-color: $primaryColor;
+			background: $primaryColor;
+			
+			a{
+				color: $white;
+			}
+
+			&:after{
+				background-position: -174px -22px;
+			}
 		}
 
 		a{

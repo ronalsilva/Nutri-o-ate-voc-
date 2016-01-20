@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:vtex="http://www.vtex.com.br/2009/vtex-common" xmlns:vtex.cmc="http://www.vtex.com.br/2009/vtex-commerce" lang="pt-br">
+
+<head>
+    <vtex:metaTags/>
+    
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <vtex:template id="commonHead" />
+</head>
+
+<body>
+    <div class="all">
+        <vtex:template id="header" />
+        
+        <div id="mainContent">
+
+            <section class="fullGallery">
+                <vtex:contentPlaceHolder id="banner tv" />
+            </section>
+            
+            <div class="wrapper">
+                <aside class="navSidebar">
+                    <div class="filterOptions">
+                        <vtex.cmc:searchNavigator/>
+                    </div>
+
+                    <div class="catgDescription">
+                        <vtex:contentPlaceHolder id="Descrição categoria" />
+                    </div>
+                </aside>
+                
+                <div class="pageContent">
+                    <section class="sortOptions">
+                        <div class="viewType">
+                            <span class="itemName">Visualizar:</span>
+
+                            <div class="switchView">
+                                <span class="view3Col active">Tabela</span>
+                                <span class="view2Col">Lista</span>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <vtex.cmc:searchResult layout="ef3fcb99-de72-4251-aa57-71fe5b6e149f" itemCount="12" columnCount="12" />
+                </div>
+    		</div><!-- /wrapper -->
+        </div><!-- /mainContent-->
+
+        <vtex:template id="footer" />
+    </div><!--/all-->
+
+    <script src="/arquivos/vtex-smartResearch.min.js"></script>
+    <vtex:template id="commonBottom" />
+</body>
+</html>

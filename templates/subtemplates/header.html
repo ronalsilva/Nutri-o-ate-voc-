@@ -1,44 +1,32 @@
 <header class="pageHeader">
-	<div class="topArea">
-		<div class="wrapper">
-			<div class="logo column">
-				<a href="/" title="Nestlé Surpresa no ovo" class="logoImg">Nestlé Surpresa no Ovo</a>
-			</div><!--/logo-->
-			
-			<div class="searchBox column">
-				<vtex.cmc:fullTextSearchBox/>
-			</div><!-- /searchBox -->
+	<div class="wrapper">
+		<div class="logo column">
+			<a href="/" title="Super páscoa" class="logoImg">Super páscoa</a>
+		</div><!--/logo-->
+		
+		<div class="searchBox column">
+			<vtex.cmc:fullTextSearchBox/>
+		</div><!-- /searchBox -->
 
-			<div class="welcomeMsg column">
-				<vtex.cmc:welcomeMessage/>
-
-				<ul class="listLinks">
-					<li><a href="/account">Minha conta</a></li>
-					<li><a href="/account/orders">Meus pedidos</a></li>
-				</ul>
-			</div>
-
-			<div class="miniCart column">
-				<a href="/checkout/#cart" class="cartAmountLink">
-					<p>Minhas compras</p>
-					<vtex.cmc:AmountItemsInCart />
-				</a>
-				<vtex.cmc:miniCart />
-			</div><!-- /miniCart -->
+		<div class="shippingInfo column">
+			<p>Frete grátis <span>todo Brasil</span></p>
 		</div>
-	</div>
 
-	<div class="bottomArea">
-		<div class="wrapper">
-			<div class="pitchBar">
-				<div class="item frete">
-					<p>Frete grátis Brasil <span>nas compras acima de R$ 99,00</span></p>
-				</div>
+		<div class="welcomeMsg column">
+			<vtex.cmc:welcomeMessage/>
 
-				<div class="item parcela">
-					<p>Parcele suas compras <span>em até 10x nos cartões de crédito</span></p>
-				</div>
-			</div>
+			<ul class="listLinks">
+				<li><a href="/account">Minha conta</a></li>
+				<li><a href="/account/orders">Meus pedidos</a></li>
+			</ul>
 		</div>
+
+		<div class="miniCart column">
+			<a href="/checkout/#cart" class="cartAmountLink">
+				<p>Minhas compras</p>
+				<vtex.cmc:AmountItemsInCart />
+			</a>
+			<vtex.cmc:miniCart />
+		</div><!-- /miniCart -->
 	</div>
 </header>
