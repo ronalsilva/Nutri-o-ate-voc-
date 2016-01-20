@@ -50,26 +50,7 @@ body.department {
 			left: 90px;
 		}
 
-		.slick-arrow {
-			@include appearance(none);
-			border: none;
-			position: absolute;
-			top: 45%;
-			z-index: 20;
-			background: $bgsprite -521px -67px;
-			width: 13px;
-			height: 25px;
-			font-size: 0;
-
-			&.slick-prev  {
-				
-			}
-
-			&.slick-next  {
-				right: 0;
-				background-position: -521px -14px;
-			}
-		}
+		
 	}
 }
 

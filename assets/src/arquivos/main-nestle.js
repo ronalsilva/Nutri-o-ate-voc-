@@ -300,6 +300,15 @@ var product = {
 		fns.shareWindow(urlProduct, urlMediaProduct);
 	},
 
+	productIndisponivel: function(){
+		if ($( ".priceProduct" ).html() == "" ){
+			$('body').addClass("productUnaviable");
+			$(".sku-notifyme-button-ok").val("Avise-me quando chegar");
+		} else {
+			$('body').removeClass("productUnaviable");
+		};	
+    },
+
 	superZoom: function (width, height) {
 		window.LoadZoom = function (pi) {
 			if($(".image-zoom").length<=0) return false;			
@@ -343,13 +352,33 @@ var product = {
 	    })
 	},
 
+	reguaOvos: function () {
+		if ($('td.Regua-de-Ovos').length > 0 ) {
+			var hImg = $('td.Regua-de-Ovos img').height()
+			$('td.Regua-de-Ovos').parents('tr').css('background','#fff').css('height', hImg + 40);
+		};
+	},
+
+	nutritionalChart: function () {
+		$('td.Tabela-nutricional').each(function () {
+			if($(this).length){
+				$('.nutricional').prepend($(this).find('img'))
+			} else {
+				$(".tabLink:eq(1)").remove();
+			}
+		});
+	},
+
 	init: function(){
 		$(document).ajaxStop(function () {			
 		    product.changeStars();
 			product.retingLightbox();
+			product.productIndisponivel();
 		})
 		product.share();
 		product.superZoom(530,530);
+		product.reguaOvos();
+		product.nutritionalChart();
 	}
 }
 
