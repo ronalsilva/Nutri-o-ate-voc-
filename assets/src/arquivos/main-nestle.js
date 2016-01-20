@@ -217,10 +217,17 @@ var global = {
 
         fns.isMobile();
     },
+
+    searchWord: function () {
+		var word = decodeURI(window.location.search);
+		word = word.replace("?ft=","");
+		$(".box-emptySearch h3 em").text(word); 
+	},
     
     init: function () {
     	global.floatHeader();
     	global.menu();
+    	global.searchWord();
     }
 }
 
