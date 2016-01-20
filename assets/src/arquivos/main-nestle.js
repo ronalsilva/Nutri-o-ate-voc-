@@ -142,9 +142,67 @@ var global = {
 	    });
     },
 
+    carouselCart: function () {
+        var numItens = $(".vtexsc-productList").find("tr").length - 1;
+        var buttonTop = $("<span>").addClass("btnTop");
+        var buttonBot = $("<span>").addClass("btnBottom");
+        var tableCart = $(".vtexsc-productList");
+        var cartWrap = $(".vtexsc-wrap");
+        cartWrap.after("<div class='carouselCart'></div>");
+        $(".carouselCart").append(buttonTop).append(buttonBot);
+        var hItem = 75;
+        
+        buttonTop.on("click", function() {
+            slide = tableCart.position().top;
+            pos_slide = (slide + hItem);
+            if (slide >= 0) {
+                tableCart.animate({
+                    top: "0"
+                });
+            } else {
+                tableCart.animate({
+                    top: (pos_slide) + "px"
+                });
+            }
+        });
+
+        buttonBot.on("click", function() {
+            slide = tableCart.position().top;
+            pos_slide = (slide - hItem);
+
+            if (numItens > 2) {
+                if (slide <= (-hItem * (numItens - 1)) + 76) {
+                    tableCart.animate({
+                        top: slide + "px"
+                    });
+
+                } else {
+                    tableCart.animate({
+                        top: (pos_slide) + "px"
+                    });
+                }
+            };
+        });
+
+        if (numItens <= 2) {
+            buttonTop.hide();
+            buttonBot.hide();
+        }
+    },
+
+	addButtonCart: function() {
+        var linkCarrinho = $("<a>").attr({
+            class: "linkGoCart",
+            href: "/checkout/#/cart"
+        }).text("ver carrinho");
+        if ($(".linkCarrinho-cart").length < 1) {
+            linkCarrinho.insertAfter(".cartCheckout");
+        };
+    },
+    
     init: function () {
     	global.floatHeader();
-    	global.shelfDiscount();
+    	global.shelfDiscount();	
     }
 }
 
@@ -366,6 +424,10 @@ $(document).ready(function () {
 	
 	fns.tabs();
 
+	setTimeout( function(){ 
+      $(".portal-minicart-ref").show();
+    }, 5000);
+
   	
 	if ($('body').hasClass("home")) {		
 		//carrega produtos categorias
@@ -429,6 +491,9 @@ $(document).ready(function () {
 
 $(document).ajaxStop(function () {
 	$(".helperComplement").remove();
+
+	global.carouselCart();
+	global.addButtonCart();
 });
 
 
