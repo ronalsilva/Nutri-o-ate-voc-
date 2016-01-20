@@ -37,56 +37,69 @@ body.catalog{
 	.pageContent{
 		border-left: 1px solid $color7;
 	}
+}
 
-	&.resultado-busca {
+// titulo
+.titulo-sessao{
+	@include pageTitle();
+	color: $primaryColor;
 
-		.box-emptySearch 
-			h3 {
-			    text-align: center;
-			    font-size: 22pt;
-			    color: #ee1934;
-			    text-transform: uppercase;
-			    padding-top: 40px;
-			    padding-bottom: 40px;
+	em{
+		color: $baseColor;
+	}
+}
 
-			    span {
-		    		color: #000;
-		    		font-style: italic;
-				}
-			}
 
-		.conteinerSearch {
-		    width: 41%;
-		    margin: 0 auto;
-		    padding-bottom: 65px;
+//busca vazia
+body.resultado-busca {
+	.box-emptySearch 
+		h3 {
+		    text-align: center;
+		    font-size: 22pt;
+		    color: #ee1934;
+		    text-transform: uppercase;
+		    padding-top: 40px;
+		    padding-bottom: 40px;
 
-		    li {
-			    padding-bottom: 7px;
-
-			    &:before {
-				    content: "";
-				    width: 20px;
-				    height: 20px;
-				    background: url("/arquivos/sprite-icons.png") -673px -70px;
-				    float: left;
-				}
+		    span {
+	    		color: #000;
+	    		font-style: italic;
 			}
 		}
 
-		.btnHome {
-		    text-align: center;
-		    padding-bottom: 40px;
+	.conteinerSearch {
+	    width: 41%;
+	    margin: 0 auto;
+	    padding-bottom: 65px;
 
-			    a {
-			    background: #E41832;
-			    color: #fff;
-			    padding: 10px 30px;
-			    border-radius: 4px;
+	    li {
+		    padding-bottom: 7px;
+
+		    &:before {
+			    content: "";
+			    width: 20px;
+			    height: 20px;
+			    background: url("/arquivos/sprite-icons.png") -673px -70px;
+			    float: left;
 			}
+		}
+	}
+
+	.btnHome {
+	    text-align: center;
+	    padding-bottom: 40px;
+
+		    a {
+		    background: #E41832;
+		    color: #fff;
+		    padding: 10px 30px;
+		    border-radius: 4px;
 		}
 	}
 }
 
+
+//departamento
 body.department {
 
 	.mainGallery{
@@ -120,19 +133,6 @@ body.department {
 		}
 	}
 }
-
-// titulo
-.titulo-sessao{
-	@include pageTitle();
-	color: $primaryColor;
-
-	em{
-		color: $baseColor;
-	}
-}
-
-
-// departamento
 .categoryName{
 	@include span-columns(4);
 }
@@ -264,6 +264,10 @@ body.department {
 	}
 }
 
+// filtro de preco
+#sliderPrice{
+	display: block !important;
+}
 
 // opcoes de ordenacao 
 .sortOptions{
@@ -324,7 +328,6 @@ body.department {
 	}
 }
 
-
 //ordernar
 .orderBy{
 	float: right;
@@ -355,7 +358,6 @@ body.department {
 		z-index: 1;
 	}
 }
-
 
 // scroll infinito
 .btn-load-more{
@@ -389,6 +391,8 @@ body.department {
 	}
 }
 
+
+// filtro sem resultado
 .vtexsr-emptySearch{
 	text-align: center;
 	font-size: rem(14px);
