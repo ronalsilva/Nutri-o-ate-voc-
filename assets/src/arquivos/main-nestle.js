@@ -507,6 +507,16 @@ $(document).ready(function () {
 	
 	fns.tabs();
 
+	$(".shippingInfo ul").slick({
+	    slidesToShow: 1,
+		slidesToScroll: 1,
+	    vertical: true,
+	    arrows: false,
+	    dots: false,
+	    autoplay: true,
+	    autoplaySpeed: 8000
+	});
+
 	setTimeout( function(){ 
       $(".portal-minicart-ref").show();
     }, 5000);
@@ -514,9 +524,10 @@ $(document).ready(function () {
   	
 	if ($('body').hasClass("home")) {		
 		//carrega produtos categorias
-  		//  $(".categoriesHighlight .column").each(function () {
-		// 	var url = "/buscapagina?fq=C%3a%2f12%2f&PS=12&sl=ef3fcb99-de72-4251-aa57-71fe5b6e149f&cc=12&sm=0&PageNumber=1";
-		// 	var container = $(this).find(".categoryProducts");
+  // 		$(".categoriesHighlight .column").each(function () {
+		// 	var href = $(this).find(".categoryProducts").attr("data-catg"),
+		// 		url = "/buscapagina?fq=" + href + "&PS=12&sl=ef3fcb99-de72-4251-aa57-71fe5b6e149f&cc=12&sm=0&PageNumber=1",
+		// 		container = $(this).find(".categoryProducts");
 
 		// 	$.ajax({
 		// 	  	url: url

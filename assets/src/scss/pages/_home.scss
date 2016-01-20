@@ -5,6 +5,13 @@
    Home
    ========================================================================== */
 
+body.home{
+	.mainGallery {
+		height: 370px;
+		overflow: hidden;
+	}
+}
+
 // categorias destacadas   
 .categoriesHighlight{
 	padding: 0 20px;
@@ -52,44 +59,91 @@
 	padding-left: 20px;
 	margin-top: 30px;
 
-	li{
-		position: relative;
-		border: 1px solid $color7;
-		border-radius: 5px;
-		margin-bottom: 10px;
-		transition: all .3s linear;
+	&.singleLinks{
+		li{
+			position: relative;
+			border: 1px solid $color7;
+			border-radius: 5px;
+			margin-bottom: 10px;
+			transition: all .3s linear;
 
-		&:hover{
-			background: $primaryColor;
-			
+			&:hover{
+				background: $primaryColor;
+				
+				a{
+					color: $white;
+				}
+
+				&:after{
+					background-position: -174px -22px;
+				}
+			}
+
 			a{
-				color: $white;
+				display: block;
+				color: $primaryColor;
+				font-size: rem(12px); 
+				text-transform: uppercase;
+				cursor: pointer;
+				padding: 12px 15px;
+				width: 90%;
 			}
 
 			&:after{
-				background-position: -174px -22px;
+				content: "";
+				background: $bgsprite -126px -21px;
+				width: 6px;
+				height: 10px;
+				display: block;
+				position: absolute;
+				top: 15px;
+				right: 15px;
 			}
 		}
+	}
 
-		a{
-			display: block;
+	&.collapseItems{
+		border: 1px solid $color7;
+		border-radius: 5px;
+		padding: 15px;
+		margin-bottom: 15px;
+		position: relative;
+
+		.title{
 			color: $primaryColor;
 			font-size: rem(12px); 
 			text-transform: uppercase;
 			cursor: pointer;
-			padding: 12px 15px;
 			width: 90%;
+
+			&:after{
+				content: "";
+				background: $bgsprite -171px -73px;
+				width: 10px;
+				height: 7px;
+				display: block;
+				position: absolute;
+				top: 20px;
+				right: 15px;
+			}
+
+			&.active{
+				&:after{
+					background-position: -124px -73px;
+				}
+			}
 		}
 
-		&:after{
-			content: "";
-			background: $bgsprite -126px -21px;
-			width: 6px;
-			height: 10px;
-			display: block;
-			position: absolute;
-			top: 15px;
-			right: 15px;
+		ul{
+			margin-top: 10px;
+		}
+
+		li{
+			font-size: rem(12px); 
+			text-transform: uppercase;
+			color: $baseColor;
+			cursor: pointer;
+			margin-bottom: 5px;
 		}
 	}
 }

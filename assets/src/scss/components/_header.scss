@@ -302,27 +302,42 @@
     }
 
     .shippingInfo{   
-        p{
+        width: 130px;
+        ul{
+            height: 30px;
+            overflow: hidden;
+        }
+
+        li{
             text-transform: uppercase;
             font-size: rem(14px);
             font-weight: bold;
-            line-height: 1.1;
-            display: inline-block;
-            vertical-align: middle;
+            line-height: 1;
+            padding-left: 30px;
+            position: relative;
+            height: 30px;
 
             span{
                 display: block;
             }
-        }
 
-        &:before{
-            content: "";
-            background: $bgsprite -415px -18px;
-            width: 21px;
-            height: 16px;
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 10px;
+            &:before{
+                content: "";
+                background: $bgsprite;
+                width: 21px;
+                height: 16px;
+                position: absolute;
+                left: 0;
+                top: 7px;
+            }
+
+            &.frete:before{
+                background-position: -415px -18px;
+            }
+
+            &.parcela:before{
+                background-position: -416px -70px;
+            }
         }
     }
 }
