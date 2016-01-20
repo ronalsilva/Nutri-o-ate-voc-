@@ -385,9 +385,33 @@ var product = {
 	    LoadZoom(0);
 	},
 
+	retingLightbox: function () {
+		$("#lnkPubliqueResenha").on("click", function (event) {
+			event.preventDefault();
+			var stars = $('#resenha .avalie-produto').clone();
+			var lightboxStars = '\
+				<div class="lb"><div class="lbBg"></div>\
+				   	<div class="lbContent">\
+						<span class="closeLB">x</span>\
+						<p class="title">O que você achou desse produto?</p>\
+						<div class="rateStars">'+stars+'</div>\
+						<a href="#" class="bt-continuar">Fazer avaliação do produto</a>\
+				   	</div>\
+				</div>';
+			
+			$('body').prepend(lightboxStars);
+
+		})
+		$(document).on("click", ".lb .bt-continuar, .closeLB", function(event) {
+	        event.preventDefault();
+	        $(".lb").fadeOut("slow").remove();
+	    });
+	},
+
 	init: function(){
 		product.share();
 		product.superZoom(530,530);
+		product.retingLightbox();
 	}
 }
 
@@ -411,15 +435,10 @@ $(document).ready(function () {
 	$(".helperComplement").remove();
 	
 	global.init();
-
-	slider.shelfSlider(false, true, 3, 3);
-
-	slider.singleSlider(true, false);
 	
 	fns.tabs();
 
-	if ($('body').hasClass("home")) {
-		
+	if ($('body').hasClass("home")) {		
 		//carrega produtos categorias
   		//  $(".categoriesHighlight .column").each(function () {
 		// 	var url = "/buscapagina?fq=C%3a%2f12%2f&PS=12&sl=ef3fcb99-de72-4251-aa57-71fe5b6e149f&cc=12&sm=0&PageNumber=1";
@@ -442,6 +461,10 @@ $(document).ready(function () {
 		// 	});
 		// });
 
+		slider.shelfSlider(false, true, 3, 3);
+
+		slider.singleSlider(true, false);
+
         // carousel vertical produtos categorias
 		$(".categoriesHighlight .categoryProducts").each(function() {
 	        $(this).find("ul").slick({
@@ -455,11 +478,16 @@ $(document).ready(function () {
 	}
 
 	if ($('body').hasClass("product")) {
+		slider.shelfSlider(false, true, 4, 4);
+
+		slider.singleSlider(true, true);
+
 		product.init();
 	};
 
 	if ( $('body').hasClass("catalog")) {
 		catalog.init();
+		slider.singleSlider(true, true);
 
 		$(".orderBy:eq(0)").appendTo(".sortOptions");
 	};
