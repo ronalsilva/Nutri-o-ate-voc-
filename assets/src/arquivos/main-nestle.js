@@ -333,10 +333,17 @@ var catalog = {
         });
     },
 
+    searchWord: function () {
+		var word = decodeURI(window.location.search);
+		word = word.replace("?ft=","");
+		$(".box-emptySearch h3 span em").text(word);
+	},
+
 	init: function  () {
 		catalog.smartResearch();
 		catalog.toggleFilter();
 		catalog.switchView();
+		catalog.searchWord();
 	}
 }
 
@@ -347,6 +354,15 @@ var product = {
 		
 		fns.shareWindow(urlProduct, urlMediaProduct);
 	},
+
+	productIndisponivel: function(){
+		if ($( ".priceProduct" ).html() == "" ){
+			$('body').addClass("productUnaviable");
+			$(".sku-notifyme-button-ok").val("Avise-me quando chegar");
+		} else {
+			$('body').removeClass("productUnaviable");
+		};	
+    },
 
 	superZoom: function (width, height) {
 		window.LoadZoom = function (pi) {
@@ -391,13 +407,33 @@ var product = {
 	    })
 	},
 
+	reguaOvos: function () {
+		if ($('td.Regua-de-Ovos').length > 0 ) {
+			var hImg = $('td.Regua-de-Ovos img').height()
+			$('td.Regua-de-Ovos').parents('tr').css('background','#fff').css('height', hImg + 40);
+		};
+	},
+
+	nutritionalChart: function () {
+		$('td.Tabela-nutricional').each(function () {
+			if($(this).length){
+				$('.nutricional').prepend($(this).find('img'))
+			} else {
+				$(".tabLink:eq(1)").remove();
+			}
+		});
+	},
+
 	init: function(){
 		$(document).ajaxStop(function () {			
 		    product.changeStars();
 			product.retingLightbox();
+			product.productIndisponivel();
 		})
 		product.share();
 		product.superZoom(530,530);
+		product.reguaOvos();
+		product.nutritionalChart();
 	}
 }
 
@@ -496,6 +532,21 @@ $(document).ready(function () {
 
 	if ($('body').hasClass("institutional")) {
 		institutional.init();
+	};
+
+	if ($('body').hasClass("resultado-busca")) {
+		catalog.searchWord();
+	};
+
+	if ($('body').hasClass("search-result")) {
+		var numbersearch = $(".resultado-busca-numero");
+		$(".titulo-sessao").append(numbersearch);
+		console.log(numbersearch);
+	};
+
+	if ($('body').hasClass("brands")) {
+		var dataUrl = decodeURI(window.location.search);
+		$("h2.titulo-sessao").text(dataUrl);
 	};
 });
 

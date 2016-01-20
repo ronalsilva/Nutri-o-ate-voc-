@@ -41,10 +41,11 @@ body{
 /*slider*/
 .mainGallery{
 	@include galleryBullets($white, $primaryColor, 10px, 10px, 2px, $primaryColor, 0 5px);
+	@include sideNav(13px, 25px, -521px -67px, -521px -14px, 0, 45%);
 
 	.slick-dots{
 		margin-top: 0;
-	}
+	}	
 }
 
 .carouselGallery{}

@@ -36,7 +36,17 @@ body.institutional{
 				font-family: $primaryFont;
 				
 				&.current{
-					font-weight: bold;
+					color: $white;
+					background: $color3;
+					border-radius: 5px;
+
+					&:before {
+					    content: "";
+					    width: 20px;
+					    height: 20px;
+					    background: url("/arquivos/sprite-icons.png") -175px -17px;
+					    float: right;
+					}
 				}	
 
 				&:hover{
