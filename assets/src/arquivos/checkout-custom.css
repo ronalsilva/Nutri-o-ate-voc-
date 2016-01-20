@@ -10,10 +10,6 @@
 
 }
 
-.btn:hover{
-      background-color: #00a650;
-}
-
 .pageHeader, .pageFooter{
   background-color: #dd182d;
 }
@@ -27,15 +23,15 @@
   margin: 0 auto;
 }
 
-.pageHeader h1{
-  background: url("http://emetrixclub.vtexlocal.com.br/arquivos/super-pascoa-logo.png") no-repeat 0 0;
-  width: 229px;
-  height:48px;
-  cursor: pointer;
+.pageHeader h1{    
   float:left;
 }
 
 .pageHeader h1 a{
+  background: url("http://emetrixclub.vtexlocal.com.br/arquivos/super-pascoa-logo.png") no-repeat 0 0;
+  width: 229px;
+  height:48px;
+  cursor: pointer;
   font-size: 0;
   display: block;
 }
