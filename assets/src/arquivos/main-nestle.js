@@ -105,7 +105,6 @@ var fns = {
 }
 
 var global = {
-
     floatHeader: function(){
     	var floatingBar = $(".floatHeader"),
     	//logo = $(".pageHeader .logo .logoImg");
@@ -352,10 +351,15 @@ var catalog = {
         });
     },
 
-    searchWord: function () {
+    searchEmptyWord: function () {
 		var word = decodeURI(window.location.search);
 		word = word.replace("?ft=","");
 		$(".box-emptySearch h3 span em").text(word);
+	},
+
+	searchWord: function () {
+		var word = $(".resultado-busca-termo:eq(0)").find("strong").text();
+		$(".titulo-sessao").html('Resultado da busca: "<em>' + word + '</em>"');
 	},
 
 	init: function  () {
@@ -600,14 +604,14 @@ $(document).ready(function () {
 		institutional.init();
 	};
 
+	//busca vazia
 	if ($('body').hasClass("resultado-busca")) {
-		catalog.searchWord();
+		catalog.searchEmptyWord();
 	};
 
 	if ($('body').hasClass("search-result")) {
-		var numbersearch = $(".resultado-busca-numero");
+		var numbersearch = $(".resultado-busca-numero:eq(0)");
 		$(".titulo-sessao").append(numbersearch);
-		console.log(numbersearch);
 	};
 
 	if ($('body').hasClass("brands")) {

@@ -37,8 +37,24 @@ body.catalog{
 	.pageContent{
 		border-left: 1px solid $color7;
 	}
+
+	.titulo-sessao{
+		@include pageTitle();
+
+		em{
+			color: $primaryColor;
+		}
+
+		.resultado-busca-numero{
+			text-transform: none;
+			color: $color6;
+			font-size: rem(12px);
+			margin-left: 10px;
+		}
+	}
 }
 
+//busca vazia
 body.resultado-busca {
 	.box-emptySearch {
 		h3 {
