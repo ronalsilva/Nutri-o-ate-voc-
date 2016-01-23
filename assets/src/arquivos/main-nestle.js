@@ -106,25 +106,42 @@ var fns = {
 
 var global = {
     floatHeader: function(){
-    	var floatingBar=$(".floatHeader"),
-    	logo = $(".pageHeader .logo .logoImg");
+    	var floatingBar = $(".floatHeader"),
+    	//logo = $(".pageHeader .logo .logoImg");
     	search = $(".pageHeader .searchBox .busca");
     	smartCart = $(".pageHeader .miniCart");
-    	
+    	$(".floatHeader wrapper").append(smartCart);
+
+    	var width = $( window ).width();
+
 	    $(window).bind("scroll",function(){
 	        if($(this).scrollTop()>100){
 	            floatingBar.fadeIn(100);
-	            logo.addClass("floatElement");
 	            search.addClass("floatElement");
 	            smartCart.addClass("floatElement");
 	        }
 	        else{
-	            logo.removeClass("floatElement");
 	            search.removeClass("floatElement");
 	            smartCart.removeClass("floatElement");
-	            floatingBar.fadeOut(100);
+	            floatingBar.fadeOut(100).css("height", "auto");               
 	        }
 	    }); 	
+    },
+
+    userLogged: function(){
+		$(".listLinks").append("<li><a href='/no-cache/user/logout'>sair</a></li>");
+    	
+    	vtexjs.checkout.getOrderForm().done(function(data){
+	        if (data.loggedIn){
+	           $('.welcomeMsg').addClass('userLogged')
+	        }  
+	   	});
+
+		setTimeout( function(){ 
+			$(".userLogged").on("click", function(){
+				$(".listLinks").slideToggle();
+			});
+	    }, 4000);
     },
     
     shelfDiscount: function(){
@@ -203,6 +220,7 @@ var global = {
     init: function () {
     	global.floatHeader();
     	global.shelfDiscount();	
+    	global.userLogged();	
     }
 }
 
@@ -333,10 +351,22 @@ var catalog = {
         });
     },
 
+    searchEmptyWord: function () {
+		var word = decodeURI(window.location.search);
+		word = word.replace("?ft=","");
+		$(".box-emptySearch h3 span em").text(word);
+	},
+
+	searchWord: function () {
+		var word = $(".resultado-busca-termo:eq(0)").find("strong").text();
+		$(".titulo-sessao").html('Resultado da busca: "<em>' + word + '</em>"');
+	},
+
 	init: function  () {
 		catalog.smartResearch();
 		catalog.toggleFilter();
 		catalog.switchView();
+		catalog.searchWord();
 	}
 }
 
@@ -347,6 +377,15 @@ var product = {
 		
 		fns.shareWindow(urlProduct, urlMediaProduct);
 	},
+
+	productIndisponivel: function(){
+		if ($( ".priceProduct" ).html() == "" ){
+			$('body').addClass("productUnaviable");
+			$(".sku-notifyme-button-ok").val("Avise-me quando chegar");
+		} else {
+			$('body').removeClass("productUnaviable");
+		};	
+    },
 
 	superZoom: function (width, height) {
 		window.LoadZoom = function (pi) {
@@ -391,13 +430,80 @@ var product = {
 	    })
 	},
 
+	reguaOvos: function () {
+		if ($('td.Regua-de-Ovos').length > 0 ) {
+			var hImg = $('td.Regua-de-Ovos img').height()
+			$('td.Regua-de-Ovos').parents('tr').css('background','#fff').css('height', hImg + 40);
+		};
+	},
+
+	nutritionalChart: function () {
+		if ($('td.Tabela-nutricional img').length < 1) {
+			$(".tabLink:eq(1)").remove();
+		} else {
+			$('.nutricional').prepend($('td.Tabela-nutricional img'));			
+		};
+	},
+
+	addCart:function(url) {    	
+    	$.ajax({
+    		type:'POST',
+            url:url,
+            async:false
+        } )
+        .done(function(data) {         	
+    		var tit = $(".productName:eq(0)").text();
+    		var img = '<img src="'+$("#image-main").attr("src")+'"/>';
+    		var success = 'Adicionado com sucesso!';
+        	
+            $("body").prepend('\
+               <div class="lb"><div class="lbOverlay"></div>\
+                   <div id="buyContent" class="lbContent">\
+                       <span class="closeLB">x</span>\
+                       <div class="buyAdd__img">'+img+'</div>\
+                       <p class="success">'+success+'</p>\
+                       <p class="title">'+tit+'</p>\
+                       <a href="/checkout/#/cart" class="bt-finalizar" target="_top">Finalizar compra</a>\
+                       <a href="#" class="bt-continuar">Continuar comprando</a>\
+                   </div>\
+               </div>')
+             vtexjs.checkout.getOrderForm();
+        })
+        .fail(function() {
+            alert("ocorreu um erro!")
+        });
+    },
+
+    buyProduct:function() {
+        $(document).on("click",".buyProductButton .buy-button", function(event) {
+            var _this = $(this)
+            var link = $(this).attr("href");
+
+            if(link.indexOf("/checkout/cart/")!=-1) {
+                event.preventDefault();
+                link = link.replace('redirect=true','redirect=false');
+                product.addCart(link,false);
+                
+            } 
+        });
+
+        $(document).on("click", ".lb .bt-continuar, .closeLB", function(event) {
+	        event.preventDefault();
+	        $(".lb").fadeOut("slow").remove();
+	    });
+    },
+
 	init: function(){
 		$(document).ajaxStop(function () {			
 		    product.changeStars();
 			product.retingLightbox();
+			product.productIndisponivel();
 		})
 		product.share();
 		product.superZoom(530,530);
+		product.reguaOvos();
+		product.nutritionalChart();
+		product.buyProduct();
 	}
 }
 
@@ -424,16 +530,27 @@ $(document).ready(function () {
 	
 	fns.tabs();
 
+	$(".shippingInfo ul").slick({
+	    slidesToShow: 1,
+		slidesToScroll: 1,
+	    vertical: true,
+	    arrows: false,
+	    dots: false,
+	    autoplay: true,
+	    autoplaySpeed: 8000
+	});		
+
 	setTimeout( function(){ 
       $(".portal-minicart-ref").show();
     }, 5000);
 
-  	
+	  	
 	if ($('body').hasClass("home")) {		
 		//carrega produtos categorias
-  		//  $(".categoriesHighlight .column").each(function () {
-		// 	var url = "/buscapagina?fq=C%3a%2f12%2f&PS=12&sl=ef3fcb99-de72-4251-aa57-71fe5b6e149f&cc=12&sm=0&PageNumber=1";
-		// 	var container = $(this).find(".categoryProducts");
+  // 		$(".categoriesHighlight .column").each(function () {
+		// 	var href = $(this).find(".categoryProducts").attr("data-catg"),
+		// 		url = "/buscapagina?fq=" + href + "&PS=12&sl=ef3fcb99-de72-4251-aa57-71fe5b6e149f&cc=12&sm=0&PageNumber=1",
+		// 		container = $(this).find(".categoryProducts");
 
 		// 	$.ajax({
 		// 	  	url: url
@@ -487,10 +604,14 @@ $(document).ready(function () {
 		institutional.init();
 	};
 
+	//busca vazia
+	if ($('body').hasClass("resultado-busca")) {
+		catalog.searchEmptyWord();
+	};
+
 	if ($('body').hasClass("search-result")) {
-		var numbersearch = $(".resultado-busca-numero");
+		var numbersearch = $(".resultado-busca-numero:eq(0)");
 		$(".titulo-sessao").append(numbersearch);
-		console.log(numbersearch);
 	};
 
 	if ($('body').hasClass("brands")) {
