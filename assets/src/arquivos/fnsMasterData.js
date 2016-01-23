@@ -105,6 +105,43 @@ var QueryString = function () {
 }();
 
 
+function addParamToLink(href,utm) {
+	var hl = href;
+	if(href.indexOf("?")<0) {
+		hl += "?utmp="+utm;
+	} else {
+		hl += "&utmp="+utm;
+	}
+	return hl;
+}
+
+
+
+function insertParam(key, value)
+{
+    key = encodeURI(key); value = encodeURI(value);
+
+    var kvp = document.location.search.substr(1).split('&');
+
+    var i=kvp.length; var x; while(i--) 
+    {
+        x = kvp[i].split('=');
+
+        if (x[0]==key)
+        {
+            x[1] = value;
+            kvp[i] = x.join('=');
+            break;
+        }
+    }
+
+    if(i<0) {kvp[kvp.length] = [key,value].join('=');}
+
+    //this will reload the page, it's likely better to store this until finished
+    //document.location.search = kvp.join('&'); 
+}
+
+
 
 var omx = {
 	getEmpresa:function(idNome) {
@@ -149,21 +186,30 @@ var omx = {
 		return vtexjs.checkout.getAddressInformation(address);
 
 	},
-	setAddress:function(address) {
+
+	setAddress:function(address, number, nameShip) {
+
+		console.log(address);
+		console.log(number);
+		console.log(nameShip);
 
 		vtexjs.checkout.getOrderForm().done(function(orderForm){ 
-		   console.log(orderForm.orderFormId); 
-
-		   
-			var data = address;
+		    console.log(orderForm.orderFormId); 
 
 
+
+			var data = '{"address":{"complement":"","country":"BRA","number":'+number+',"postalCode":'+address.postalCode+',"receiverName":"'+nameShip+'"}}';
+			    
+			data = JSON.stringify(data)
+			data = JSON.parse(data) 
+			
 			$.ajax({  
 			   type:"POST",
 			   url:"/api/checkout/pub/orderForm/"+orderForm.orderFormId+"/attachments/shippingData",
 			   data:data
 			}).done(function( msg ){  
-			   console.info(msg);
+			    console.log(msg);
+ 			    vtexjs.checkout.getOrderForm();
 			});
 
 		   // 
@@ -172,37 +218,145 @@ var omx = {
 
 		});
 		 
+	},
+
+	setCookie:function(cname, value) {
+		document.cookie = cname + "=" + value + "; "	
+	},
+
+	getCookie:function(value) {
+		var name = value + "=";
+	    var ca = document.cookie.split(';');
+	    for(var i=0; i<ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0)==' ') c = c.substring(1);
+	        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+	    }
+	    return "";
 	}
+
+
 }
 
 
-omx.getEmpresa(QueryString.utmp).done(function(data) {
-	$(".lightBoxShop__img").html('<img alt="'+data.Documents[0].nome+'" src="/arquivos/'+data.Documents[0].file+'"/>')
-	var html = "";
-	omx.getFilial(data.Documents[0].id).done(function(data) {
-		
-		$.each(data.Documents, function(i) {
-			html += '<label class="lightBoxShop__un__unit"><input type="radio" value="'+this.postalCode+'" name="lightBoxShop__un"/><p>'+this.filialName+"</p></label>";
+
+$(document).ready(function() {
+
+	if(omx.getCookie("utmp") != "" || typeof QueryString.utmp != "undefined"){
+
+		var ck = omx.getCookie("utmp") || QueryString.utmp;
+		console.log(ck);
+		insertParam("utmp", ck) ;
+
+		$("a").each(function() {
+			if($(this).attr("href")) {
+				var href = $(this).attr("href");
+				var nh = addParamToLink(href,ck);
+				$(this).attr("href", nh);
+			}
+
 		});
-		$(".lightBoxShop__un__wrap").html(html);
-		//omx.getAddress(data.Documents[0].postalCode).c
+
+
+		if(typeof QueryString.utmp != "undefined"  ) {
+
+			omx.setCookie("utmp",ck);
+
+
+			omx.getEmpresa(QueryString.utmp)
+			.done(function(data) {
+				$(".lightBoxShop__img").html('<img alt="'+data.Documents[0].nome+'" src="/arquivos/'+data.Documents[0].file+'"/>')
+				var html = "";
+				omx.getFilial(data.Documents[0].id).done(function(data) {
+					
+					$.each(data.Documents, function(i) {
+						html += '<label class="lightBoxShop__un__unit"><input type="radio" value="'+this.postalCode+'" data-number="'+this.number+'" name="lightBoxShop__un"/><p>'+this.filialName+"</p></label>";
+					});
+					$(".lightBoxShop__un__wrap").html(html).mCustomScrollbar();
+					$(".lightBoxShop__un").append("<div class='lightBoxShop__un__details'></div>");
+					//omx.getAddress(data.Documents[0].postalCode).c
+				});
+
+			})
+			.fail(function() {
+				alert("utm não validada");
+			});
+
+			if(omx.getCookie("setAddress")=="true") {
+				$(".lightBoxShop").remove();
+			} else {
+				$(".lightBoxShop").show();
+			}
+		}
+	} else {
+		console.log("teste");
+		if( window.location.pathname.indexOf("checkout") < 0) {
+			alert("coloque um utm");
+		}
+	}
+
+
+	$(".lightBoxShop__submit").on("click", function(event) {
+		event.preventDefault();
+
+		var cep = $(".lightBoxShop__un__unit.active input").val();
+		var number = $(".lightBoxShop__un__unit.active input").attr("data-number");
+		var nome = $(".lightBoxShop__name input").val();
+
+
+		if(typeof cep != "undefined" && nome != "") {
+			omx.getAddress(cep).done(function(address) {
+				//omx.setAddress(address);
+				var t = JSON.stringify(address);
+				omx.setCookie("adressSelected", t);
+				omx.setCookie("adressNumber", number);
+				omx.setCookie("adressNome", nome);
+				omx.setCookie("setAddress", "true");
+
+				$(".lightBoxShop").fadeOut("slow").remove();
+			});
+		} else {
+			alert("Coloque o seu nome e escolha uma unidade!");
+		}
+		
+
+
+
 	});
+
+	$(".lightBoxShop").on("click", ".lightBoxShop__un__unit", function(event) {
+		event.preventDefault();
+
+		$(".lightBoxShop__un__unit").removeClass("active");
+		$(this).addClass("active");
+		
+		var cep = $(this).find("input").val();
+
+		var postalCode = cep;
+		var country = 'BRA';
+		var address = {postalCode: postalCode, country: country};
+
+		vtexjs.checkout.getAddressInformation(address).done(function(result){
+
+			var address = "<h3>Endereço para entrega:</h3><p>"+result.street+"</p><p>"+result.neighborhood+" - "+result.city+"</p><p>Cep: "+result.postalCode+"</p>";
+			$(".lightBoxShop__un__details").html(address);
+		});
+
+	});
+
+
+
+	if(window.location.pathname.indexOf("checkout")) {
+		var address = omx.getCookie("adressSelected");
+		var number = omx.getCookie("adressNumber");
+		var nome = omx.getCookie("adressNome");
+		address = JSON.parse(address);
+		omx.setAddress(address, number, nome);
+	}
+
 
 });
 
-$(".lightBoxShop__submit").on("click", function(event) {
-	event.preventDefault();
-
-	var cep = $(".lightBoxShop__un__wrap input:checked").val();
-	console.log(cep);
-
-	omx.getAddress(cep).done(function(address) {
-		omx.setAddress(address);
-	});
-
-
-
-});
 
 
 
