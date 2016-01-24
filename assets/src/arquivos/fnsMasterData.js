@@ -218,80 +218,87 @@ var omx = {
 
 		});
 		 
-	},
-
-	setCookie:function(cname, value) {
-		document.cookie = cname + "=" + value + "; "	
-	},
-
-	getCookie:function(value) {
-		var name = value + "=";
-	    var ca = document.cookie.split(';');
-	    for(var i=0; i<ca.length; i++) {
-	        var c = ca[i];
-	        while (c.charAt(0)==' ') c = c.substring(1);
-	        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
-	    }
-	    return "";
 	}
+
 
 
 }
 
 
+function infoTopBar() {
+	var t = JSON.parse($.cookie("adressSelected"));
+
+	var html = '<div class="infolog"><div class="wrapper"><p>Olá, <b>'+$.cookie("adressNome")+'</b> da empresa '+$.cookie("utmp")+'. O endereço selecionado é '+t.street+', '+$.cookie("adressNumber")+' - '+t.city+', '+t.state+'</p><span>Os dados estão corretos? <a id="changeAddress">Clique aqui para alterar</a></span></div></div>';
+
+	$(".topBar.infoLogged").html(html);
+}
+
+
+$.browser.device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+
 
 $(document).ready(function() {
 
-	if(omx.getCookie("utmp") != "" || typeof QueryString.utmp != "undefined"){
+	if(typeof $.cookie("utmp") != "undefined" || typeof QueryString.utmp != "undefined"){
 
-		var ck = omx.getCookie("utmp") || QueryString.utmp;
+		var ck = $.cookie("utmp") || QueryString.utmp;
 		console.log(ck);
 		insertParam("utmp", ck) ;
 
 		$("a").each(function() {
 			if($(this).attr("href")) {
 				var href = $(this).attr("href");
-				var nh = addParamToLink(href,ck);
-				$(this).attr("href", nh);
+				if(href.indexOf("checkout")<0) {
+					var nh = addParamToLink(href,ck);
+					$(this).attr("href", nh);
+				}
 			}
 
 		});
 
 
-		if(typeof QueryString.utmp != "undefined"  ) {
-
-			omx.setCookie("utmp",ck);
+		$.cookie("utmp",ck);
 
 
-			omx.getEmpresa(QueryString.utmp)
-			.done(function(data) {
-				$(".lightBoxShop__img").html('<img alt="'+data.Documents[0].nome+'" src="/arquivos/'+data.Documents[0].file+'"/>')
-				var html = "";
-				omx.getFilial(data.Documents[0].id).done(function(data) {
-					
-					$.each(data.Documents, function(i) {
-						html += '<label class="lightBoxShop__un__unit"><input type="radio" value="'+this.postalCode+'" data-number="'+this.number+'" name="lightBoxShop__un"/><p>'+this.filialName+"</p></label>";
-					});
-					$(".lightBoxShop__un__wrap").html(html).mCustomScrollbar();
-					$(".lightBoxShop__un").append("<div class='lightBoxShop__un__details'></div>");
-					//omx.getAddress(data.Documents[0].postalCode).c
+		omx.getEmpresa(ck)
+		.done(function(data) {
+			$(".lightBoxShop__img").html('<img alt="'+data.Documents[0].nome+'" src="/arquivos/'+data.Documents[0].file+'"/>')
+			var html = "";
+			omx.getFilial(data.Documents[0].id).done(function(data) {
+				
+				$.each(data.Documents, function(i) {
+					html += '<label class="lightBoxShop__un__unit"><input type="radio" value="'+this.postalCode+'" data-number="'+this.number+'" name="lightBoxShop__un"/><p>'+this.filialName+"</p></label>";
 				});
+				$(".lightBoxShop__un__wrap").html(html);
+				if(!$.browser.device) {
+					$(".lightBoxShop__un__wrap").mCustomScrollbar();
 
-			})
-			.fail(function() {
-				alert("utm não validada");
+				}
+				$(".lightBoxShop__un").append("<div class='lightBoxShop__un__details'></div>");
+				//omx.getAddress(data.Documents[0].postalCode).c
 			});
 
-			if(omx.getCookie("setAddress")=="true") {
-				$(".lightBoxShop").remove();
-			} else {
-				$(".lightBoxShop").show();
-			}
+		})
+		.fail(function() {
+			alert("utm não validada");
+		});
+
+		if($.cookie("setAddress")=="true") {
+
+			$(".lightBoxShop").remove();
+			infoTopBar()
+
+
+		} else {
+			$(".lightBoxShop").show();
 		}
+
+
 	} else {
-		console.log("teste");
+
 		if( window.location.pathname.indexOf("checkout") < 0) {
-			alert("coloque um utm");
+			alert("coloque uma utm");
+			$("body").html("Coloque uma utm válida");
 		}
 	}
 
@@ -308,12 +315,14 @@ $(document).ready(function() {
 			omx.getAddress(cep).done(function(address) {
 				//omx.setAddress(address);
 				var t = JSON.stringify(address);
-				omx.setCookie("adressSelected", t);
-				omx.setCookie("adressNumber", number);
-				omx.setCookie("adressNome", nome);
-				omx.setCookie("setAddress", "true");
+
+				$.cookie("adressSelected", t, { path: '/' });
+				$.cookie("adressNumber", number, { path: '/' });
+				$.cookie("adressNome", nome, { path: '/' });
+				$.cookie("setAddress", "true", { path: '/' });
 
 				$(".lightBoxShop").fadeOut("slow").remove();
+				infoTopBar();
 			});
 		} else {
 			alert("Coloque o seu nome e escolha uma unidade!");
@@ -345,18 +354,32 @@ $(document).ready(function() {
 	});
 
 
+	$(".topBar").on("click", "span a", function(event) {
+		event.preventDefault();
 
-	if(window.location.pathname.indexOf("checkout")) {
-		var address = omx.getCookie("adressSelected");
-		var number = omx.getCookie("adressNumber");
-		var nome = omx.getCookie("adressNome");
-		address = JSON.parse(address);
-		omx.setAddress(address, number, nome);
+		$.removeCookie('adressSelected', { path: '/' }); // => true
+		$.removeCookie('adressNumber', { path: '/' }); // => true
+		$.removeCookie('adressNome', { path: '/' }); // => true
+		$.removeCookie('setAddress', { path: '/' }); // => true
+		$.removeCookie('utmp', { path: '/' }); // => true
+
+		window.location.reload();
+	});
+
+
+
+	if(window.location.pathname.indexOf("checkout")>0) {
+		var address = $.cookie("adressSelected");
+		var number  = $.cookie("adressNumber");
+		var nome    = $.cookie("adressNome");
+		if(typeof address != "undefined" && typeof number != "undefined" && typeof nome != "undefined") {
+			address = JSON.parse(address);
+			omx.setAddress(address, number, nome);
+		}
 	}
 
 
 });
-
 
 
 

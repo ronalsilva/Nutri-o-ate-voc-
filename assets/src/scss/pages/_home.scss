@@ -160,6 +160,28 @@ body.home{
 }
 
 
+.topBar {
+	background:$color1;
+}
+
+
+.infolog {
+    padding:20px 0;
+    font-size:12px;
+}
+    .infolog p {
+        float:left;
+    }
+        .infolog b {font-weight:bold;}
+    .infolog span {
+        float:right;
+    }
+        .infolog span a {
+            text-decoration:underline;
+            cursor:pointer;
+        }
+
+
 .lightBoxShop {
     position: fixed;
     width: 100%;
@@ -215,6 +237,12 @@ body.home{
         background:#FFF;
         max-height:79px;
         border-radius:4px;
+
+        img {
+        	display: block;
+		    max-height: 32px;
+		    width: auto;
+        }
     }
 
     .lightBoxShop__name { 
@@ -273,7 +301,8 @@ body.home{
 
        .lightBoxShop__un__details {
            float:right;
-               width: 34%;
+           width: 34%;
+           margin-top: -27px;
        }
 
         .lightBoxShop__submit {
