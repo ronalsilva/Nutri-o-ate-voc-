@@ -513,7 +513,7 @@ div.lbOverlay {
 /*ADD CARRINHO*/
 #buyContent {
     width: 400px;
-    height: 520px;
+    height: 540px;
 
     .buyAdd__img {
         display: block;
@@ -531,18 +531,16 @@ div.lbOverlay {
         font-size: rem(18px);
     }
 
-    .bt-finalizar {
+    .bt-finalizar { 
         @include buyActionButton();
         display: table;
         margin: auto;
+        display: inline-block;
     }
 
     .bt-continuar {
-        font-family: $secondaryFont;
-        font-size: rem(12px);
-        text-decoration: underline;
-        color: #000;
-        display: block;
-        margin: 10px;
+        margin-top: 10px;
+        display: inline-block;
+        @include secondaryButton2(); 
     }
 }

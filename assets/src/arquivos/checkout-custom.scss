@@ -339,6 +339,18 @@ a{
 	}
 }
 
+a#change-other-shipping-option {
+    display: none;
+}
+
+.shipping-options.just-one {
+    display: none;
+}
+
+a#edit-shipping-data {
+    display: none !important;
+}
+
 
 a#edit-shipping-data {
     display: none !important;

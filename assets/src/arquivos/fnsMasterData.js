@@ -108,9 +108,9 @@ var QueryString = function () {
 function addParamToLink(href,utm) {
 	var hl = href;
 	if(href.indexOf("?")<0) {
-		hl += "?utmp="+utm;
+		hl += "?utmi_cp="+utm;
 	} else {
-		hl += "&utmp="+utm;
+		hl += "&utmi_cp="+utm;
 	}
 	return hl;
 }
@@ -166,7 +166,7 @@ var omx = {
 		return $.ajax({
 		    async: false,
 		    type: "GET",
-		    url: "/api/ds/pub/documents/CF",
+		    url: "/api/ds/pub/documents/CF?&pgsize=1000",
 		    headers: {
 		      "accept": "application/vnd.vtex.masterdata.v10+json",
 		      "content-type": "application/json; charset=utf-8"
@@ -228,7 +228,7 @@ var omx = {
 function infoTopBar() {
 	var t = JSON.parse($.cookie("adressSelected"));
 
-	var html = '<div class="infolog"><div class="wrapper"><p>Olá, <b>'+$.cookie("adressNome")+'</b> da empresa '+$.cookie("utmp")+'. O endereço selecionado é '+t.street+', '+$.cookie("adressNumber")+' - '+t.city+', '+t.state+'</p><span>Os dados estão corretos? <a id="changeAddress">Clique aqui para alterar</a></span></div></div>';
+	var html = '<div class="infolog"><div class="wrapper"><p>Olá, <b>'+$.cookie("adressNome")+'</b> da empresa '+$.cookie("utmi_cp")+'. O endereço selecionado é '+t.street+', '+$.cookie("adressNumber")+' - '+t.city+', '+t.state+'</p><span>Os dados estão corretos? <a id="changeAddress">Clique aqui para alterar</a></span></div></div>';
 
 	$(".topBar.infoLogged").html(html);
 }
@@ -239,11 +239,11 @@ $.browser.device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mi
 
 $(document).ready(function() {
 
-	if(typeof $.cookie("utmp") != "undefined" || typeof QueryString.utmp != "undefined"){
+	if(typeof $.cookie("utmi_cp") != "undefined" || typeof QueryString.utmi_cp != "undefined"){
 
-		var ck = $.cookie("utmp") || QueryString.utmp;
+		var ck = QueryString.utmi_cp || $.cookie("utmi_cp");
 		console.log(ck);
-		insertParam("utmp", ck) ;
+		insertParam("utmi_cp", ck) ;
 
 		$("a").each(function() {
 			if($(this).attr("href")) {
@@ -257,31 +257,7 @@ $(document).ready(function() {
 		});
 
 
-		$.cookie("utmp",ck);
-
-
-		omx.getEmpresa(ck)
-		.done(function(data) {
-			$(".lightBoxShop__img").html('<img alt="'+data.Documents[0].nome+'" src="/arquivos/'+data.Documents[0].file+'"/>')
-			var html = "";
-			omx.getFilial(data.Documents[0].id).done(function(data) {
-				
-				$.each(data.Documents, function(i) {
-					html += '<label class="lightBoxShop__un__unit"><input type="radio" value="'+this.postalCode+'" data-number="'+this.number+'" name="lightBoxShop__un"/><p>'+this.filialName+"</p></label>";
-				});
-				$(".lightBoxShop__un__wrap").html(html);
-				if(!$.browser.device) {
-					$(".lightBoxShop__un__wrap").mCustomScrollbar();
-
-				}
-				$(".lightBoxShop__un").append("<div class='lightBoxShop__un__details'></div>");
-				//omx.getAddress(data.Documents[0].postalCode).c
-			});
-
-		})
-		.fail(function() {
-			alert("utm não validada");
-		});
+		$.cookie("utmi_cp",ck);		
 
 		if($.cookie("setAddress")=="true") {
 
@@ -290,6 +266,33 @@ $(document).ready(function() {
 
 
 		} else {
+			omx.getEmpresa(ck)
+			.done(function(data) {
+				$(".lightBoxShop__img").html('<img alt="'+data.Documents[0].nome+'" src="/arquivos/'+data.Documents[0].file+'"/>')
+				var html = "";
+				omx.getFilial(data.Documents[0].id).done(function(data) {
+					
+					var totalFilial = data.TotalRows;
+
+					for(var i=0;i<=totalFilial;i++) {
+						html += '<label class="lightBoxShop__un__unit"><input type="radio" value="'+data.Documents[i].postalCode+'" data-number="'+data.Documents[i].number+'" name="lightBoxShop__un"/><p>'+data.Documents[i].filialName+"</p></label>";
+					}
+					
+					$(".lightBoxShop__un__wrap").html(html);
+					if(!$.browser.device) {
+						$(".lightBoxShop__un__wrap").mCustomScrollbar();
+
+					}
+					$(".lightBoxShop__un").append("<div class='lightBoxShop__un__details'></div>");
+					//omx.getAddress(data.Documents[0].postalCode).c
+				});
+
+			})
+			.fail(function() {
+				alert("utm não validada");
+			});
+
+			
 			$(".lightBoxShop").show();
 		}
 
@@ -361,7 +364,7 @@ $(document).ready(function() {
 		$.removeCookie('adressNumber', { path: '/' }); // => true
 		$.removeCookie('adressNome', { path: '/' }); // => true
 		$.removeCookie('setAddress', { path: '/' }); // => true
-		$.removeCookie('utmp', { path: '/' }); // => true
+		$.removeCookie('utmi_cp', { path: '/' }); // => true
 
 		window.location.reload();
 	});
