@@ -376,7 +376,7 @@
                     background-position: -415px -18px;
                 }
             }
-            
+
             &.parcela:before{
                 background-position: -416px -70px;
             }
@@ -393,23 +393,26 @@ Header Flutuante
     z-index: 5011;
 
     &.busca {
-        width: 390px !important;
         margin: auto;
         top: 7px;
-        left: 0;
-        right: 0;
-        .fulltext-search-box {
-            width: 365px !important;
-        }
+        margin-left: 40px;
+    }
+
+    &.shippingInfo {
+        position: relative;
+        top: 16px;
+        transform: translateX(330px);
+        -webkit-transform: translateX(330px);
+        -moz-transform: translateX(330px);
     }
 
     &.miniCart {
         position: relative;
         margin: auto;
         top: 5px;
-        transform: translateX(200px);
-        -webkit-transform: translateX(200px);
-        -moz-transform: translateX(200px);
+        transform: translateX(330px);
+        -webkit-transform: translateX(330px);
+        -moz-transform: translateX(330px);
     }
 
     &.pageNav {
@@ -422,7 +425,7 @@ Header Flutuante
 .floatHeader {
     display: none;
     width: 100%;
-    background: #af1f16;
+    @include linear-gradient(to top, $primaryColor, $primaryColorLight);
     position: fixed;
     padding: 10px 0;
     z-index: 5010;

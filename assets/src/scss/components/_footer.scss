@@ -5,11 +5,12 @@
    Footer
    ========================================================================== */
 .pageFooter{
-	background: $primaryColorLight;
+	// background: $primaryColorLight;
 	color: $white; 	
 	margin-top: 50px;
 	text-transform: uppercase;
 	font-size: rem(12px);
+	@include linear-gradient(to top, $primaryColor, $primaryColorLight);
 
 	a{
 		color: $white;
@@ -21,7 +22,7 @@
 
 	.adm{
 		@include span-columns(3);
-		background: $primaryColorDark;
+		// background: $primaryColorDark;
 		text-align: center;
 		border-left: 1px solid #cf142d;
 		border-right: 1px solid #cf142d;

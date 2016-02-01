@@ -107,8 +107,8 @@ var fns = {
 var global = {
     floatHeader: function(){
     	var floatingBar = $(".floatHeader"),
-    	//logo = $(".pageHeader .logo .logoImg");
-    	search = $(".pageHeader .searchBox .busca");
+        search = $(".pageHeader .searchBox .busca");
+    	shippingInfo = $(".pageHeader .shippingInfo");
     	smartCart = $(".pageHeader .miniCart");
     	$(".floatHeader wrapper").append(smartCart);
 
@@ -117,11 +117,13 @@ var global = {
 	    $(window).bind("scroll",function(){
 	        if($(this).scrollTop()>100){
 	            floatingBar.fadeIn(100);
-	            search.addClass("floatElement");
+                search.addClass("floatElement");
+	            shippingInfo.addClass("floatElement");
 	            smartCart.addClass("floatElement");
 	        }
 	        else{
-	            search.removeClass("floatElement");
+                search.removeClass("floatElement");
+	            shippingInfo.removeClass("floatElement");
 	            smartCart.removeClass("floatElement");
 	            floatingBar.fadeOut(100).css("height", "auto");               
 	        }
@@ -316,7 +318,7 @@ var catalog = {
 				$(this).next("div").slideToggle();
 				$(this).toggleClass("active");
 			})
-		})
+		});
 	},
 
 	switchView: function () {
@@ -546,6 +548,14 @@ $(document).ready(function () {
 
 	  	
 	if ($('body').hasClass("home")) {		
+
+        $(".collapseBox .filterItem").each(function(){
+            $(this).find(".title").on("click", function(){
+                $(this).next("ul").slideToggle();
+                $(this).toggleClass("active");
+            })
+        });
+
 		//carrega produtos categorias
   // 		$(".categoriesHighlight .column").each(function () {
 		// 	var href = $(this).find(".categoryProducts").attr("data-catg"),
