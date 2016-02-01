@@ -426,6 +426,7 @@ Header Flutuante
     display: none;
     width: 100%;
     @include linear-gradient(to top, $primaryColor, $primaryColorLight);
+    // background: $primaryColorDark;
     position: fixed;
     padding: 10px 0;
     z-index: 5010;
