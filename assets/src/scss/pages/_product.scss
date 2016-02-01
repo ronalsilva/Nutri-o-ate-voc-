@@ -472,11 +472,10 @@ div.lbOverlay {
     left: 0;
     margin: auto;    
     text-align: center;
-    padding: 40px;
+    padding: 20px;
     z-index: 100;
     background: #FFF;
     @include border-radius(6px);
-
     
     .closeLB {
         position: absolute;
@@ -537,11 +536,11 @@ div.lbOverlay {
 /*ADD CARRINHO*/
 #buyContent {
     width: 400px;
-    height: 540px;
+    height: 550px;
 
     .buyAdd__img {
         display: block;
-        width: 90%;
+        width: 85%;
         margin: auto;
         img {
             width: 100%;
@@ -557,14 +556,15 @@ div.lbOverlay {
 
     .bt-finalizar { 
         @include buyActionButton();
-        display: table;
+        display: block;
         margin: auto;
         display: inline-block;
     }
 
     .bt-continuar {
-        margin-top: 10px;
-        display: inline-block;
-        @include secondaryButton2(); 
+        margin-top: 15px;
+        display: block;
+        text-decoration: underline;
+        color: $color5;
     }
 }

@@ -36,7 +36,7 @@
 
 	.safe{
 		background: url("/arquivos/compra-segura-checkout.png") no-repeat 0 0;
-		width: 133px;
+		width: 191px;
 		height:48px;
 		text-align: center;
 		margin-top: 28px;
@@ -112,6 +112,10 @@
 	overflow: hidden;  
 }
 
+
+input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{
+	height: 30px;
+}
 
 // .pageFooter ul li{
 // 	display: inline-block;
