@@ -369,10 +369,14 @@
                 top: 7px;
             }
 
-            &.frete:before{
-                background-position: -415px -18px;
-            }
+            &.frete{
+                padding-top: 7px;
 
+                &:before{
+                    background-position: -415px -18px;
+                }
+            }
+            
             &.parcela:before{
                 background-position: -416px -70px;
             }
