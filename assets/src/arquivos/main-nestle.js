@@ -573,29 +573,6 @@ $(document).ready(function () {
             })
         });
 
-		//carrega produtos categorias
-  // 		$(".categoriesHighlight .column").each(function () {
-		// 	var href = $(this).find(".categoryProducts").attr("data-catg"),
-		// 		url = "/buscapagina?fq=" + href + "&PS=12&sl=ef3fcb99-de72-4251-aa57-71fe5b6e149f&cc=12&sm=0&PageNumber=1",
-		// 		container = $(this).find(".categoryProducts");
-
-		// 	$.ajax({
-		// 	  	url: url
-		// 	}).done(function( data ) {
-		// 		container.html(data);
-
-		// 		$(".helperComplement").remove();
-
-		//         container.find("ul").slick({
-		//             dots: false,
-		//             arrows: true,
-		//             slidesToShow: 1,
-		//             infinite: false,
-		//             vertical: true,
-		//         });
-		// 	});
-		// });
-
 		slider.shelfSlider(false, true, 3, 3);
 
 		slider.singleSlider(true, false);
@@ -642,7 +619,7 @@ $(document).ready(function () {
 	};
 
 	if ($('body').hasClass("brands")) {
-		var dataUrl = decodeURI(window.location.search);
+        var dataUrl = decodeURI(window.location.pathname).replace(/^\//,'').replace(/\-/g, " ");
 		$("h2.titulo-sessao").text(dataUrl);
 	};
 
