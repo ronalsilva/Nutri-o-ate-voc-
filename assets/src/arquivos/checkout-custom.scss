@@ -363,3 +363,25 @@ a#edit-shipping-data {
 a#change-other-shipping-option {
     display: none;
 }
+
+
+.summary-totalizers{
+	.shipping-selected-sla-estimate{
+		display: none !important;
+	}
+	.cart-reset-postal-code .icon-remove-sign{
+		display: none;
+	}
+}
+
+#client-profile-data{
+	#client-pre-email{
+		height: 54px
+	}	
+}
+
+.cart-items{
+	.shipping-date{
+		display: none;
+	}
+}
