@@ -179,10 +179,16 @@ body.product{
                     background: $color7;
                 }
             }
+
             th {
                 width: 200px;
+                
                 &.Regua-de-Ovos {
                     font-size: 0;
+                }
+
+                &.Imagem-especial{
+                    display: none;
                 }
             }
 
@@ -198,6 +204,7 @@ body.product{
                 &.Regua-de-Ovos {
                     padding: 20px 0px;
                     font-size: 0;
+                    
                     img {
                         position: absolute;
                         top: 0;
