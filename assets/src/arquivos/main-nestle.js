@@ -1,3 +1,5 @@
+/* 2.0 */
+
 var fns = {
 	lightboxOverlay:    $('<div class="lightboxOverlay"></div>'),
 
@@ -469,7 +471,12 @@ var product = {
                        <a href="#" class="bt-continuar">Continuar comprando</a>\
                    </div>\
                </div>')
-             vtexjs.checkout.getOrderForm();
+             vtexjs.checkout.getOrderForm().done(function() {
+                global.carouselCart();
+                global.addButtonCart();
+             });
+
+            
         })
         .fail(function() {
             alert("ocorreu um erro!")
@@ -485,6 +492,7 @@ var product = {
                 event.preventDefault();
                 link = link.replace('redirect=true','redirect=false');
                 product.addCart(link,false);
+
                 
             } 
         });
@@ -628,16 +636,22 @@ $(document).ready(function () {
 		var dataUrl = decodeURI(window.location.search);
 		$("h2.titulo-sessao").text(dataUrl);
 	};
+
+    
 });
 
 
 $(document).ajaxStop(function () {
 	$(".helperComplement").remove();
 
-	global.carouselCart();
-	global.addButtonCart();
+	
 });
 
+
+$(window).load(function() {
+    global.carouselCart();
+    global.addButtonCart();
+});
 
 //plugins
 $.fn.countSlider = function () {
