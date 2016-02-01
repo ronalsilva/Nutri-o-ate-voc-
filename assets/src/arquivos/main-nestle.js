@@ -450,7 +450,7 @@ var product = {
 	},
 
     gift: function(){
-        if ($('td.Foto-brinde img')) {
+        if ($('td.Foto-brinde').length > 0) {
             $("td.Foto-brinde").hide();
             var img =  $("td.Foto-brinde").html();
             $(".mainProductInfo").append("<div class='gift'><p>Brinde:</p>" + img + "</div>");
