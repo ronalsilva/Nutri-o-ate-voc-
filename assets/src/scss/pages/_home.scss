@@ -155,10 +155,25 @@ body.home{
 	}
 }
 
-.banner{
+.collapseBanner{
 	margin: 20px 0 40px 0;
+	position: relative;
+	
+	a{
+		display: block;
+	}
 
-	.box-banner{
+	&:hover{
+		.bannerOpen{
+			display: block;
+		}
+	}
+
+	.bannerOpen{
+		display: none;
+		position: absolute;
+		top: 0;
+		z-index: 99;
 	}
 }
 

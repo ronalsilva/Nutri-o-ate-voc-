@@ -380,7 +380,7 @@ var product = {
 		fns.shareWindow(urlProduct, urlMediaProduct);
 	},
 
-	productIndisponivel: function(){
+	productUnaviable: function(){
 		if ($( ".priceProduct" ).html() == "" ){
 			$('body').addClass("productUnaviable");
 			$(".sku-notifyme-button-ok").val("Avise-me quando chegar");
@@ -402,7 +402,7 @@ var product = {
 	    LoadZoom(0);
 	},
 
-	retingLightbox: function () {
+	ratingLightbox: function () {
 		var stars = $("#resenha .avalie-produto").clone().html();
 		$("#lnkPubliqueResenha").on("click", function (event) {
 			event.preventDefault();
@@ -447,7 +447,15 @@ var product = {
 		};
 	},
 
-	addCart:function(url) {    	
+    gift: function(){
+        if ($('td.Foto-brinde img')) {
+            $("td.Foto-brinde").hide();
+            var img =  $("td.Foto-brinde").html();
+            $(".mainProductInfo").append("<div class='gift'><p>Brinde:</p>" + img + "</div>");
+        }
+    },
+
+	addCart:function(url) {
     	$.ajax({
     		type:'POST',
             url:url,
@@ -498,14 +506,15 @@ var product = {
 	init: function(){
 		$(document).ajaxStop(function () {			
 		    product.changeStars();
-			product.retingLightbox();
-			product.productIndisponivel();
+			product.ratingLightbox();
+			product.productUnaviable();
 		})
 		product.share();
 		product.superZoom(530,530);
 		product.reguaOvos();
 		product.nutritionalChart();
-		product.buyProduct();
+        product.buyProduct();
+		product.gift();
 	}
 }
 
