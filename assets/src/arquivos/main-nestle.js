@@ -241,6 +241,16 @@ var global = {
         if(n.length>0) {
           var n = $("td.value-field.Multiplicador-Kits").text();
           n = parseFloat(n);         
+
+          if($(".skuListPrice").length>0) {
+               y = global.calcPriceMulti($(".skuListPrice").text(), n)          
+               $(".skuListPrice").text("R$ "+y);                        
+           }
+           x = global.calcPriceMulti($(".skuBestPrice").text(), n)          
+           $(".skuBestPrice").text("R$ "+x);
+
+           z = global.calcPriceMulti($(".economia-de .economia").text(), n)          
+           $(".economia-de .economia").text("R$ "+z);
         }
 
         //vitrine
