@@ -281,6 +281,20 @@ body.home{
 	        border:1px solid #ccc;
 	    }
 
+
+	.lightBoxShop__un__search {padding:0 0 10px 0}
+	    .lightBoxShop__un__search label {
+	        display:inline-block;
+	        margin-right:10px;
+	    }
+	    .lightBoxShop__un__search input {
+	        padding:5px;
+	        border-radius:5px;
+	        border:1px solid #eee;
+	        color:#ccc;
+	        font-size:12px;
+	    }
+
     .lightBoxShop__un {
         padding: 0 30px 20px 30px;
     }
@@ -292,8 +306,8 @@ body.home{
         .lightBoxShop__un__wrap {
             width: 60%;
             float: left;
-            max-height: 132px;
-   			height: 132px;
+            max-height: 99px;
+   			height: 99px;
             overflow: auto;
         }
 

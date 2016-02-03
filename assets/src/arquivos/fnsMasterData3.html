@@ -96,6 +96,22 @@ var omx = {
             }
         })
     },
+
+    searchFilial:function() {
+        
+
+        $(".searchFilial").keyup(function( event ) {
+            var txt = $(this).val();
+            txt = txt.toUpperCase();
+            if(txt == "") {
+                $(".lightBoxShop__un__unit").show();
+            } else {
+                $(".lightBoxShop__un__unit").hide();
+                $(".lightBoxShop__un__unit:contains('"+txt+"')").show();                
+            }
+        });
+    },
+
     getAddress:function(cep) {
 
         var postalCode = cep;
@@ -246,6 +262,7 @@ $(window).load(function() {
 
             
             $(".lightBoxShop").show();
+            omx.searchFilial();
         }
 
 
