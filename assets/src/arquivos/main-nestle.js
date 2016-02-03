@@ -220,11 +220,56 @@ var global = {
             linkCarrinho.insertAfter(".cartCheckout");
         };
     },
+
+
+    calcPriceMulti:function(num, multi) {
+        var n = multi;
+        n = parseFloat(n);
+
+        var p = parseFloat(num.replace("R$ ","").replace(",","."));
+        p = p*n;
+        p = p.toFixed(2);
+        p = p.toString();
+        p = p.replace(".",",");
+        return p;
+    },
+
+    priceKit:function() {
+
+        //produto
+        var n = $("td.value-field.Multiplicador-Kits");
+        if(n.length>0) {
+          var n = $("td.value-field.Multiplicador-Kits").text();
+          n = parseFloat(n);         
+        }
+
+        //vitrine
+        $(document).ajaxStop(function() {
+            $(".shelf li").each(function() {
+                var _this = $(this);
+                if(_this.find(".multipleItem li").length > 0) {
+                    var n = _this.find(".multipleItem li").text();
+                    n = parseFloat(n);
+
+                    if(_this.find(".oldPrice").length>0) {
+                        y = global.calcPriceMulti(_this.find(".oldPrice").text(), n)          
+                        _this.find(".oldPrice").text("R$ "+y);                        
+                    }
+                    x = global.calcPriceMulti(_this.find(".bestPrice").text(), n)          
+                    _this.find(".bestPrice").text("R$ "+x);
+                }
+            });
+        });
+        
+
+        
+    },
     
     init: function () {
     	global.floatHeader();
     	global.shelfDiscount();	
-    	global.userLogged();	
+        global.userLogged();    
+    	global.priceKit();	
     }
 }
 
@@ -503,6 +548,8 @@ var product = {
 	    });
     },
 
+
+
 	init: function(){
 		$(document).ajaxStop(function () {			
 		    product.changeStars();
@@ -513,7 +560,7 @@ var product = {
 		product.superZoom(530,530);
 		product.reguaOvos();
 		product.nutritionalChart();
-		product.buyProduct();
+        product.buyProduct();
 	}
 }
 

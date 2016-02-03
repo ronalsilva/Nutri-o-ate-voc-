@@ -89,10 +89,7 @@ var omx = {
             async: false,
             type: "GET",
             url: "/api/ds/pub/documents/CF?&pgsize=1000",
-            headers: {
-              "accept": "application/vnd.vtex.masterdata.v10+json",
-              "content-type": "application/json; charset=utf-8"
-            },
+            
             data: {
                 "f": "cnpjmatriz,complement,country,filialName,number,postalCode,street,neighboard",
                 "fq": "cnpjmatriz:"+id
@@ -129,168 +126,49 @@ var omx = {
             var address = {"address":{"addressType":"residential", "complement":"","country":"BRA","number":number,"postalCode":addressCep, "receiverName":nameShip}};
             address = JSON.stringify(address);
 
-            $.ajax({  
-               type:"POST",
-               url:"/api/checkout/pub/orderForm/"+orderForm.orderFormId+"/attachments/shippingData",
-               data:address
-            }).done(function( msg ){  
-                vtexjs.checkout.getOrderForm().done(function(orderForm){
-                    console.log(orderForm)
+            if(orderForm.shippingData.availableAddresses.length <= 0) {
+                $.ajax({  
+                   type:"POST",
+                   url:"/api/checkout/pub/orderForm/"+orderForm.orderFormId+"/attachments/shippingData",
+                   data:address
+                }).done(function( msg ){  
+                    vtexjs.checkout.getOrderForm().done(function(orderForm){
+                        console.log(orderForm)
 
-                    var shippingData = orderForm.shippingData;
+                        var shippingData = orderForm.shippingData;
 
-                    if(orderForm.shippingData.address.street=="" && orderForm.shippingData.address.neighborhood=="") {
-                        console.log("22");
-                        $.ajax({
-                           url:"//viacep.com.br/ws/15200000/json/"
-                        })
-                        .done(function(data) {
-                            console.log(data)
-                            
-                            var omx_street = data.logradouro || $.cookie("adressStreet");
-                            var omx_neigh = data.bairro || $.cookie("adressNeigh");
+                        if(orderForm.shippingData.address.street=="" && orderForm.shippingData.address.neighborhood=="") {
+                            console.log("22");
+                            $.ajax({
+                               url:"//viacep.com.br/ws/15200000/json/"
+                            })
+                            .done(function(data) {
+                                console.log(data)
+                                
+                                var omx_street = data.logradouro || $.cookie("adressStreet");
+                                var omx_neigh = data.bairro || $.cookie("adressNeigh");
 
-                            console.log(omx_neigh);
-                            console.log(omx_street);
+                                console.log(omx_neigh);
+                                console.log(omx_street);
 
-                            shippingData.address.neighborhood = omx_neigh;
-                            shippingData.address.street = omx_street;
-                            return vtexjs.checkout.sendAttachment('shippingData', shippingData)
+                                shippingData.address.neighborhood = omx_neigh;
+                                shippingData.address.street = omx_street;
+                                return vtexjs.checkout.sendAttachment('shippingData', shippingData)
 
-                        });
-                    } else {
-                        console.log("tudo certo")
-                    }
+                            });
+                        } else {
+                            console.log("tudo certo")
+                        }
 
-                });
-
-            });
-
-        });
-
-
-/*
-        $.ajax({
-           url:"//viacep.com.br/ws/"+addressCep+"/json/"
-        })
-        .done(function(data) {
-            console.log(data)
-           vtexjs.checkout.getOrderForm().then(function(orderForm){
-                console.log(orderForm);
-
-
-
-
-                var shippingData = orderForm.shippingData;
-
-                var omx_street = $.cookie("adressStreet") || data.logradouro ;
-                var omx_neigh = $.cookie("adressNeigh") || data.bairro;
-
-                console.log(omx_neigh);
-                console.log(omx_street);
-
-                if(shippingData.address) {
-                    console.log("tentativa 1");
-                    shippingData.address.city = data.uf;
-                    shippingData.address.country = 'BRA';
-                    shippingData.address.neighborhood = omx_neigh;
-                    shippingData.address.number = number;
-                    shippingData.address.postalCode = addressCep;
-                    shippingData.address.receiverName = nameShip;
-                    shippingData.address.street = omx_street;
-                    return vtexjs.checkout.sendAttachment('shippingData', shippingData)
-                } else {
-
-                    console.log("tentativa 2");
-                    console.log(data);
-                    var address = {"address":{"complement":"","city":data.localidade,"country":"BRA","number":number,"postalCode":addressCep,"neighborhood":omx_neigh, "state":number, "street":omx_street, "receiverName":nameShip}};
-
-                    address = JSON.stringify(address);
-                    //address = JSON.parse(address);
-
-                    console.log(address);
-
-                    $.ajax({  
-                       type:"POST",
-                       url:"/api/checkout/pub/orderForm/"+orderForm.orderFormId+"/attachments/shippingData",
-                       data:address
-                    }).done(function( msg ){  
-                       vtexjs.checkout.getOrderForm();
                     });
 
-                }
-                
-            }).done(function(orderForm){
-                vtexjs.checkout.getOrderForm();
-                
-            })
+                });
+            }
 
+            
 
         });
-*/
-        
 
-        /*vtexjs.checkout.getOrderForm().done(function(orderForm){ 
-            console.log(orderForm.orderFormId); 
-
-            //var addressCep = omx.zeroPad(address.postalCode, 8); //;
-      
-
-            var addressCep = address.postalCode; 
-            addressCep = parseFloat(addressCep);
-            addressCep = (addressCep).toPrecision(8).split('.').reverse().join(''); //12214500
-
-            var data = {"address":{"complement":"","country":"BRA","number":number, "postalCode":addressCep,"receiverName":nameShip }};
-                data = JSON.stringify(data)
-                //data = JSON.parse(data) 
-
-
-            console.log(data);
-            
-            $.ajax({  
-               type:"POST",
-               url:"/api/checkout/pub/orderForm/"+orderForm.orderFormId+"/attachments/shippingData",
-               data:data
-            }).done(function( msg ){  
-                console.log(msg);
-                vtexjs.checkout.getOrderForm();
-
-                if(address.street=="") {
-
-                    console.log("2");
-
-                    var cStreet = $.cookie("adressStreet");
-                    var CNeighborhood = $.cookie("adressNeigh");
-
-                    //$(window).on('orderFormUpdated.vtex', function(evt, orderForm){ 
-                        //alert('Alguem atualizou o orderForm!'); 
-                        
-                        $("#ship-street").val(cStreet);
-                        $("#ship-neighborhood").val(CNeighborhood);
-
-                       // $(".btn-go-to-payment").trigger("click");
-
-                    //   $(".box-step.box-info.shipping-summary-placeholder").append("<p>"+address.city+"<br/>"+address.//postalCode+"-"+CNeighborhood+"-"+cStreet+","+number+"</p>", function() {
-                    //        //window.location = "#/payment";
-                    //    });
-
-                           // $(".btn-go-to-payment").trigger("click");                        
-                        
-
-                   // });
-
-                    
-
-                    
-             
-                }
-            });
-
-
-            
-
-
-        });*/
          
     }
 
@@ -484,37 +362,5 @@ $(window).load(function() {
 
 });
 
-/*
- vtexjs.checkout.getOrderForm().done(function(orderForm){ 
-            console.log(orderForm.orderFormId); 
-
-
-            var addresscep = new String(01309000);
-
-            var addresscep = 22743050;
-            addresscep = addresscep.toPrecision(8).split('.').reverse().join('');
-
-
-            var data = {"address":{"complement":"","country":"BRA","number":333,"postalCode":addresscep,"receiverName":"tste"}};
-                
-            data = JSON.stringify(data)
-
-            console.log(data);
-            //data = JSON.parse(data) 
-            
-            $.ajax({  
-               type:"POST",
-               url:"/api/checkout/pub/orderForm/"+orderForm.orderFormId+"/attachments/shippingData",
-               data:data
-            }).done(function( msg ){  
-                console.log(msg);
-                vtexjs.checkout.getOrderForm();
-            });
-
-           // 
-
-
-
-        });*/
 
 </script>
