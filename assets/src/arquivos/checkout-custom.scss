@@ -36,7 +36,7 @@
 
 	.safe{
 		background: url("/arquivos/compra-segura-checkout.png") no-repeat 0 0;
-		width: 133px;
+		width: 191px;
 		height:48px;
 		text-align: center;
 		margin-top: 28px;
@@ -112,6 +112,10 @@
 	overflow: hidden;  
 }
 
+
+input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{
+	height: 30px;
+}
 
 // .pageFooter ul li{
 // 	display: inline-block;
@@ -358,4 +362,26 @@ a#edit-shipping-data {
 
 a#change-other-shipping-option {
     display: none;
+}
+
+
+.summary-totalizers{
+	.shipping-selected-sla-estimate{
+		display: none !important;
+	}
+	.cart-reset-postal-code .icon-remove-sign{
+		display: none;
+	}
+}
+
+#client-profile-data{
+	#client-pre-email{
+		height: 54px
+	}	
+}
+
+.cart-items{
+	.shipping-date{
+		display: none;
+	}
 }

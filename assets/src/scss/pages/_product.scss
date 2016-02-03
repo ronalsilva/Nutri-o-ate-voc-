@@ -99,6 +99,23 @@ body.product{
 
         .notifyme-button-ok{}
     }
+
+    .gift{
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid $color9;
+
+        p{
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        img{
+            width: 160px;
+            height: 160px;
+            display: block;
+        }
+    }
 }
 
 
@@ -162,10 +179,16 @@ body.product{
                     background: $color7;
                 }
             }
+
             th {
                 width: 200px;
+                
                 &.Regua-de-Ovos {
                     font-size: 0;
+                }
+
+                &.Imagem-especial{
+                    display: none;
                 }
             }
 
@@ -181,6 +204,7 @@ body.product{
                 &.Regua-de-Ovos {
                     padding: 20px 0px;
                     font-size: 0;
+                    
                     img {
                         position: absolute;
                         top: 0;
@@ -450,11 +474,10 @@ div.lbOverlay {
     left: 0;
     margin: auto;    
     text-align: center;
-    padding: 40px;
+    padding: 20px;
     z-index: 100;
     background: #FFF;
     @include border-radius(6px);
-
     
     .closeLB {
         position: absolute;
@@ -515,11 +538,11 @@ div.lbOverlay {
 /*ADD CARRINHO*/
 #buyContent {
     width: 400px;
-    height: 540px;
+    height: 550px;
 
     .buyAdd__img {
         display: block;
-        width: 90%;
+        width: 85%;
         margin: auto;
         img {
             width: 100%;
@@ -535,14 +558,15 @@ div.lbOverlay {
 
     .bt-finalizar { 
         @include buyActionButton();
-        display: table;
+        display: block;
         margin: auto;
         display: inline-block;
     }
 
     .bt-continuar {
-        margin-top: 10px;
-        display: inline-block;
-        @include secondaryButton2(); 
+        margin-top: 15px;
+        display: block;
+        text-decoration: underline;
+        color: $color5;
     }
 }

@@ -4,11 +4,6 @@
 /* ==========================================================================
    Catalog
    ========================================================================== */
-
-.navSidebar{
-	@include span-columns(3);
-}
-
 .pageContent{
 	@include span-columns(9);
 	
@@ -149,8 +144,9 @@ body.department {
 //filtros
 .navSidebar{
 	padding-right: 40px;
+	@include span-columns(3);
 
-	.menu-navegue, .bt-refinar, .search-single-navigator, .search-multiple-navigator h3, .search-multiple-navigator h4{
+	.menu-navegue, .bt-refinar, .search-single-navigator, .search-multiple-navigator h3, .search-multiple-navigator h4, .productClusterSearchableIds{
 		display: none;
 	}
 
