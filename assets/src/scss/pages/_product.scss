@@ -570,3 +570,31 @@ div.lbOverlay {
         color: $color5;
     }
 }
+
+
+.buyProductButton-quant.qtdProd {
+    text-align:right;
+    display: block !important;
+    
+    * {
+        display:inline-block;
+        vertical-align:middle;
+    }
+    span {
+        width:30px;
+        height:30px;
+        line-height:30px;
+        text-align:center;
+        font-weight:bold;
+        font-size:20px;
+    }
+
+    input {
+        width:30px;
+        height:30px;
+        text-align:center;
+        border:1px solid #ccc;
+        border-radius:5px;
+    }
+}
+    

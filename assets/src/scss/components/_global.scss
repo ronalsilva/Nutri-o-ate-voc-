@@ -61,3 +61,16 @@ body{
 	
 /*lightbox*/
 @include lightbox();
+
+
+
+
+
+/**/
+
+
+.ui-autocomplete {display:none !important;}
+.shelf li.venda-b2b,
+.search-single-navigator h3.venda-b2b {
+    display:none;
+}

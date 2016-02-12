@@ -257,7 +257,10 @@ var global = {
         $(document).ajaxStop(function() {
             $(".shelf li").each(function() {
                 var _this = $(this);
-                if(_this.find(".multipleItem li").length > 0) {
+
+                _this.addClass(_this.find(".category").text().toLowerCase().replace(/\s/g,"-"));
+
+                if(_this.find(".multipleItem li").length > 0 && _this.find(".multipleItem li").text() != "") {
                     var n = _this.find(".multipleItem li").text();
                     n = parseFloat(n);
 
@@ -269,17 +272,56 @@ var global = {
                     _this.find(".bestPrice").text("R$ "+x);
                 }
             });
+
+
+            
+
+            if($.cookie("utmi_cp")=="vendab2b") {
+                $(".venda-b2b").show();
+                console.log("5");
+            } else {
+                if($(".shelf li.venda-b2b").length > 0) {
+                    $(this).hide();
+                    if($(".shelf li.venda-b2b").length == $(".shelf > ul > li").length) {
+                        window.location = "/Sistema/buscavazia";                    
+                    }
+                }
+
+            }
         });
         
 
         
+    },
+
+    searchPrevent:function() {
+        $(".fulltext-search-box, .btn-buscar").attr("id","omBusca");
+
+        function redirectSearch() {
+            var term = $(".fulltext-search-box").val();
+            window.location = "/"+term;
+        }
+        $('.fulltext-search-box').keypress(function (k) {
+                console.log("4");
+            if (k.which === 13) {
+                event.preventDefault();
+                redirectSearch();
+
+                return false;
+            }
+            return true;
+        });
+        $('.btn-buscar').click(function () {
+             redirectSearch();
+        });
     },
     
     init: function () {
     	global.floatHeader();
     	global.shelfDiscount();	
         global.userLogged();    
-    	global.priceKit();	
+        global.priceKit();  
+    	global.searchPrevent();	
     }
 }
 
