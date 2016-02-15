@@ -34,6 +34,8 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             overflow: hidden;
+
+            a {color:#FFF;}
         }
 
         &.userLogged{
@@ -42,6 +44,7 @@
 
             .welcome{
                 cursor: pointer;
+                a {text-decoration:underline;margin-left:10px;}
             }
             
             &:after{

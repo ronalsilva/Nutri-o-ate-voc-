@@ -162,7 +162,8 @@ var omx = {
               address = JSON.stringify(address);
 
 
-               // if(orderForm.shippingData.availableAddresses.length <= 0) {
+
+                if(orderForm.shippingData.availableAddresses.length <= 0) {
                     $.ajax({  
                        type:"POST",
                        url:"/api/checkout/pub/orderForm/"+orderForm.orderFormId+"/attachments/shippingData",
@@ -171,7 +172,7 @@ var omx = {
                         vtexjs.checkout.getOrderForm()
 
                     });
-              //  }
+                }
                     
 
                 

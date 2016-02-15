@@ -196,22 +196,29 @@ body.account{
 	}
 
 	/*enderecos*/
+
 	.address-display-block{	
+
+		.address-update {display:none !important;} 
 		.address-display-unit{
 			background: $evenlightergrey;
 			padding: 15px;
 			margin: 0 15px 15px 0;
 			
 			h5{
+				display:none !important;
 				margin-bottom: 5px;
 				color: $primaryColor;
 			}
 
 			.edit-address-link{
+				display:none !important;
 				a{
 					padding: 5px;
 				}
 			}
+
+
 		}
 	}
 
