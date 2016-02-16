@@ -86,7 +86,7 @@
 
     .searchBox{
         margin: 0 41px;
-
+        visibility: hidden;
         @include searchBox1(transparent, $white, $white, $primaryFont, rem(14px), 205px, 175px);
         
         fieldset{

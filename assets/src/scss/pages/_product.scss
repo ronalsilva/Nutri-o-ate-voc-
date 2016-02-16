@@ -575,10 +575,16 @@ div.lbOverlay {
 .buyProductButton-quant.qtdProd {
     text-align:right;
     display: block !important;
-    
+
     * {
         display:inline-block;
         vertical-align:middle;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
     span {
         width:30px;
@@ -587,9 +593,10 @@ div.lbOverlay {
         text-align:center;
         font-weight:bold;
         font-size:20px;
+        cursor: pointer;
     }
 
-    input {
+    input { 
         width:30px;
         height:30px;
         text-align:center;

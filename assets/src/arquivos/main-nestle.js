@@ -275,19 +275,29 @@ var global = {
 
 
             
-
-            if($.cookie("utmi_cp")=="vendab2b") {
+            console.log($.cookie("utmi_cp"));
+            if($.cookie("utmi_cp").indexOf("vendab2b")>=0) {
                 $(".venda-b2b").show();
                 console.log("5");
             } else {
                 if($(".shelf li.venda-b2b").length > 0) {
                     $(this).hide();
                     if($(".shelf li.venda-b2b").length == $(".shelf > ul > li").length) {
-                        window.location = "/Sistema/buscavazia";                    
+                       // window.location = "/Sistema/buscavazia";                    
                     }
                 }
 
             }
+
+            if($.cookie("utmi_cp").indexOf("multiplus")>=0) {
+                $(".logo .logoImg").attr("href","/campanha/multiplus/?utmi_cp=multiplus");
+            }
+            if($.cookie("utmi_cp").indexOf("vendab2b")>=0) {
+                $(".logo .logoImg").attr("href","/venda-b2b?utmi_cp=vendab2b");
+            }
+            if($.cookie("utmi_cp").indexOf("multiplus")<0 || $.cookie("utmi_cp").indexOf("vendab2b")<0) {
+                $(".pageHeader .searchBox").css('visibility', 'visible');
+            } 
         });
         
 
@@ -588,6 +598,44 @@ var product = {
         });
     },
 
+    qtdProd:function() {
+
+        function updateBtQtd(q) {
+            var hlink = $("a.buy-button.buy-button-ref").attr("href");
+            console.log("DASSS:"+hlink);
+            hlink = hlink.split("qty=");
+
+            var t = "/checkout/cart/add?sku=98&qty=1&seller=1&redirect=true&sc=1"
+            var hlinkt2 = hlink[1].split("seller")[1]
+
+            $("a.buy-button.buy-button-ref").attr("href", hlink[0]+"qty="+q+"&seller"+hlinkt2);
+        }
+
+        $(".qtdProd .more").on("click", function(event) {
+           event.preventDefault();
+           var tVal = parseInt($("input[name=qtdProd]").val());
+           tVal = tVal+1;
+           $("input[name=qtdProd]").val(tVal)
+           updateBtQtd(tVal);
+        });
+
+        $(".qtdProd .less").on("click", function(event) {
+           event.preventDefault();
+           var tVal = parseInt($("input[name=qtdProd]").val());
+           if(tVal>1) {
+            tVal = tVal-1;
+            $("input[name=qtdProd]").val(tVal);
+            updateBtQtd(tVal);            
+           }
+        });
+
+        $("input[name=qtdProd]").on("keyup change", function(event) {
+            var tVal = $(this).val();
+            updateBtQtd(tVal);
+        });
+
+    },
+
     buyProduct:function() {
         $(document).on("click",".buyProductButton .buy-button", function(event) {
             var _this = $(this)
@@ -621,7 +669,8 @@ var product = {
 		product.reguaOvos();
 		product.nutritionalChart();
         product.buyProduct();
-		product.gift();
+        product.gift();
+		product.qtdProd();
 	}
 }
 
