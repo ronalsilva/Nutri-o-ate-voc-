@@ -161,9 +161,15 @@ var omx = {
               var address = {"address":{"addressType":"residential", "complement":"","city":omx_city, "neighborhood":omx_neigh,"state":omx_uf, "street":omx_street, "country":"BRA","number":number,"postalCode":addressCep, "receiverName":nameShip}};
               address = JSON.stringify(address);
 
-
-
-                if(orderForm.shippingData.availableAddresses.length <= 0) {
+              console.log(address);
+              console.log(orderForm.shippingData.availableAddresses.length);
+              console.log(orderForm.shippingData.availableAddresses);
+                if(orderForm.shippingData.availableAddresses.length > 0) {
+                    if(orderForm.shippingData.availableAddresses[0].city.indexOf("*") > 0) {
+                        return false;
+                    }
+                }
+                
                     $.ajax({  
                        type:"POST",
                        url:"/api/checkout/pub/orderForm/"+orderForm.orderFormId+"/attachments/shippingData",
@@ -171,8 +177,10 @@ var omx = {
                     }).done(function( msg ){  
                         vtexjs.checkout.getOrderForm()
 
+
+
                     });
-                }
+                
                     
 
                 
@@ -192,11 +200,28 @@ var omx = {
 
 }
 
+$(document).ajaxStop(function() {
+    if($("#ship-street").length>0 || $("#ship-neighborhood").length>0) {
+        var omx_street = $.cookie("adressStreet");
+        var omx_neigh = $.cookie("adressNeigh")
+        if($("#ship-street").val()=="") {
+            $("#ship-street").val(omx_street);
+        }
+        if($("#ship-neighborhood").val()=="") {
+            $("#ship-neighborhood").val(omx_neigh);
+        }
+        $(".btn-go-to-payment-wrapper .btn-go-to-payment").trigger("click")
+    }
+
+});
+
 
 function infoTopBar() {
     var t = JSON.parse($.cookie("adressSelected"));
 
-    var html = '<div class="infolog"><div class="wrapper"><p>Olá, <b>'+$.cookie("adressNome")+'</b> da empresa '+$.cookie("utmi_cp")+'. O endereço selecionado é '+t.street+', '+$.cookie("adressNumber")+' - '+t.city+', '+t.state+'</p><span>Os dados estão corretos? <a id="changeAddress">Clique aqui para alterar</a></span></div></div>';
+    street = t.street || $.cookie("adressStreet")
+    console.log(street);
+    var html = '<div class="infolog"><div class="wrapper"><p>Olá, <b>'+$.cookie("adressNome")+'</b> da empresa '+$.cookie("utmi_cp")+'. O endereço selecionado é '+street+', '+$.cookie("adressNumber")+' - '+t.city+', '+t.state+'</p><span>Os dados estão corretos? <a id="changeAddress">Clique aqui para alterar</a></span></div></div>';
 
     $(".topBar.infoLogged").html(html);
 }
@@ -225,7 +250,19 @@ $(window).load(function() {
         });
 
 
-        $.cookie("utmi_cp",ck);     
+        $.cookie("utmi_cp",ck);    
+
+
+        if(ck.indexOf("multiplus")>=0) {
+            $(".logo .logoImg").attr("href","/campanha/multiplus/?utmi_cp=multiplus");
+        }
+        if(ck.indexOf("vendab2b")>=0) {
+            $(".venda-b2b").show();
+            $(".logo .logoImg").attr("href","/venda-b2b?utmi_cp=vendab2b");
+        }
+        if(ck.indexOf("multiplus")<0 || $.cookie("utmi_cp").indexOf("vendab2b")<0) {
+            $(".pageHeader .searchBox").css('visibility', 'visible');
+        } 
 
         if($.cookie("setAddress")=="true") {
 
@@ -313,13 +350,16 @@ $(window).load(function() {
     $(".lightBoxShop").on("click", ".lightBoxShop__un__unit", function(event) {
         event.preventDefault();
 
-        $(".lightBoxShop__un__unit").removeClass("active");
-        $(this).addClass("active");
-        
-        var cep = $(this).find("input").val();
+        var _this = $(this);
 
-        var street = $(this).find("input").attr("data-street");
-        var neigh = $(this).find("input").attr("data-neigh");
+        $(".lightBoxShop__un__unit").removeClass("active");
+        _this.addClass("active");
+        
+
+        var cep = _this.find("input").val();
+
+        var street = _this.find("input").attr("data-street");
+        var neigh = _this.find("input").attr("data-neigh");
 
         var postalCode = cep;
         var country = 'BRA';
@@ -336,9 +376,11 @@ $(window).load(function() {
             .done(function(addressRetest) {
                 if(street=="null") {
                     street = result.street || addressRetest.logradouro;
+                    _this.find("input").attr("data-street", street);
                 }
                 if(neigh=="null") {
                     neigh = result.neighborhood || addressRetest.bairro;
+                    _this.find("input").attr("data-neigh", neigh);
                 }
                 var address = "<h3>Endereço para entrega:</h3><p>"+street+"</p><p>"+neigh+" - "+result.city+"</p><p>Cep: "+result.postalCode+"</p>";
                 $(".lightBoxShop__un__details").html(address);

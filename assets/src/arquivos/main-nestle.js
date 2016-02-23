@@ -1,5 +1,8 @@
 /* 2.0 */
 
+!function(e,n,r){function o(e){return e}function t(e){return i(decodeURIComponent(e.replace(a," ")))}function i(e){return 0===e.indexOf('"')&&(e=e.slice(1,-1).replace(/\\"/g,'"').replace(/\\\\/g,"\\")),e}function u(e){return c.json?JSON.parse(e):e}var a=/\+/g,c=e.cookie=function(i,a,p){if(a!==r){if(p=e.extend({},c.defaults,p),null===a&&(p.expires=-1),"number"==typeof p.expires){var s=p.expires,f=p.expires=new Date;f.setDate(f.getDate()+s)}return a=c.json?JSON.stringify(a):String(a),n.cookie=[encodeURIComponent(i),"=",c.raw?a:encodeURIComponent(a),p.expires?"; expires="+p.expires.toUTCString():"",p.path?"; path="+p.path:"",p.domain?"; domain="+p.domain:"",p.secure?"; secure":""].join("")}for(var l=c.raw?o:t,d=n.cookie.split("; "),m=i?null:{},x=0,g=d.length;g>x;x++){var k=d[x].split("="),h=l(k.shift()),j=l(k.join("="));if(i&&i===h){m=u(j);break}i||(m[h]=u(j))}return m};c.defaults={},e.removeCookie=function(n,r){return null!==e.cookie(n)?(e.cookie(n,null,r),!0):!1}}(jQuery,document);
+
+
 var fns = {
 	lightboxOverlay:    $('<div class="lightboxOverlay"></div>'),
 
@@ -254,13 +257,17 @@ var global = {
         }
 
         //vitrine
-        $(document).ajaxStop(function() {
+        
+
             $(".shelf li").each(function() {
                 var _this = $(this);
 
                 _this.addClass(_this.find(".category").text().toLowerCase().replace(/\s/g,"-"));
 
-                if(_this.find(".multipleItem li").length > 0 && _this.find(".multipleItem li").text() != "") {
+                if(_this.find(".multipleItem li").length > 0 && _this.find(".multipleItem li").text() != "" && _this.attr("class").indexOf("calculedmultipleItem") < 0) {
+                    
+                    _this.addClass("calculedmultipleItem");
+
                     var n = _this.find(".multipleItem li").text();
                     n = parseFloat(n);
 
@@ -276,29 +283,32 @@ var global = {
 
             
             console.log($.cookie("utmi_cp"));
-            if($.cookie("utmi_cp").indexOf("vendab2b")>=0) {
-                $(".venda-b2b").show();
-                console.log("5");
-            } else {
-                if($(".shelf li.venda-b2b").length > 0) {
-                    $(this).hide();
-                    if($(".shelf li.venda-b2b").length == $(".shelf > ul > li").length) {
-                       // window.location = "/Sistema/buscavazia";                    
+            if($.cookie("utmi_cp")) {
+                if($.cookie("utmi_cp").indexOf("vendab2b")>=0) {
+                    $(".venda-b2b").show();
+                    console.log("5");
+                } else {
+                    if($(".shelf li.venda-b2b").length > 0) {
+                        $(this).hide();
+                        if($(".shelf li.venda-b2b").length == $(".shelf > ul > li").length) {
+                           // window.location = "/Sistema/buscavazia";                    
+                        }
                     }
+
                 }
 
+                if($.cookie("utmi_cp").indexOf("multiplus")>=0) {
+                    $(".logo .logoImg").attr("href","/campanha/multiplus/?utmi_cp=multiplus");
+                }
+                if($.cookie("utmi_cp").indexOf("vendab2b")>=0) {
+                    $(".logo .logoImg").attr("href","/venda-b2b?utmi_cp=vendab2b");
+                }
+                if($.cookie("utmi_cp").indexOf("multiplus")<0 || $.cookie("utmi_cp").indexOf("vendab2b")<0) {
+                    $(".pageHeader .searchBox").css('visibility', 'visible');
+                } 
             }
-
-            if($.cookie("utmi_cp").indexOf("multiplus")>=0) {
-                $(".logo .logoImg").attr("href","/campanha/multiplus/?utmi_cp=multiplus");
-            }
-            if($.cookie("utmi_cp").indexOf("vendab2b")>=0) {
-                $(".logo .logoImg").attr("href","/venda-b2b?utmi_cp=vendab2b");
-            }
-            if($.cookie("utmi_cp").indexOf("multiplus")<0 || $.cookie("utmi_cp").indexOf("vendab2b")<0) {
-                $(".pageHeader .searchBox").css('visibility', 'visible');
-            } 
-        });
+            
+        
         
 
         
@@ -414,11 +424,15 @@ var slider = {
 
 var catalog = {
 	smartResearch: function(){
-		$(".navSidebar input[type='checkbox']").vtexSmartResearch({
-	        callback:function() {
-	           global.shelfDiscount();
-	        }
-	    });
+        if($(".navSidebar input[type='checkbox']").length>0) {
+            $(".navSidebar input[type='checkbox']").vtexSmartResearch({
+                shelfCallback:function() {
+                   global.priceKit();
+                   global.shelfDiscount();
+                }
+            });
+        }
+		
 	},
 
 	toggleFilter: function(){
@@ -431,35 +445,39 @@ var catalog = {
 	},
 
 	switchView: function () {
-        var typeGrid = $(".switchView").find("span"),
-            grid3 = $(".view3Col"),
-            grid2 = $(".view2Col"),
-            vitrinePrateleira = $(".resultItemsWrapper");
 
-        grid3.addClass('active');
+        if($(".switchView").length>0) {
+            var typeGrid = $(".switchView").find("span"),
+                grid3 = $(".view3Col"),
+                grid2 = $(".view2Col"),
+                vitrinePrateleira = $(".resultItemsWrapper");
 
-        typeGrid.on("click", function () {
+            grid3.addClass('active');
 
-            if (!$(this).hasClass("active")) {
-                $(".vitrine > ul").hide(0).delay(300).fadeIn(400);
-            };
+            typeGrid.on("click", function () {
 
-            typeGrid.removeClass('active');
-            $(this).addClass('active');
+                if (!$(this).hasClass("active")) {
+                    $(".vitrine > ul").hide(0).delay(300).fadeIn(400);
+                };
 
-            if (grid3.hasClass('active')) {
-                vitrinePrateleira.removeClass("col2");
-                vitrinePrateleira.addClass("col3");
-        		$(".productList li").removeClass("last");
-        		$(".productList li:nth-child(3n)").addClass("last");
+                typeGrid.removeClass('active');
+                $(this).addClass('active');
 
-            } else if (grid2.hasClass('active')) {
-                vitrinePrateleira.removeClass("col3");
-                vitrinePrateleira.addClass("col2");
-        		$(".productList li").removeClass("last");
-        		$(".productList li:nth-child(2n)").addClass("last");
-            }
-        });
+                if (grid3.hasClass('active')) {
+                    vitrinePrateleira.removeClass("col2");
+                    vitrinePrateleira.addClass("col3");
+                    $(".productList li").removeClass("last");
+                    $(".productList li:nth-child(3n)").addClass("last");
+
+                } else if (grid2.hasClass('active')) {
+                    vitrinePrateleira.removeClass("col3");
+                    vitrinePrateleira.addClass("col2");
+                    $(".productList li").removeClass("last");
+                    $(".productList li:nth-child(2n)").addClass("last");
+                }
+            });
+        }
+        
     },
 
     searchEmptyWord: function () {
@@ -656,6 +674,27 @@ var product = {
 	    });
     },
 
+    quantDiscount: function(){
+
+        
+
+        if($("em.valor-de.price-list-price").is(":visible")) {
+            var valFrom = parseFloat($(".priceProduct .skuListPrice").text().replace(',', '.').replace('R$ ', ''));
+            var valTo = parseFloat($(".priceProduct .skuBestPrice").text().replace(',', '.').replace('R$ ', ''));
+            
+            descpct = valTo/valFrom*100;
+            descpct = 100-descpct;
+            descpct = Math.ceil(descpct);
+
+            if ((descpct == "0") || (descpct == 0)) {
+                //$(this).hide();
+            } else {
+               $(".mainProductInfo").prepend("<div class='flagDiscountHighlight'>"+descpct + "% off</div>");
+            }
+        }
+
+       
+    },
 
 
 	init: function(){
@@ -670,7 +709,8 @@ var product = {
 		product.nutritionalChart();
         product.buyProduct();
         product.gift();
-		product.qtdProd();
+        product.qtdProd();
+		product.quantDiscount();
 	}
 }
 

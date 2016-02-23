@@ -41,7 +41,16 @@ body.product{
     @include span-columns(4);
 
     .productTitle {
+        clear: both;
         @include productTitle();
+    }
+
+    .flagDiscountHighlight {
+        float: right;
+        background:$suportColor;
+        padding:5px 10px;
+        color:#FFF;
+        font-weight: bold;
     }
   
     .shortDescription{
