@@ -300,10 +300,13 @@ var global = {
                 if($.cookie("utmi_cp").indexOf("multiplus")>=0) {
                     $(".logo .logoImg").attr("href","/campanha/multiplus/?utmi_cp=multiplus");
                 }
+                if($.cookie("utmi_cp").indexOf("santander")>=0) {
+                    $(".logo .logoImg").attr("href","/campanha/santander/?utmi_cp=santander");
+                }
                 if($.cookie("utmi_cp").indexOf("vendab2b")>=0) {
                     $(".logo .logoImg").attr("href","/venda-b2b?utmi_cp=vendab2b");
                 }
-                if($.cookie("utmi_cp").indexOf("multiplus")<0 || $.cookie("utmi_cp").indexOf("vendab2b")<0) {
+                if($.cookie("utmi_cp").indexOf("multiplus")<0 || $.cookie("utmi_cp").indexOf("santander")<0 || $.cookie("utmi_cp").indexOf("vendab2b")<0) {
                     $(".pageHeader .searchBox").css('visibility', 'visible');
                 } 
             }

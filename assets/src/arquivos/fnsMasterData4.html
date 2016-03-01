@@ -256,11 +256,14 @@ $(window).load(function() {
         if(ck.indexOf("multiplus")>=0) {
             $(".logo .logoImg").attr("href","/campanha/multiplus/?utmi_cp=multiplus");
         }
+        if(ck.indexOf("santander")>=0) {
+            $(".logo .logoImg").attr("href","/campanha/santander/?utmi_cp=santander");
+        }
         if(ck.indexOf("vendab2b")>=0) {
             $(".venda-b2b").show();
             $(".logo .logoImg").attr("href","/venda-b2b?utmi_cp=vendab2b");
         }
-        if(ck.indexOf("multiplus")<0 || $.cookie("utmi_cp").indexOf("vendab2b")<0) {
+        if(ck.indexOf("multiplus")<0 || ck.indexOf("santander")<0 || $.cookie("utmi_cp").indexOf("vendab2b")<0) {
             $(".pageHeader .searchBox").css('visibility', 'visible');
         } 
 
